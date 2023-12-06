@@ -4,6 +4,14 @@
   padding: 5rem 1rem;
 }
 
+.section__pearl { /*Section background pearl*/
+	background-color: #F2F2F2;
+}
+
+.section__white { /*Section background white*/
+	background-color: #FFFFFF;
+}
+
 .section__header {
   font-size: 2rem;
   font-weight: 600;
@@ -104,4 +112,5 @@
 .booking__container .btn:hover {
 	background-color: var(--primary-color-dark);
 }
+
 

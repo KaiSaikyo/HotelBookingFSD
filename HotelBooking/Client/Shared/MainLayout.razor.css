@@ -4,6 +4,14 @@
     padding: 10px;
 }
 
+.pearl-color {
+    background-color: #F2F2F2;
+}
+
+.white-color {
+    background-color: #FFFFFF;
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;
