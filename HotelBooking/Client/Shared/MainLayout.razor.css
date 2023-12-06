@@ -1,58 +1,70 @@
+/* Styles for the top bar */
 .top-bar {
-    background-color: #343a40;
-    color: white;
-    padding: 10px;
+    background-color: #343a40; /* Sets the background color to a dark gray */
+    color: white; /* Sets the text color to white */
+    padding: 5px; /* Adds 10px of padding around the top bar */
 }
 
+/* Styles for a pearl-colored background */
 .pearl-color {
-    background-color: #F2F2F2;
+    background-color: #F2F2F2; /* Sets the background color to a pearl gray */
 }
 
+/* Styles for a white background */
 .white-color {
-    background-color: #FFFFFF;
+    background-color: #FFFFFF; /* Sets the background color to white */
 }
 
+/* Styles for the navigation bar */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; /* Makes the navbar a flexbox */
+    justify-content: space-between; /* Distributes the navbar items evenly across the flexbox */
+    align-items: center; /* Aligns the navbar items vertically in the center of the flexbox */
 }
 
+/* Styles for the navbar brand */
 .navbar-brand {
-    font-size: 1.5rem;
-    color: white;
-    text-decoration: none;
+    font-size: 1.5rem; /* Sets the font size to 1.5rem */
+    color: white; /* Sets the text color to white */
+    text-decoration: none; /* Removes any text decoration */
 }
 
+/* Styles for the navbar toggler */
 .navbar-toggler {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.1); /* Sets a semi-transparent white background */
 }
 
+/* Styles for the content container */
 .content-container {
-    display: flex;
+    display: flex; /* Makes the content container a flexbox */
 }
 
+/* Styles for the navigation menu */
 .nav-menu {
-    width: 250px;
-    height: 100vh;
-    background-color: #343a40;
-    color: white;
-    overflow-y: auto;
-    position: sticky;
-    top: 0;
+    width: 250px; /* Sets the width to 250px */
+    height: 100vh; /* Sets the height to 100% of the viewport height */
+    background-color: #343a40; /* Sets the background color to a dark gray */
+    color: white; /* Sets the text color to white */
+    overflow-y: auto; /* Adds scrollbars when the content overflows */
+    position: sticky; /* Makes the navbar stick to the top of the viewport */
+    top: 0; /* Positions the navbar at the top of the viewport */
 }
 
+/* Styles for the main content area */
 .content {
-    flex: 1;
-    padding: 20px;
+    flex: 1; /* Expands the content area to fill the remaining space in the flexbox */
+    padding: 5px; /* Adds 20px of padding around the content */
 }
 
+/* Media query for screens smaller than 640px */
 @media (max-width: 640.98px) {
+    /* Hides the navigation menu on small screens */
     .nav-menu {
         display: none;
     }
 
+    /* Changes the flexbox layout for small screens */
     .content-container {
-        flex-direction: column;
+        flex-direction: column; /* Changes the flex direction to column */
     }
 }

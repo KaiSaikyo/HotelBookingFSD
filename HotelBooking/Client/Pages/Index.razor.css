@@ -26,7 +26,7 @@
 .header__image__container {
 	position: relative;
 	min-height: 500px;
-	background-image: url("css/img/Quick_Book.png");
+	background-image: url("css/img/BookingThumbnail.jpg");
 	background-position: center center;
 	background-size: cover;
 	background-repeat: no-repeat;
