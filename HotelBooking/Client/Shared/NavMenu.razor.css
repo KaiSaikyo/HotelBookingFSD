@@ -1,16 +1,14 @@
+/* Styling for the navigation toggle button */
 .navbar-toggler {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-.top-row {
-    height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
-}
-
+/* Styling for the brand */
 .navbar-brand {
     font-size: 1.1rem;
 }
 
+/* Icon styling */
 .oi {
     width: 2rem;
     font-size: 1.1rem;
@@ -18,50 +16,47 @@
     top: -2px;
 }
 
+/* Styling for navigation items */
 .nav-item {
     font-size: 0.9rem;
-    padding-bottom: 0.5rem;
 }
 
-    .nav-item:first-of-type {
-        padding-top: 1rem;
-    }
-
-    .nav-item:last-of-type {
-        padding-bottom: 1rem;
-    }
-
+    /* Styling for navigation links */
     .nav-item ::deep a {
         color: #d7d7d7;
         border-radius: 4px;
-        height: 3rem;
         display: flex;
         align-items: center;
-        line-height: 3rem;
+        line-height: 1rem;
+        text-decoration: none;
     }
 
-.nav-item ::deep a.active {
-    background-color: rgba(255,255,255,0.25);
-    color: white;
-}
+        /* Active link styling */
+        .nav-item ::deep a.active {
+            background-color: rgba(255, 255, 255, 0.25);
+            color: white;
+        }
 
-.nav-item ::deep a:hover {
-    background-color: rgba(255,255,255,0.1);
-    color: white;
-}
+        /* Hover effect for links */
+        .nav-item ::deep a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
 
+/* Media query for responsive design */
 @media (min-width: 641px) {
+    /* Hide navigation toggle button for wider screens */
     .navbar-toggler {
         display: none;
     }
 
+    /* Display navigation links for wider screens */
     .collapse {
-        /* Never collapse the sidebar for wide screens */
         display: block;
     }
-    
+
+    /* Allow sidebar to scroll for tall menus on wider screens */
     .nav-scrollable {
-        /* Allow sidebar to scroll for tall menus */
         height: calc(100vh - 3.5rem);
         overflow-y: auto;
     }
