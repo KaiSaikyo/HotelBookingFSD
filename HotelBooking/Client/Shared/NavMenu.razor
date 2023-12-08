@@ -16,6 +16,26 @@
         <div class="top-bar-scrollable">
             <!-- Navigation links -->
             <nav class="d-flex">
+                <!-- Other navigation links -->
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                        <span class="oi oi-home" aria-hidden="true"></span> Home
+                    </NavLink>
+                </div>
+
+                <!-- Additional navigation links -->
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="samplepage">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Browse
+                    </NavLink>
+                </div>
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="samplepage">
+                        <span class="oi oi-book" aria-hidden="true"></span> Bookings
+                    </NavLink>
+                </div>
+                
                 <!-- Authorization checks -->
                 <AuthorizeView>
                     <Authorized>
@@ -41,32 +61,6 @@
                     </NotAuthorized>
                 </AuthorizeView>
 
-                <!-- Other navigation links -->
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                        <span class="oi oi-home" aria-hidden="true"></span> Home
-                    </NavLink>
-                </div>
-
-                <!-- Example navigation link -->
-                <!-- <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="https://www.booking.com/">
-                        <span class="oi oi-audio" aria-hidden="true"></span> Booking.com Example
-                    </NavLink>
-                </div> -->
-
-                <!-- Additional navigation links -->
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="samplepage">
-                        <span class="oi oi-list-rich" aria-hidden="true"></span> Browse
-                    </NavLink>
-                </div>
-
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="samplepage">
-                        <span class="oi oi-list-rich" aria-hidden="true"></span> Bookings
-                    </NavLink>
-                </div>
             </nav>
         </div>
     </div>

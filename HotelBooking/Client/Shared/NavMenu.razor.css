@@ -23,7 +23,7 @@
 
     /* Styling for navigation links */
     .nav-item ::deep a {
-        color: #d7d7d7;
+        color: #343a40;
         border-radius: 4px;
         display: flex;
         align-items: center;
@@ -33,13 +33,13 @@
 
         /* Active link styling */
         .nav-item ::deep a.active {
-            background-color: rgba(255, 255, 255, 0.25);
+            background-color: #8eb4e5;
             color: white;
         }
 
         /* Hover effect for links */
         .nav-item ::deep a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(142,180,229, 0.70);
             color: white;
         }
 
