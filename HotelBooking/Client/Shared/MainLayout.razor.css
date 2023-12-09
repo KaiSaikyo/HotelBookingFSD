@@ -1,6 +1,6 @@
 /* Styles for the top bar */
 .top-bar {
-    background-color: #FFFFFF; /* Sets the background color to a dark gray */
+    background-color: #FFFFFF; /* Sets the background color to white for the nav bar */
     color: white; /* Sets the text color to white */
     padding: 5px; /* Adds 10px of padding around the top bar */
 }
@@ -43,7 +43,7 @@
 .nav-menu {
     width: 250px; /* Sets the width to 250px */
     height: 100vh; /* Sets the height to 100% of the viewport height */
-    background-color: #343a40; /* Sets the background color to a dark gray */
+    background-color: white; /* Sets the background color to white */
     color: white; /* Sets the text color to white */
     overflow-y: auto; /* Adds scrollbars when the content overflows */
     position: sticky; /* Makes the navbar stick to the top of the viewport */
