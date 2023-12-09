@@ -258,12 +258,14 @@
 	}
 }
 
+
+/* Buttons */
 .prev-button,
 .next-button {
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
-	width: 70px;
+	width: 80vw;
 	height: 40px;
 	background-color: transparent;
 	border: none;
@@ -274,9 +276,23 @@
 }
 
 .prev-button {
+	display: inline-block;
+	width: 64px;
+	height: 64px;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
 	left: 20px;
+	margin-top: -24px;
 }
 
 .next-button {
-	right: 20px;
+	display: inline-block;
+	width: 64px;
+	height: 64px;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	right: 34px;
+	margin-top: -24px;
 }
