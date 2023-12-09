@@ -1,4 +1,20 @@
-﻿.section__container {
+﻿:root {
+	--primary-color: #2c3855;
+	--primary-color-dark: #435681;
+	--text-dark: #333333;
+	--text-light: #767268;
+	--extra-light: #f3f4f6;
+	--white: #ffffff;
+	--max-width: 1200px;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.section__container {
   max-width: var(--max-width);
   margin: auto;
   padding: 5rem 1rem;
@@ -193,13 +209,13 @@
 	height: auto;
 	padding: 20px 30px 20px 70px;
 	color: black;
-	
 }
-	.text-left p {
-		line-height: 1.5;
-		word-wrap: break-word;
-		font-size: 18px;
-	}
+
+.text-left p {
+	line-height: 1.5;
+	word-wrap: break-word;
+	font-size: 18px;
+}
 
 .GoBack-btn {
 	font-size: 0.9rem;
@@ -234,17 +250,17 @@
 	position: relative;
 }
 
-	#controls label {
-		transition: opacity 0.2s ease-out;
-		display: none;
-		width: 50px;
-		height: 50px;
-		opacity: .4;
-	}
+#controls label {
+	transition: opacity 0.2s ease-out;
+	display: none;
+	width: 50px;
+	height: 50px;
+	opacity: .4;
+}
 
-		#controls label:hover {
-			opacity: 1;
-		}
+#controls label:hover {
+	opacity: 1;
+}
 
 #slide1:checked ~ #controls label:nth-child(2),
 #slide2:checked ~ #controls label:nth-child(3),
@@ -269,14 +285,14 @@
 	text-align: center;
 }
 
-	#bullets label {
-		display: inline-block;
-		width: 10px;
-		height: 10px;
-		border-radius: 100%;
-		background: #ccc;
-		margin: 0 10px;
-	}
+#bullets label {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border-radius: 100%;
+	background: #ccc;
+	margin: 0 10px;
+}
 
 #slide1:checked ~ #bullets label:nth-child(1),
 #slide2:checked ~ #bullets label:nth-child(2),
@@ -337,4 +353,39 @@
 	cursor: pointer;
 	right: 34px;
 	margin-top: -24px;
+}
+
+.popular__grid {
+	margin-top: 4rem;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 2rem;
+}
+
+.popular__card {
+	overflow: hidden;
+	border-radius: 1rem;
+	box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.popular__content {
+	padding: 1rem;
+}
+
+.popular__card__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	margin-bottom: 0.5rem;
+}
+
+.popular__card__header h4 {
+	font-size: 1.2rem;
+	font-weight: 600;
+	color: var(--text-dark);
+}
+
+.popular__content p {
+	color: var(--text-light);
 }
