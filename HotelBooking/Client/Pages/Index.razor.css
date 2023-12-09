@@ -98,6 +98,7 @@
 }
 
 .booking__container .btn {
+	margin-top: -4px;
 	padding: 1rem;
 	outline: none;
 	border: none;
@@ -112,6 +113,8 @@
 .booking__container .btn:hover {
 	background-color: var(--primary-color-dark);
 }
+
+
 
 
 /* Slider Image */
