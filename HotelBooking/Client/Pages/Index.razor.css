@@ -14,6 +14,107 @@
 	box-sizing: border-box;
 }
 
+
+
+.Hero-Section {
+	margin: 0px;
+	padding: 1rem 1rem 5rem 1rem;
+	background-color: #f2f2f2;
+}
+
+.Hero-Image-Container {
+	position: relative;
+	min-height: 500px;
+	background-image: url("css/img/BookingThumbnail.jpg");
+	background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 2rem;
+}
+
+.Booking-Container {
+	margin-bottom: 1rem;
+	position: absolute;
+	bottom: -5rem;
+	left: 50%;
+	transform: translateX(-50%);
+	width: calc(100% - 6rem);
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	padding: 3rem 2rem;
+	border-radius: 2rem;
+	background-color: rgba(255, 255, 255, 0.7);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+	box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.1);
+}
+
+	.Booking-Container form {
+		width: 100%;
+		flex: 1;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 1rem;
+	}
+
+	.Booking-Container .input-group {
+		width: 100%;
+		position: relative;
+	}
+
+	.Booking-Container label {
+		position: absolute;
+		top: 50%;
+		left: 0;
+		transform: translateY(-50%);
+		font-size: 1.2rem;
+		font-weight: 500;
+		pointer-events: none;
+		transition: 0.3s;
+	}
+
+	.Booking-Container input {
+		width: 100%;
+		padding: 10px 0;
+		font-size: 1rem;
+		outline: none;
+		border: none;
+		background-color: transparent;
+		border-bottom: 1px solid var(--primary-color);
+		color: var(--text-dark);
+	}
+
+		.Booking-Container input:focus ~ label {
+			font-size: 0.8rem;
+			top: 0;
+		}
+
+	.Booking-Container .form-group p {
+		margin-top: 0.5rem;
+		font-size: 0.8rem;
+		color: var(--text-light);
+	}
+
+	.Booking-Container .btn {
+		margin-top: -4px;
+		padding: 1rem;
+		outline: none;
+		border: none;
+		font-size: 1.5rem;
+		color: var(--white);
+		background-color: var(--primary-color);
+		border-radius: 100%;
+		cursor: pointer;
+		transition: 0.3s;
+	}
+
+		.Booking-Container .btn:hover {
+			background-color: var(--primary-color-dark);
+		}
+
+
+
 .section__container {
   max-width: var(--max-width);
   margin: auto;
@@ -50,6 +151,7 @@
 }
 
 .booking__container {
+	margin-bottom: 1rem;
 	position: absolute;
 	bottom: -5rem;
 	left: 50%;
@@ -215,6 +317,31 @@
 	word-wrap: break-word;
 	font-size: 18px;
 }
+
+.nav-item {
+	font-size: 0.9rem;
+}
+
+	.nav-item ::deep a {
+		color: #343a40;
+		border-radius: 4px;
+		display: flex;
+		align-items: center;
+		line-height: 1rem;
+		text-decoration: none;
+	}
+
+		/* Active link styling */
+		.nav-item ::deep a.active {
+			background-color: #8eb4e5;
+			color: white;
+		}
+
+		/* Hover effect for links */
+		.nav-item ::deep a:hover {
+			background-color: rgba(142,180,229, 0.70);
+			color: white;
+		}
 
 .GoBack-btn {
 	font-size: 0.9rem;
