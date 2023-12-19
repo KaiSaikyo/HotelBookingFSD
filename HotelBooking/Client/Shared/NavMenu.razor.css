@@ -1,11 +1,5 @@
-/* Styling for the navigation toggle button */
-.navbar-toggler {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Styling for the brand */
-.navbar-brand {
-    font-size: 1.1rem;
+.top-bar {
+    min-width: 1000px;
 }
 
 /* Icon styling */
@@ -41,23 +35,4 @@
 .nav-item ::deep a:hover {
     background-color: rgba(142,180,229, 0.70);
     color: white;
-}
-
-/* Media query for responsive design */
-@media (min-width: 641px) {
-    /* Hide navigation toggle button for wider screens */
-    .navbar-toggler {
-        display: none;
-    }
-
-    /* Display navigation links for wider screens */
-    .collapse {
-        display: block;
-    }
-
-    /* Allow sidebar to scroll for tall menus on wider screens */
-    .nav-scrollable {
-        height: calc(100vh - 3.5rem);
-        overflow-y: auto;
-    }
 }
