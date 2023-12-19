@@ -20,11 +20,11 @@
   padding: 5rem 1rem;
 }
 
-.section__pearl { /*Section background pearl*/
+.section__pearl { 
 	background-color: #F2F2F2;
 }
 
-.section__white { /*Section background white*/
+.section__white {
 	background-color: #FFFFFF;
 }
 
@@ -138,7 +138,6 @@
 	flex: 1;
 	margin: 0 auto;
 	width: 80vw;
-	max-width: 100%;
 	text-align: center;
 }
 
@@ -317,45 +316,6 @@
 }
 
 
-/* Buttons */
-.prev-button,
-.next-button {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	width: 80vw;
-	height: 40px;
-	background-color: transparent;
-	border: none;
-	color: #000;
-	font-size: 24px;
-	cursor: pointer;
-	z-index: 3;
-}
-
-.prev-button {
-	display: inline-block;
-	width: 64px;
-	height: 64px;
-	background-color: transparent;
-	border: none;
-	cursor: pointer;
-	left: 20px;
-	margin-top: -24px;
-}
-
-.next-button {
-	display: inline-block;
-	width: 64px;
-	height: 64px;
-	background-color: transparent;
-	border: none;
-	cursor: pointer;
-	right: 34px;
-	margin-top: -24px;
-}
-
-
 
 .Popular-Section {
 	min-height: 480px;
@@ -438,3 +398,118 @@
 	border-radius: 1rem;
 	background-color: #ffffff;
 }
+
+.About-Section {
+	margin-block: 1rem;
+	padding: 0px;
+	background-color: #ffffff;
+}
+
+.About-Display {
+	margin-block: 0.5rem;
+	padding: 0.5rem;
+	display: flex;
+	flex-direction: column;
+}
+
+	.About-Display h2 {
+		font-size: 2rem;
+		font-weight: 600;
+		text-align: center;
+	}
+
+	.About-Display p {
+		overflow-wrap: break-word;
+		font-size: 1.2rem;
+		text-align: center;
+	}
+
+.About-Grid {
+	flex-grow: 1;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr;
+	grid-template-areas:
+		"ag1 ag2 ag3";
+	gap: 1rem;
+	padding: 0.5rem;
+}
+
+	.About-Grid img {
+		inline-size: 100%;
+		aspect-ratio: 5 / 2.5;
+		object-fit: cover;
+		border-radius: 1rem;
+	}
+
+	.About-Grid h4 {
+		padding-inline: 1rem;
+		margin-block: 0.5rem;
+		font-size: 1.2rem;
+		font-weight: 600;
+		text-align: left;
+	}
+
+	.About-Grid p {
+		padding-inline: 1rem;
+		margin-bottom: 0.5rem;
+		overflow-wrap: break-word;
+		font-size: 1rem;
+		text-align: left;
+	}
+
+.AG-1 {
+	grid-area: ag1;
+	border-radius: 1rem;
+	background-color: #f2f2f2;
+}
+
+.AG-2 {
+	grid-area: ag2;
+	border-radius: 1rem;
+	background-color: #f2f2f2;
+}
+
+.AG-3 {
+	grid-area: ag3;
+	border-radius: 1rem;
+	background-color: #f2f2f2;
+}
+
+.RoomScout {
+	margin: 0px;
+	display: flex;
+	flex-direction: row;
+}
+
+.Logo-RoomScout {
+	margin: 0px;
+	padding: 1.8rem;
+}
+
+.About-RoomScout {
+	flex-grow: 1;
+	margin: 0px;
+	padding: 1.8rem;
+
+	display: flex;
+	flex-direction: row;
+	gap: 3rem;
+	justify-content: center;
+}
+
+	.About-RoomScout h4 {
+		padding-inline: 1rem;
+		margin-block: 0.5rem;
+		font-size: 1rem;
+		font-weight: 600;
+		text-align: left;
+	}
+
+	.About-RoomScout p {
+		padding-inline: 1rem;
+		margin-bottom: 0.5rem;
+		overflow-wrap: break-word;
+		font-size: 0.8rem;
+		text-align: left;
+	}
