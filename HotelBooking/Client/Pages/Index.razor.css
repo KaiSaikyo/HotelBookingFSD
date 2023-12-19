@@ -389,3 +389,89 @@
 .popular__content p {
 	color: var(--text-light);
 }
+
+
+
+
+
+.Popular-Section {
+	min-height: 480px;
+	margin: 0px;
+	padding: 0px;
+	background-color: #f2f2f2;
+}
+
+.Popular-Display {
+	margin-block: 0.5rem;
+	padding: 0.5rem;
+
+	display: flex;
+	flex-direction: column;
+}
+
+	.Popular-Display h2 {
+		font-size: 2rem;
+		font-weight: 600;
+		text-align: center;
+	}
+
+	.Popular-Display p {
+		overflow-wrap: break-word;
+		font-size: 1.2rem;
+		text-align: center;
+	}
+
+.Popular-Grid {
+	flex-grow: 1;
+
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr;
+	grid-template-areas:
+		"pg1 pg2 pg3";
+
+	gap: 1rem;
+	padding: 0.5rem;
+
+}
+
+	.Popular-Grid img {
+		inline-size: 100%;
+		aspect-ratio: 5 / 2.5;
+		object-fit: cover;
+		border-radius: 1rem;
+	}
+
+	.Popular-Grid h4 {
+		padding-inline: 1rem;
+		margin-block: 0.5rem;
+		font-size: 1.2rem;
+		font-weight: 600;
+		text-align: left;
+	}
+
+	.Popular-Grid p {
+		padding-inline: 1rem;
+		margin-bottom: 0.5rem;
+		overflow-wrap: break-word;
+		font-size: 1rem;
+		text-align: left;
+	}
+
+.PG-1 {
+	grid-area: pg1;
+	border-radius: 1rem;
+	background-color: #ffffff;
+}
+
+.PG-2 {
+	grid-area: pg2;
+	border-radius: 1rem;
+	background-color: #ffffff;
+}
+
+.PG-3 {
+	grid-area: pg3;
+	border-radius: 1rem;
+	background-color: #ffffff;
+}
