@@ -1,5 +1,7 @@
 .top-bar {
     min-width: 1000px;
+    background-color: #ffffff;
+    opacity: 0.8;
 }
 
 /* Icon styling */
