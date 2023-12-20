@@ -3998,8 +3998,7 @@ textarea.form-control-lg {
   list-style: none;
 }
     .navbar-nav .nav-link {
-        padding-right: 0;
-        padding-left: 0;
+        padding: 0.5rem 1rem;
     }
 
 
@@ -4068,8 +4067,7 @@ textarea.form-control-lg {
     position: absolute;
   }
   .navbar-expand-sm .navbar-nav .nav-link {
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
+    padding: 0.5rem 1rem;
   }
   .navbar-expand-sm .navbar-nav-scroll {
     overflow: visible;
@@ -4120,10 +4118,9 @@ textarea.form-control-lg {
   .navbar-expand-md .navbar-nav .dropdown-menu {
     position: absolute;
   }
-  .navbar-expand-md .navbar-nav .nav-link {
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
-  }
+    .navbar-expand-md .navbar-nav .nav-link {
+        padding: 0.5rem 1rem;
+    }
   .navbar-expand-md .navbar-nav-scroll {
     overflow: visible;
   }
@@ -4173,10 +4170,9 @@ textarea.form-control-lg {
   .navbar-expand-lg .navbar-nav .dropdown-menu {
     position: absolute;
   }
-  .navbar-expand-lg .navbar-nav .nav-link {
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
-  }
+    .navbar-expand-lg .navbar-nav .nav-link {
+        padding: 0.5rem 1rem;
+    }
   .navbar-expand-lg .navbar-nav-scroll {
     overflow: visible;
   }
@@ -4226,10 +4222,9 @@ textarea.form-control-lg {
   .navbar-expand-xl .navbar-nav .dropdown-menu {
     position: absolute;
   }
-  .navbar-expand-xl .navbar-nav .nav-link {
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
-  }
+    .navbar-expand-xl .navbar-nav .nav-link {
+        padding: 0.5rem 1rem;
+    }
   .navbar-expand-xl .navbar-nav-scroll {
     overflow: visible;
   }
@@ -4279,10 +4274,9 @@ textarea.form-control-lg {
   .navbar-expand-xxl .navbar-nav .dropdown-menu {
     position: absolute;
   }
-  .navbar-expand-xxl .navbar-nav .nav-link {
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
-  }
+    .navbar-expand-xxl .navbar-nav .nav-link {
+        padding: 0.5rem 1rem;
+    }
   .navbar-expand-xxl .navbar-nav-scroll {
     overflow: visible;
   }
@@ -4331,10 +4325,9 @@ textarea.form-control-lg {
 .navbar-expand .navbar-nav .dropdown-menu {
   position: absolute;
 }
-.navbar-expand .navbar-nav .nav-link {
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
-}
+    .navbar-expand .navbar-nav .nav-link {
+        padding: 0.5rem 1rem;
+    }
 .navbar-expand .navbar-nav-scroll {
   overflow: visible;
 }
