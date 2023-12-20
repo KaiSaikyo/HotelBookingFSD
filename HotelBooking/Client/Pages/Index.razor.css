@@ -404,7 +404,7 @@
 .Popular-Grid {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	grid-gap: 20px;
+	grid-gap: 1rem;
 }
 
 .PG-1, .PG-2, .PG-3 {
@@ -412,7 +412,7 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding: 20px;
+	padding: 1rem;
 	background-color: #fff;
 	box-shadow: 0 0 3px 0 #00000073;
 	transition: all 0.3s;
@@ -430,7 +430,7 @@
 	.PG-1 h4, .PG-2 h4, .PG-3 h4 {
 		padding: 0;
 		margin: 10px 0;
-		font-size: 22px;
+		font-size: 1.6rem;
 		color: black;
 	}
 
