@@ -1,4 +1,5 @@
 ﻿using Duende.IdentityServer.EntityFramework.Options;
+using HotelBooking.Server.Configurations.Entities;
 using HotelBooking.Server.Models;
 using HotelBooking.Shared.Domain;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
@@ -19,5 +20,17 @@ namespace HotelBooking.Server.Data
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<RoomType> RoomTypes { get; set; }
         public DbSet<Room> Rooms { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.ApplyConfiguration(new StaffSeedConfiguration());
+            builder.ApplyConfiguration(new HotelSeedConfiguration());
+            builder.ApplyConfiguration(new RoomTypeSeedConfiguration());
+            builder.ApplyConfiguration(new RoleSeedConfiguration());
+            builder.ApplyConfiguration(new UserSeedConfiguration());
+            builder.ApplyConfiguration(new UserRoleSeedConfiguration());
+        }
     }
 }
