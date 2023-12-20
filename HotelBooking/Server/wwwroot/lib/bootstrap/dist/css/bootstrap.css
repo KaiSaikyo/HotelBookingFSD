@@ -3997,10 +3997,12 @@ textarea.form-control-lg {
   margin-bottom: 0;
   list-style: none;
 }
-.navbar-nav .nav-link {
-  padding-right: 0;
-  padding-left: 0;
-}
+    .navbar-nav .nav-link {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+
 .navbar-nav .dropdown-menu {
   position: static;
 }
