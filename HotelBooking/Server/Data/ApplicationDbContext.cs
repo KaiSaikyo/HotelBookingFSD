@@ -5,6 +5,7 @@ using HotelBooking.Shared.Domain;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System.Reflection.Emit;
 
 namespace HotelBooking.Server.Data
 {
@@ -20,9 +21,15 @@ namespace HotelBooking.Server.Data
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<RoomType> RoomTypes { get; set; }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Stay> Stays { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
             base.OnModelCreating(builder);
 
             builder.ApplyConfiguration(new StaffSeedConfiguration());

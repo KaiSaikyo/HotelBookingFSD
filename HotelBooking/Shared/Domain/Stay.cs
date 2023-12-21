@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace HotelBooking.Shared.Domain
 {
-    internal class Stay
+    public class Stay
     {
+        public int Id { get; set; }
+
+        public string? EmergencyContact { get; set; }
+
+        public bool OccupancyStatus { get; set; }
+
+        public string? ComplimentaryServices { get; set; }
+
     }
 }
