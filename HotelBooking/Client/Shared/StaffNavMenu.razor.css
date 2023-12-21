@@ -1,0 +1,40 @@
+﻿.top-bar-staff {
+    min-width: 1440px;
+    background-color: #ffffff;
+    opacity: 0.9;
+}
+
+/* Icon styling */
+.oi {
+    width: 2rem;
+    font-size: 1.1rem;
+    vertical-align: text-top;
+    top: -2px;
+}
+
+/* Styling for navigation items */
+.nav-item-staff {
+    font-size: 0.9rem;
+}
+
+/* Styling for navigation links */
+.nav-item-staff ::deep a {
+    color: #343a40;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    line-height: 1rem;
+    text-decoration: none;
+}
+
+/* Active link styling */
+.nav-item-staff ::deep a.active {
+    background-color: #8eb4e5;
+    color: white;
+}
+
+/* Hover effect for links */
+.nav-item-staff ::deep a:hover {
+    background-color: rgba(142,180,229, 0.70);
+    color: white;
+}
