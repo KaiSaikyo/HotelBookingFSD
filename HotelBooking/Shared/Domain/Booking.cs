@@ -20,9 +20,9 @@ namespace HotelBooking.Shared.Domain
 
         public bool Status { get; set; }
 
-        public int RoomTypeId { get; set; }
+        public int HotelId { get; set; }
 
-        public virtual RoomType? RoomType { get; set; }
+        public virtual Hotel? Hotel { get; set; }
 
         public int StaffId { get; set; }
 
@@ -31,5 +31,9 @@ namespace HotelBooking.Shared.Domain
         public int CustomerId { get; set; }
 
         public virtual Customer? Customer { get; set; }
+
+        public int StayId { get; set; }
+
+        public virtual Stay? Stay { get; set; }
     }
 }

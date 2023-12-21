@@ -4,6 +4,7 @@ using HotelBooking.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooking.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231221060317_AddApplicationTables2")]
+    partial class AddApplicationTables2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -238,7 +241,7 @@ namespace HotelBooking.Server.Data.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c2007b23-7c00-4756-9872-198f6e2cf207",
+                            ConcurrencyStamp = "9e4ce16e-a0a3-4788-9e12-90f77d10babc",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -246,9 +249,9 @@ namespace HotelBooking.Server.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEDiGKY7IrnhsjtwMk6IFrpsmk/0JpYnNArQiwDHHZilmCEALR/5VC8leNN25jOm4w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEa6Rz0Jv2D7S79mfXez1MUnJ+EwAnVJBEsdx00CPI0AtvH8vWU8wfC/gZ+H6Iom+w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4511d4ec-3c52-4f9a-a933-2b69a3f3a580",
+                            SecurityStamp = "073066fb-4b3f-4ac4-89a4-5b575dd9691d",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -274,9 +277,6 @@ namespace HotelBooking.Server.Data.Migrations
                     b.Property<string>("Destination")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("HotelId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("NumGuest")
                         .HasColumnType("int");
 
@@ -292,8 +292,6 @@ namespace HotelBooking.Server.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
-
-                    b.HasIndex("HotelId");
 
                     b.HasIndex("StaffId");
 
@@ -611,7 +609,12 @@ namespace HotelBooking.Server.Data.Migrations
                     b.Property<bool>("OccupancyStatus")
                         .HasColumnType("bit");
 
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("RoomId");
 
                     b.ToTable("Stays");
                 });
@@ -782,12 +785,6 @@ namespace HotelBooking.Server.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HotelBooking.Shared.Domain.Hotel", "Hotel")
-                        .WithMany()
-                        .HasForeignKey("HotelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("HotelBooking.Shared.Domain.Staff", "Staff")
                         .WithMany()
                         .HasForeignKey("StaffId")
@@ -801,8 +798,6 @@ namespace HotelBooking.Server.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Customer");
-
-                    b.Navigation("Hotel");
 
                     b.Navigation("Staff");
 
@@ -848,6 +843,17 @@ namespace HotelBooking.Server.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Hotel");
+                });
+
+            modelBuilder.Entity("HotelBooking.Shared.Domain.Stay", b =>
+                {
+                    b.HasOne("HotelBooking.Shared.Domain.Room", "Room")
+                        .WithMany()
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -22,9 +22,10 @@ namespace HotelBooking.Server.Data
         public DbSet<RoomType> RoomTypes { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
         public DbSet<Stay> Stays { get; set; }
         public DbSet<Review> Reviews { get; set; }
-        public DbSet<Booking> Bookings { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
