@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooking.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231221064957_AddApplicationTables3")]
-    partial class AddApplicationTables3
+    [Migration("20231221084135_AddApplicationTables1")]
+    partial class AddApplicationTables1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -241,7 +241,7 @@ namespace HotelBooking.Server.Data.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c2007b23-7c00-4756-9872-198f6e2cf207",
+                            ConcurrencyStamp = "8b8c8035-2be5-436f-8b80-8a5fed1438ce",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -249,9 +249,9 @@ namespace HotelBooking.Server.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEDiGKY7IrnhsjtwMk6IFrpsmk/0JpYnNArQiwDHHZilmCEALR/5VC8leNN25jOm4w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEByKPT0Wn5Qm6lDBBIYmQBRu1yvC9abPnpjKUJU/9LFMvNlk9UOxm/V425unqyiSvg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4511d4ec-3c52-4f9a-a933-2b69a3f3a580",
+                            SecurityStamp = "155ed921-7cc0-4044-8d42-00869be81ea7",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
