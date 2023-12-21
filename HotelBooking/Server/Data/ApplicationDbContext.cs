@@ -35,7 +35,8 @@ namespace HotelBooking.Server.Data
             builder.ApplyConfiguration(new StaffSeedConfiguration());
             builder.ApplyConfiguration(new HotelSeedConfiguration());
             builder.ApplyConfiguration(new RoomTypeSeedConfiguration());
-			builder.ApplyConfiguration(new CustomerSeedConfiguration());
+            builder.ApplyConfiguration(new RoomSeedConfiguration());
+            builder.ApplyConfiguration(new CustomerSeedConfiguration());
 			builder.ApplyConfiguration(new ReviewSeedConfiguration());
 			builder.ApplyConfiguration(new StaySeedConfiguration());
 			builder.ApplyConfiguration(new BookingSeedConfiguration());
