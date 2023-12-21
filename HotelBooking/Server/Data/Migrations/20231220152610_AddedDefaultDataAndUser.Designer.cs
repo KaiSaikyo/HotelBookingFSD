@@ -4,6 +4,7 @@ using HotelBooking.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooking.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231220152610_AddedDefaultDataAndUser")]
+    partial class AddedDefaultDataAndUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -238,7 +241,7 @@ namespace HotelBooking.Server.Data.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "441a72de-e9f6-48ba-942a-1b6f16cec2a2",
+                            ConcurrencyStamp = "fabfd4ba-1668-4ae2-9482-5c8d17fc7b99",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -246,200 +249,11 @@ namespace HotelBooking.Server.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHrtBGhtXYZks/kA3CLse9hxqSs1HzXNVYBFsjSItKK8z7Xvd7JEXA2e+co3tby79A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMZjpySsgx/35QeMkPU6nmtx+cy3aUmyWTgLIqonytxA+B5vzpJO0BQ/EA5kGZ06Ew==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f36a1334-f225-47aa-8016-2f0344488d86",
+                            SecurityStamp = "04219bda-91c2-46b8-9f44-a35292b0a74e",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
-                        });
-                });
-
-            modelBuilder.Entity("HotelBooking.Shared.Domain.Booking", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime?>("CheckInDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("CheckOutDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Destination")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("HotelId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("NumGuest")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StaffId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("StayId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("HotelId");
-
-                    b.HasIndex("StaffId");
-
-                    b.HasIndex("StayId");
-
-                    b.ToTable("Bookings");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CheckInDate = new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOutDate = new DateTime(2023, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CustomerId = 1,
-                            Destination = "City A",
-                            HotelId = 1,
-                            NumGuest = 2,
-                            StaffId = 1,
-                            Status = true,
-                            StayId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CheckInDate = new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOutDate = new DateTime(2023, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CustomerId = 2,
-                            Destination = "City B",
-                            HotelId = 2,
-                            NumGuest = 1,
-                            StaffId = 2,
-                            Status = true,
-                            StayId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CheckInDate = new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOutDate = new DateTime(2023, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CustomerId = 3,
-                            Destination = "City C",
-                            HotelId = 3,
-                            NumGuest = 3,
-                            StaffId = 3,
-                            Status = false,
-                            StayId = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CheckInDate = new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CheckOutDate = new DateTime(2023, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CustomerId = 4,
-                            Destination = "City D",
-                            HotelId = 4,
-                            NumGuest = 2,
-                            StaffId = 4,
-                            Status = true,
-                            StayId = 4
-                        });
-                });
-
-            modelBuilder.Entity("HotelBooking.Shared.Domain.Customer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CardNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Cvv")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ExpiryDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Mobile")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PaymentType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Customers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CardNumber = "1234567812345678",
-                            Cvv = "123",
-                            Email = "sara.jones@example.com",
-                            ExpiryDate = new DateTime(2025, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Mobile = "87654321",
-                            Name = "SARA JONES",
-                            Password = "sara123",
-                            PaymentType = "CreditCard"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CardNumber = "9876543210987654",
-                            Cvv = "456",
-                            Email = "mike.smith@example.com",
-                            ExpiryDate = new DateTime(2024, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Mobile = "98765432",
-                            Name = "MIKE SMITH",
-                            Password = "mikepass",
-                            PaymentType = "DebitCard"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CardNumber = "8765123412345678",
-                            Cvv = "789",
-                            Email = "jason.lee@example.com",
-                            ExpiryDate = new DateTime(2026, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Mobile = "87651234",
-                            Name = "JASON LEE",
-                            Password = "jasonPass",
-                            PaymentType = "CreditCard"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CardNumber = "9876234512345678",
-                            Cvv = "567",
-                            Email = "emily.tan@example.com",
-                            ExpiryDate = new DateTime(2028, 8, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Mobile = "98762345",
-                            Name = "EMILY TAN",
-                            Password = "emilyPwd",
-                            PaymentType = "DebitCard"
                         });
                 });
 
@@ -516,76 +330,6 @@ namespace HotelBooking.Server.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HotelBooking.Shared.Domain.Review", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal?>("Rating")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("StayId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("StayId");
-
-                    b.ToTable("Reviews");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CustomerId = 1,
-                            Date = new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Enjoyed the stay, great service!",
-                            Rating = 4.5m,
-                            StayId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CustomerId = 2,
-                            Date = new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Decent stay, room was comfortable",
-                            Rating = 3.0m,
-                            StayId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CustomerId = 3,
-                            Date = new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Outstanding experience, highly recommended!",
-                            Rating = 5.0m,
-                            StayId = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CustomerId = 4,
-                            Date = new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Average stay, room cleanliness could be improved",
-                            Rating = 2.5m,
-                            StayId = 4
-                        });
-                });
-
             modelBuilder.Entity("HotelBooking.Shared.Domain.Room", b =>
                 {
                     b.Property<int>("Id")
@@ -614,44 +358,6 @@ namespace HotelBooking.Server.Data.Migrations
                     b.HasIndex("RoomTypeId");
 
                     b.ToTable("Rooms");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Amenities = "2 King Beds",
-                            Number = "704A",
-                            RoomMaxStay = 5,
-                            RoomMinStay = 3,
-                            RoomTypeId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Amenities = "1 King Bed, 1 Office Room",
-                            Number = "680B",
-                            RoomMaxStay = 3,
-                            RoomMinStay = 2,
-                            RoomTypeId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Amenities = "2 Single Beds",
-                            Number = "530F",
-                            RoomMaxStay = 5,
-                            RoomMinStay = 4,
-                            RoomTypeId = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Amenities = "1 Single Bed, 1 Fax Machine",
-                            Number = "745C",
-                            RoomMaxStay = 3,
-                            RoomMinStay = 1,
-                            RoomTypeId = 4
-                        });
                 });
 
             modelBuilder.Entity("HotelBooking.Shared.Domain.RoomType", b =>
@@ -771,58 +477,6 @@ namespace HotelBooking.Server.Data.Migrations
                             Mobile = "12345678",
                             Name = "TAY ZI XIANG",
                             Password = "TZXTZX"
-                        });
-                });
-
-            modelBuilder.Entity("HotelBooking.Shared.Domain.Stay", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ComplimentaryServices")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmergencyContact")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("OccupancyStatus")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Stays");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ComplimentaryServices = "Wi-Fi, Breakfast",
-                            EmergencyContact = "12345678",
-                            OccupancyStatus = true
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ComplimentaryServices = "Pool Access, Newspaper",
-                            EmergencyContact = "87654321",
-                            OccupancyStatus = false
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ComplimentaryServices = "Gym Access, Parking",
-                            EmergencyContact = "55558888",
-                            OccupancyStatus = true
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ComplimentaryServices = "Airport Shuttle",
-                            EmergencyContact = "33332222",
-                            OccupancyStatus = false
                         });
                 });
 
@@ -982,60 +636,6 @@ namespace HotelBooking.Server.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("HotelBooking.Shared.Domain.Booking", b =>
-                {
-                    b.HasOne("HotelBooking.Shared.Domain.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HotelBooking.Shared.Domain.Hotel", "Hotel")
-                        .WithMany()
-                        .HasForeignKey("HotelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HotelBooking.Shared.Domain.Staff", "Staff")
-                        .WithMany()
-                        .HasForeignKey("StaffId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HotelBooking.Shared.Domain.Stay", "Stay")
-                        .WithMany()
-                        .HasForeignKey("StayId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
-
-                    b.Navigation("Hotel");
-
-                    b.Navigation("Staff");
-
-                    b.Navigation("Stay");
-                });
-
-            modelBuilder.Entity("HotelBooking.Shared.Domain.Review", b =>
-                {
-                    b.HasOne("HotelBooking.Shared.Domain.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HotelBooking.Shared.Domain.Stay", "Stay")
-                        .WithMany()
-                        .HasForeignKey("StayId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
-
-                    b.Navigation("Stay");
                 });
 
             modelBuilder.Entity("HotelBooking.Shared.Domain.Room", b =>
