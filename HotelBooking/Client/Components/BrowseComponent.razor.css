@@ -16,6 +16,8 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
 }
 
     .Hotel-Card:hover {
@@ -36,6 +38,7 @@
     }
 
     .Hotel-Card p {
+        flex-grow: 1;
         padding: 0 10px;
         margin: 5px 0;
         font-size: 0.9rem;
