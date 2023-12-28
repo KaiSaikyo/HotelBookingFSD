@@ -1,4 +1,13 @@
-﻿.Booking-Container {
+﻿:root {
+    --primary-color: #2c3855;
+    --primary-color-dark: #435681;
+    --text-dark: #333333;
+    --text-light: #767268;
+    --extra-light: #f3f4f6;
+    --white: #ffffff;
+}
+
+.Booking-Container {
     width: 60%;
     padding: 2rem;
     margin: 1rem auto;
@@ -76,14 +85,6 @@
             background-color: var(--primary-color-dark);
         }
 
-@media screen and (max-width: var(--page-max-width)) {
-    .Booking-Container {
-        width: 100%;
-        padding: 2rem;
-        margin: 0 auto;
-    }
-}
-
 .container {
     width: 100%;
     padding: 15px;
@@ -110,49 +111,8 @@
         width: 100%;
         padding: 8px;
         box-sizing: border-box;
+        border-radius: 0.5rem;
     }
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.dropbtn {
-    background-color: #f1f1f1;
-    color: black;
-    padding: 8px 16px;
-    border: none;
-    cursor: pointer;
-    outline: none;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
-    .dropdown-content a {
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-    }
-
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown:hover .dropbtn {
-    background-color: #ddd;
-}
 
 #filter-btn {
     background-color: #8EB4E5;
