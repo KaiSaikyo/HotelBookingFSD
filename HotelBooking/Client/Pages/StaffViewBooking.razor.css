@@ -75,4 +75,36 @@
 }
 
 .Booking-Data {
+    display: flex;
 }
+
+.Cancel-Button {
+    width: 140px;
+    height: 40px;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    border: 1px solid black;
+    color: black;
+    text-align: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+    .Cancel-Button:active {
+        outline: 2px solid black;
+    }
+
+.Save-Button {
+    width: 140px;
+    height: 40px;
+    background-color: #1570EF;
+    border-radius: 0.5rem;
+    border: 1px #1570EF;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+    .Save-Button:active {
+        outline: 2px solid black;
+    }
