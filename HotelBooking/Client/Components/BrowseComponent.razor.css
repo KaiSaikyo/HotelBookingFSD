@@ -58,7 +58,7 @@
 .Map-Container {
     display: inline-block;
     vertical-align: top;
-    width: 55%;
+    width: 50%;
     padding: 20px;
     box-sizing: border-box;
     height: calc(60vh - 40px);
