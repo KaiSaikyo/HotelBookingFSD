@@ -33,6 +33,7 @@
 
     .Hotel-Card h3 {
         padding: 10px;
+        padding-bottom: 0px;
         font-size: 1.2rem;
         margin: 0;
     }
