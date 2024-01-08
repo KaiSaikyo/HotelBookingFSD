@@ -22,6 +22,11 @@
 	grid-row: span 2;
 }
 
+.Hotel-Info {
+	display: flex;
+	flex: 1;
+}
+
 .Hotel-Name {
 	background-color: #8EB4E5;
 	color: white;
@@ -50,4 +55,22 @@ ul {
 
 li {
 	padding-top: 0.5rem;
+}
+
+.Map-Container {
+	display: inline-block;
+	vertical-align: top;
+	width: 50%;
+	box-sizing: border-box;
+	padding-right: 7.5rem;
+	padding-top: 1rem;
+	padding-left: 9rem;
+}
+
+.Map {
+	background-color: #ffffff;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	max-height: 180px;
 }
