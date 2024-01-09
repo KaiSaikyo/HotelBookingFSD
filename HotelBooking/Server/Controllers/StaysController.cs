@@ -8,76 +8,78 @@ using Microsoft.EntityFrameworkCore;
 using HotelBooking.Server.Data;
 using HotelBooking.Shared.Domain;
 using HotelBooking.Server.IRepository;
+using HotelBooking.Server.IRepository;
+using HotelBooking.Shared.Domain;
 
 namespace HotelBooking.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ReviewsController : ControllerBase
+    public class StaysController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public ReviewsController(IUnitOfWork unitOfWork)
+        public StaysController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        // GET: api/Reviews
+        // GET: api/Stays
         [HttpGet]
-        /*public async Task<ActionResult<IEnumerable<Review>>> GetReviews()
+        /*public async Task<ActionResult<IEnumerable<Stay>>> GetStays()
         {
-          if (_context.Reviews == null)
+          if (_context.Stays == null)
           {
               return NotFound();
           }
-            return await _context.Reviews.ToListAsync();
+            return await _context.Stays.ToListAsync();
         }*/
-        public async Task<IActionResult> GetReviews()
+        public async Task<IActionResult> GetStays()
         {
-            var reviews = await _unitOfWork.Reviews.GetAll();
-            return Ok(reviews);
+            var stays = await _unitOfWork.Stays.GetAll();
+            return Ok(stays);
         }
 
-        // GET: api/Reviews/5
+        // GET: api/Stays/5
         [HttpGet("{id}")]
-        /*public async Task<ActionResult<Review>> GetReview(int id)
+        /*public async Task<ActionResult<Stay>> GetStay(int id)
         {
-          if (_context.Reviews == null)
+          if (_context.Stays == null)
           {
               return NotFound();
           }
-            var review = await _context.Reviews.FindAsync(id);
+            var stay = await _context.Stays.FindAsync(id);
 
-            if (review == null)
+            if (stay == null)
             {
                 return NotFound();
             }
 
-            return review;
+            return stay;
         }*/
-        public async Task<IActionResult> GetReview(int id)
+        public async Task<IActionResult> GetStay(int id)
         {
-            var review = await _unitOfWork.Reviews.Get(q => q.Id == id);
+            var stay = await _unitOfWork.Stays.Get(q => q.Id == id);
 
-            if (review == null)
+            if (stay == null)
             {
                 return NotFound();
             }
 
-            return Ok(review);
+            return Ok(stay);
         }
 
-        // PUT: api/Reviews/5
+        // PUT: api/Stays/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        /*public async Task<IActionResult> PutReview(int id, Review review)
+        /*public async Task<IActionResult> PutStay(int id, Stay stay)
         {
-            if (id != review.Id)
+            if (id != stay.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(review).State = EntityState.Modified;
+            _context.Entry(stay).State = EntityState.Modified;
 
             try
             {
@@ -85,7 +87,7 @@ namespace HotelBooking.Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ReviewExists(id))
+                if (!StayExists(id))
                 {
                     return NotFound();
                 }
@@ -98,14 +100,14 @@ namespace HotelBooking.Server.Controllers
             return NoContent();
         }*/
 
-        public async Task<IActionResult> PutReview(int id, Review review)
+        public async Task<IActionResult> PutStay(int id, Stay stay)
         {
-            if (id != review.Id)
+            if (id != stay.Id)
             {
                 return BadRequest();
             }
 
-            _unitOfWork.Reviews.Update(review);
+            _unitOfWork.Stays.Update(stay);
 
             try
             {
@@ -113,7 +115,7 @@ namespace HotelBooking.Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!await ReviewExists(id))
+                if (!await StayExists(id))
                 {
                     return NotFound();
                 }
@@ -126,78 +128,78 @@ namespace HotelBooking.Server.Controllers
             return NoContent();
         }
 
-        // POST: api/Reviews
+        // POST: api/Stays
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        /*public async Task<ActionResult<Review>> PostReview(Review review)
+        /*public async Task<ActionResult<Stay>> PostStay(Stay stay)
         {
-          if (_context.Reviews == null)
+          if (_context.Stays == null)
           {
-              return Problem("Entity set 'ApplicationDbContext.Reviews'  is null.");
+              return Problem("Entity set 'ApplicationDbContext.Stays'  is null.");
           }
-            _context.Reviews.Add(review);
+            _context.Stays.Add(stay);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetReview", new { id = review.Id }, review);
+            return CreatedAtAction("GetStay", new { id = stay.Id }, stay);
         }*/
 
-        public async Task<ActionResult<Review>> PostReview(Review review)
+        public async Task<ActionResult<Stay>> PostStay(Stay stay)
         {
-            await _unitOfWork.Reviews.Insert(review);
+            await _unitOfWork.Stays.Insert(stay);
             await _unitOfWork.Save(HttpContext);
 
-            return CreatedAtAction("GetReview", new { id = review.Id }, review);
+            return CreatedAtAction("GetStay", new { id = stay.Id }, stay);
         }
 
-        // DELETE: api/Reviews/5
+        // DELETE: api/Stays/5
         [HttpDelete("{id}")]
-        /*public async Task<IActionResult> DeleteReview(int id)
+        /*public async Task<IActionResult> DeleteStay(int id)
         {
-            if (_context.Reviews == null)
+            if (_context.Stays == null)
             {
                 return NotFound();
             }
-            var review = await _context.Reviews.FindAsync(id);
-            if (review == null)
+            var stay = await _context.Stays.FindAsync(id);
+            if (stay == null)
             {
                 return NotFound();
             }
 
-            _context.Reviews.Remove(review);
+            _context.Stays.Remove(stay);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ReviewExists(int id)
+        private bool StayExists(int id)
         {
-            return (_context.Reviews?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Stays?.Any(e => e.Id == id)).GetValueOrDefault();
         }*/
 
-        public async Task<IActionResult> DeleteReview(int id)
+        public async Task<IActionResult> DeleteStay(int id)
         {
-            if (_unitOfWork.Reviews == null)
+            if (_unitOfWork.Stays == null)
             {
                 return NotFound();
             }
 
-            var review = await _unitOfWork.Reviews.Get(q => q.Id == id);
+            var stay = await _unitOfWork.Stays.Get(q => q.Id == id);
 
-            if (review == null)
+            if (stay == null)
             {
                 return NotFound();
             }
 
-            await _unitOfWork.Reviews.Delete(id);
+            await _unitOfWork.Stays.Delete(id);
             await _unitOfWork.Save(HttpContext);
 
             return NoContent();
         }
 
-        private async Task<bool> ReviewExists(int id)
+        private async Task<bool> StayExists(int id)
         {
-            var review = await _unitOfWork.Reviews.Get(q => q.Id == id);
-            return review != null;
+            var stay = await _unitOfWork.Stays.Get(q => q.Id == id);
+            return stay != null;
         }
     }
 }

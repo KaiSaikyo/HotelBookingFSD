@@ -8,76 +8,78 @@ using Microsoft.EntityFrameworkCore;
 using HotelBooking.Server.Data;
 using HotelBooking.Shared.Domain;
 using HotelBooking.Server.IRepository;
+using HotelBooking.Server.IRepository;
+using HotelBooking.Shared.Domain;
 
 namespace HotelBooking.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ReviewsController : ControllerBase
+    public class HotelsController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public ReviewsController(IUnitOfWork unitOfWork)
+        public HotelsController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        // GET: api/Reviews
+        // GET: api/Hotels
         [HttpGet]
-        /*public async Task<ActionResult<IEnumerable<Review>>> GetReviews()
+        /*public async Task<ActionResult<IEnumerable<Hotel>>> GetHotels()
         {
-          if (_context.Reviews == null)
+          if (_context.Hotels == null)
           {
               return NotFound();
           }
-            return await _context.Reviews.ToListAsync();
+            return await _context.Hotels.ToListAsync();
         }*/
-        public async Task<IActionResult> GetReviews()
+        public async Task<IActionResult> GetHotels()
         {
-            var reviews = await _unitOfWork.Reviews.GetAll();
-            return Ok(reviews);
+            var hotels = await _unitOfWork.Hotels.GetAll();
+            return Ok(hotels);
         }
 
-        // GET: api/Reviews/5
+        // GET: api/Hotels/5
         [HttpGet("{id}")]
-        /*public async Task<ActionResult<Review>> GetReview(int id)
+        /*public async Task<ActionResult<Hotel>> GetHotel(int id)
         {
-          if (_context.Reviews == null)
+          if (_context.Hotels == null)
           {
               return NotFound();
           }
-            var review = await _context.Reviews.FindAsync(id);
+            var hotel = await _context.Hotels.FindAsync(id);
 
-            if (review == null)
+            if (hotel == null)
             {
                 return NotFound();
             }
 
-            return review;
+            return hotel;
         }*/
-        public async Task<IActionResult> GetReview(int id)
+        public async Task<IActionResult> GetHotel(int id)
         {
-            var review = await _unitOfWork.Reviews.Get(q => q.Id == id);
+            var hotel = await _unitOfWork.Hotels.Get(q => q.Id == id);
 
-            if (review == null)
+            if (hotel == null)
             {
                 return NotFound();
             }
 
-            return Ok(review);
+            return Ok(hotel);
         }
 
-        // PUT: api/Reviews/5
+        // PUT: api/Hotels/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        /*public async Task<IActionResult> PutReview(int id, Review review)
+        /*public async Task<IActionResult> PutHotel(int id, Hotel hotel)
         {
-            if (id != review.Id)
+            if (id != hotel.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(review).State = EntityState.Modified;
+            _context.Entry(hotel).State = EntityState.Modified;
 
             try
             {
@@ -85,7 +87,7 @@ namespace HotelBooking.Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ReviewExists(id))
+                if (!HotelExists(id))
                 {
                     return NotFound();
                 }
@@ -98,14 +100,14 @@ namespace HotelBooking.Server.Controllers
             return NoContent();
         }*/
 
-        public async Task<IActionResult> PutReview(int id, Review review)
+        public async Task<IActionResult> PutHotel(int id, Hotel hotel)
         {
-            if (id != review.Id)
+            if (id != hotel.Id)
             {
                 return BadRequest();
             }
 
-            _unitOfWork.Reviews.Update(review);
+            _unitOfWork.Hotels.Update(hotel);
 
             try
             {
@@ -113,7 +115,7 @@ namespace HotelBooking.Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!await ReviewExists(id))
+                if (!await HotelExists(id))
                 {
                     return NotFound();
                 }
@@ -126,78 +128,78 @@ namespace HotelBooking.Server.Controllers
             return NoContent();
         }
 
-        // POST: api/Reviews
+        // POST: api/Hotels
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        /*public async Task<ActionResult<Review>> PostReview(Review review)
+        /*public async Task<ActionResult<Hotel>> PostHotel(Hotel hotel)
         {
-          if (_context.Reviews == null)
+          if (_context.Hotels == null)
           {
-              return Problem("Entity set 'ApplicationDbContext.Reviews'  is null.");
+              return Problem("Entity set 'ApplicationDbContext.Hotels'  is null.");
           }
-            _context.Reviews.Add(review);
+            _context.Hotels.Add(hotel);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetReview", new { id = review.Id }, review);
+            return CreatedAtAction("GetHotel", new { id = hotel.Id }, hotel);
         }*/
 
-        public async Task<ActionResult<Review>> PostReview(Review review)
+        public async Task<ActionResult<Hotel>> PostHotel(Hotel hotel)
         {
-            await _unitOfWork.Reviews.Insert(review);
+            await _unitOfWork.Hotels.Insert(hotel);
             await _unitOfWork.Save(HttpContext);
 
-            return CreatedAtAction("GetReview", new { id = review.Id }, review);
+            return CreatedAtAction("GetHotel", new { id = hotel.Id }, hotel);
         }
 
-        // DELETE: api/Reviews/5
+        // DELETE: api/Hotels/5
         [HttpDelete("{id}")]
-        /*public async Task<IActionResult> DeleteReview(int id)
+        /*public async Task<IActionResult> DeleteHotel(int id)
         {
-            if (_context.Reviews == null)
+            if (_context.Hotels == null)
             {
                 return NotFound();
             }
-            var review = await _context.Reviews.FindAsync(id);
-            if (review == null)
+            var hotel = await _context.Hotels.FindAsync(id);
+            if (hotel == null)
             {
                 return NotFound();
             }
 
-            _context.Reviews.Remove(review);
+            _context.Hotels.Remove(hotel);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ReviewExists(int id)
+        private bool HotelExists(int id)
         {
-            return (_context.Reviews?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Hotels?.Any(e => e.Id == id)).GetValueOrDefault();
         }*/
 
-        public async Task<IActionResult> DeleteReview(int id)
+        public async Task<IActionResult> DeleteHotel(int id)
         {
-            if (_unitOfWork.Reviews == null)
+            if (_unitOfWork.Hotels == null)
             {
                 return NotFound();
             }
 
-            var review = await _unitOfWork.Reviews.Get(q => q.Id == id);
+            var hotel = await _unitOfWork.Hotels.Get(q => q.Id == id);
 
-            if (review == null)
+            if (hotel == null)
             {
                 return NotFound();
             }
 
-            await _unitOfWork.Reviews.Delete(id);
+            await _unitOfWork.Hotels.Delete(id);
             await _unitOfWork.Save(HttpContext);
 
             return NoContent();
         }
 
-        private async Task<bool> ReviewExists(int id)
+        private async Task<bool> HotelExists(int id)
         {
-            var review = await _unitOfWork.Reviews.Get(q => q.Id == id);
-            return review != null;
+            var hotel = await _unitOfWork.Hotels.Get(q => q.Id == id);
+            return hotel != null;
         }
     }
 }

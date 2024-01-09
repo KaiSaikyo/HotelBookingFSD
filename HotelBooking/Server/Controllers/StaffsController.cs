@@ -13,71 +13,71 @@ namespace HotelBooking.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ReviewsController : ControllerBase
+    public class StaffsController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public ReviewsController(IUnitOfWork unitOfWork)
+        public StaffsController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        // GET: api/Reviews
+        // GET: api/Staffs
         [HttpGet]
-        /*public async Task<ActionResult<IEnumerable<Review>>> GetReviews()
+        /*public async Task<ActionResult<IEnumerable<Staff>>> GetStaffs()
         {
-          if (_context.Reviews == null)
+          if (_context.Staffs == null)
           {
               return NotFound();
           }
-            return await _context.Reviews.ToListAsync();
+            return await _context.Staffs.ToListAsync();
         }*/
-        public async Task<IActionResult> GetReviews()
+        public async Task<IActionResult> GetStaffs()
         {
-            var reviews = await _unitOfWork.Reviews.GetAll();
-            return Ok(reviews);
+            var staffs = await _unitOfWork.Staffs.GetAll();
+            return Ok(staffs);
         }
 
-        // GET: api/Reviews/5
+        // GET: api/Staffs/5
         [HttpGet("{id}")]
-        /*public async Task<ActionResult<Review>> GetReview(int id)
+        /*public async Task<ActionResult<Staff>> GetStaff(int id)
         {
-          if (_context.Reviews == null)
+          if (_context.Staffs == null)
           {
               return NotFound();
           }
-            var review = await _context.Reviews.FindAsync(id);
+            var staff = await _context.Staffs.FindAsync(id);
 
-            if (review == null)
+            if (staff == null)
             {
                 return NotFound();
             }
 
-            return review;
+            return staff;
         }*/
-        public async Task<IActionResult> GetReview(int id)
+        public async Task<IActionResult> GetStaff(int id)
         {
-            var review = await _unitOfWork.Reviews.Get(q => q.Id == id);
+            var staff = await _unitOfWork.Staffs.Get(q => q.Id == id);
 
-            if (review == null)
+            if (staff == null)
             {
                 return NotFound();
             }
 
-            return Ok(review);
+            return Ok(staff);
         }
 
-        // PUT: api/Reviews/5
+        // PUT: api/Staffs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        /*public async Task<IActionResult> PutReview(int id, Review review)
+        /*public async Task<IActionResult> PutStaff(int id, Staff staff)
         {
-            if (id != review.Id)
+            if (id != staff.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(review).State = EntityState.Modified;
+            _context.Entry(staff).State = EntityState.Modified;
 
             try
             {
@@ -85,7 +85,7 @@ namespace HotelBooking.Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ReviewExists(id))
+                if (!StaffExists(id))
                 {
                     return NotFound();
                 }
@@ -98,14 +98,14 @@ namespace HotelBooking.Server.Controllers
             return NoContent();
         }*/
 
-        public async Task<IActionResult> PutReview(int id, Review review)
+        public async Task<IActionResult> PutStaff(int id, Staff staff)
         {
-            if (id != review.Id)
+            if (id != staff.Id)
             {
                 return BadRequest();
             }
 
-            _unitOfWork.Reviews.Update(review);
+            _unitOfWork.Staffs.Update(staff);
 
             try
             {
@@ -113,7 +113,7 @@ namespace HotelBooking.Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!await ReviewExists(id))
+                if (!await StaffExists(id))
                 {
                     return NotFound();
                 }
@@ -126,78 +126,78 @@ namespace HotelBooking.Server.Controllers
             return NoContent();
         }
 
-        // POST: api/Reviews
+        // POST: api/Staffs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        /*public async Task<ActionResult<Review>> PostReview(Review review)
+        /*public async Task<ActionResult<Staff>> PostStaff(Staff staff)
         {
-          if (_context.Reviews == null)
+          if (_context.Staffs == null)
           {
-              return Problem("Entity set 'ApplicationDbContext.Reviews'  is null.");
+              return Problem("Entity set 'ApplicationDbContext.Staffs'  is null.");
           }
-            _context.Reviews.Add(review);
+            _context.Staffs.Add(staff);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetReview", new { id = review.Id }, review);
+            return CreatedAtAction("GetStaff", new { id = staff.Id }, staff);
         }*/
 
-        public async Task<ActionResult<Review>> PostReview(Review review)
+        public async Task<ActionResult<Staff>> PostStaff(Staff staff)
         {
-            await _unitOfWork.Reviews.Insert(review);
+            await _unitOfWork.Staffs.Insert(staff);
             await _unitOfWork.Save(HttpContext);
 
-            return CreatedAtAction("GetReview", new { id = review.Id }, review);
+            return CreatedAtAction("GetStaff", new { id = staff.Id }, staff);
         }
 
-        // DELETE: api/Reviews/5
+        // DELETE: api/Staffs/5
         [HttpDelete("{id}")]
-        /*public async Task<IActionResult> DeleteReview(int id)
+        /*public async Task<IActionResult> DeleteStaff(int id)
         {
-            if (_context.Reviews == null)
+            if (_context.Staffs == null)
             {
                 return NotFound();
             }
-            var review = await _context.Reviews.FindAsync(id);
-            if (review == null)
+            var staff = await _context.Staffs.FindAsync(id);
+            if (staff == null)
             {
                 return NotFound();
             }
 
-            _context.Reviews.Remove(review);
+            _context.Staffs.Remove(staff);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ReviewExists(int id)
+        private bool StaffExists(int id)
         {
-            return (_context.Reviews?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Staffs?.Any(e => e.Id == id)).GetValueOrDefault();
         }*/
 
-        public async Task<IActionResult> DeleteReview(int id)
+        public async Task<IActionResult> DeleteStaff(int id)
         {
-            if (_unitOfWork.Reviews == null)
+            if (_unitOfWork.Staffs == null)
             {
                 return NotFound();
             }
 
-            var review = await _unitOfWork.Reviews.Get(q => q.Id == id);
+            var staff = await _unitOfWork.Staffs.Get(q => q.Id == id);
 
-            if (review == null)
+            if (staff == null)
             {
                 return NotFound();
             }
 
-            await _unitOfWork.Reviews.Delete(id);
+            await _unitOfWork.Staffs.Delete(id);
             await _unitOfWork.Save(HttpContext);
 
             return NoContent();
         }
 
-        private async Task<bool> ReviewExists(int id)
+        private async Task<bool> StaffExists(int id)
         {
-            var review = await _unitOfWork.Reviews.Get(q => q.Id == id);
-            return review != null;
+            var staff = await _unitOfWork.Staffs.Get(q => q.Id == id);
+            return staff != null;
         }
     }
 }
