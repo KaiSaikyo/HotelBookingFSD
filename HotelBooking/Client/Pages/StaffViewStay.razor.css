@@ -1,0 +1,262 @@
+﻿﻿.background-color {
+    background-color: #8EB4E5;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    padding: 1rem;
+}
+
+.Dashboard-Container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+    .Dashboard-Container h2 {
+        padding-inline: 1rem;
+        margin-block: 0.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .Dashboard-Container p {
+        flex-grow: 1;
+        padding-inline: 1rem;
+        margin-bottom: 0.5rem;
+        overflow-wrap: break-word;
+        font-size: 1rem;
+        text-align: justify;
+    }
+
+    .Dashboard-Container hr {
+        margin-top: 0px;
+        margin-bottom: 0.5rem;
+    }
+
+.right-aligned-button {
+    width: 140px;
+    height: 40px;
+    background-color: #1570EF;
+    border-radius: 0.5rem;
+    border: none;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+    .right-aligned-button:active {
+        outline: 2px solid white;
+    }
+
+.button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Stay-List {
+    flex-grow: 1;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    overflow-y: auto;
+    max-height: 640px;
+}
+
+.Stay-Header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #f2f2f2;
+}
+
+.Stay-Data {
+    display: flex;
+}
+
+.Stay-Modal {
+    background-color: #ffffff;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 960px;
+    padding: 1rem;
+}
+
+    .Stay-Modal h2 {
+        padding-inline: 1rem;
+        margin-block: 0.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        text-align: left;
+    }
+
+.Stay-Inputs {
+    flex-grow: 1;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+        "si1 si2"
+        "si3 si3"
+        "si4 si5";
+
+    gap: 1rem;
+}
+
+.SI-1, .SI-2, .SI-3, .SI-4, .SI-5 {
+    background-color: #f2f2f2;
+    border-radius: 0.5rem;
+}
+
+.SI-1 {
+    grid-area: si1;
+    
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+}
+
+    .SI-1 input {
+        margin-inline: 1rem;
+        border-radius: 0.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .SI-1 select {
+        margin-inline: 1rem;
+        border-radius: 0.2rem;
+        margin-bottom: 1rem;
+    }
+
+.SI-2 {
+    grid-area: si2;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+}
+
+.SI-2 input {
+    margin-inline: 1rem;
+    border-radius: 0.2rem;
+    margin-bottom: 1rem;
+}
+
+.SI-3 {
+    grid-area: si3;
+    display: flex;
+    flex-direction: column;
+}
+
+    .SI-3 input {
+        margin-inline: 1rem;
+        border-radius: 0.2rem;
+        margin-bottom: 1rem;
+    }
+
+.SI-4 {
+    grid-area: si4;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+}
+
+    .SI-4 input {
+        margin-inline: 1rem;
+        border-radius: 0.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .SI-4 select {
+        margin-inline: 1rem;
+        border-radius: 0.2rem;
+        margin-bottom: 1rem;
+    }
+
+.SI-5 {
+    grid-area: si5;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+}
+
+    .SI-5 input {
+        margin-inline: 1rem;
+        border-radius: 0.2rem;
+        margin-bottom: 1rem;
+    }
+
+.Upload-Button {
+    width: 140px;
+    height: 40px;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    border: 1px solid black;
+    color: black;
+    text-align: center;
+    justify-content: center;
+    font-size: 1rem;
+    margin-block: 0.5rem;
+    margin-inline: 1rem;
+}
+
+    .Upload-Button:active {
+        outline: 2px solid black;
+    }
+
+.Stay-Buttons {
+    min-height: 80px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.Stay-Div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.Cancel-Button {
+    width: 140px;
+    height: 40px;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    border: 1px solid black;
+    color: black;
+    text-align: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+    .Cancel-Button:active {
+        outline: 2px solid black;
+    }
+
+.Save-Button {
+    width: 140px;
+    height: 40px;
+    background-color: #1570EF;
+    border-radius: 0.5rem;
+    border: 1px #1570EF;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+    .Save-Button:active {
+        outline: 2px solid black;
+    }

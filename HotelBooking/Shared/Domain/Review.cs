@@ -21,8 +21,8 @@ namespace HotelBooking.Shared.Domain
 
         public virtual Customer? Customer { get; set; }
 
-        public int StayId { get; set; }
+        /*public int StayId { get; set; }
 
-        public virtual Stay? Stay { get; set; }
+        public virtual Stay? Stay { get; set; }*/
     }
 }

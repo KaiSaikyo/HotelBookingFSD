@@ -1,0 +1,97 @@
+﻿﻿.background-color {
+    background-color: #f2f2f2;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    padding: 1rem;
+}
+
+.Payment-Container {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr;
+    /*grid-template-areas:
+        "pc1 pc2";*/
+
+    gap: 1rem;
+}
+
+    .Payment-Container h2 {
+        padding-inline: 1rem;
+        padding-bottom: 0px;
+        margin-top: 0.5rem;
+        margin-bottom: 0px;
+        font-size: 2rem;
+        font-weight: 600;
+        text-align: left;
+    }
+
+    .Payment-Container p {
+        flex-grow: 1;
+        padding-inline: 1rem;
+        margin-bottom: 0.5rem;
+        overflow-wrap: break-word;
+        font-size: 1rem;
+        text-align: justify;
+    }
+
+    .Payment-Container hr {
+        margin-top: 0px;
+        margin-bottom: 0.5rem;
+    }
+
+    .Payment-Container img {
+        width: 100%;
+        height: 270px;
+        object-fit: cover;
+        border-bottom: 1px solid #ddd;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+    }
+
+.Payment-Inputs {
+
+}
+
+.Payment-Picture-Container {
+    display: flex;
+    flex-direction: column;
+}
+
+.Payment-Picture {
+    flex-grow: 1;
+    margin: 1rem;
+    background-color: #f8f8f8;
+    border-radius: 1rem;
+}
+
+.Payment-Button {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .Payment-Button button {
+        display: block;
+        width: 60%;
+        height: 3rem;
+        background-color: #8EB4E5;
+        border-radius: 0.5rem;
+        border: none;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+        .Payment-Button button:hover {
+            background-color: rgba(142, 180, 229, 0.70);
+            color: white;
+        }
+
+        .Payment-Button button:active {
+            background-color: #8eb4e5;
+            color: white;
+        }

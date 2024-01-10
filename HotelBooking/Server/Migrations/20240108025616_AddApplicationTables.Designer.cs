@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace HotelBooking.Server.Data.Migrations
+namespace HotelBooking.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231221084135_AddApplicationTables1")]
-    partial class AddApplicationTables1
+    [Migration("20240108025616_AddApplicationTables")]
+    partial class AddApplicationTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -241,7 +241,7 @@ namespace HotelBooking.Server.Data.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8b8c8035-2be5-436f-8b80-8a5fed1438ce",
+                            ConcurrencyStamp = "212a0327-6189-4d5c-b34c-1293a248bcb5",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -249,9 +249,9 @@ namespace HotelBooking.Server.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEByKPT0Wn5Qm6lDBBIYmQBRu1yvC9abPnpjKUJU/9LFMvNlk9UOxm/V425unqyiSvg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENhw5ml+yjkRC+a/2Y9Y+WL32vRxm3A7YBjOTq8hIJZVZ2FjAtQ6j4ThaSEFLIHbpA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "155ed921-7cc0-4044-8d42-00869be81ea7",
+                            SecurityStamp = "af4266db-cd2d-43ae-a6d2-5c46ab22e2c7",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -289,9 +289,6 @@ namespace HotelBooking.Server.Data.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
-                    b.Property<int>("StayId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
@@ -299,8 +296,6 @@ namespace HotelBooking.Server.Data.Migrations
                     b.HasIndex("HotelId");
 
                     b.HasIndex("StaffId");
-
-                    b.HasIndex("StayId");
 
                     b.ToTable("Bookings");
                 });
@@ -371,48 +366,6 @@ namespace HotelBooking.Server.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Hotels");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "333 Orchard Rd, Mandarin Orchard Singapore",
-                            Amenities = "Breakfast, Wifi, Gym",
-                            Availability = true,
-                            Description = "Hilton Hotels & Resorts is a global brand of full-service hotels and resorts.",
-                            Name = "Hilton Hotel",
-                            Rating = 3.5m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "1 Fullerton Square, Singapore 049178",
-                            Amenities = "Breakfast, Gym, Laundry",
-                            Availability = true,
-                            Description = "The Fullerton Hotel Singapore offers 5-star luxury rooms & suites with exceptional services.",
-                            Name = "Fullerton Hotel",
-                            Rating = 5m
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Address = "768 Upper Serangoon Rd, Singapore 534636",
-                            Amenities = "Game Center, Swimming Pool, Wifi",
-                            Availability = false,
-                            Description = "Your go-to hotel for awesome rates, comfortable rooms, and accessible locations.",
-                            Name = "St 81 Hotel",
-                            Rating = 3m
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Address = "Desaru Coast, Jln Pantai 3, 81930, Johor, Malaysia",
-                            Amenities = "Breakfast, Wifi, Gym",
-                            Availability = true,
-                            Description = "Your ultimate destination getaway at the leading entertainment hotel in Desaru Coast, Johor, Malaysia.",
-                            Name = "Hard Rock Hotel",
-                            Rating = 2.5m
-                        });
                 });
 
             modelBuilder.Entity("HotelBooking.Shared.Domain.Review", b =>
@@ -435,14 +388,9 @@ namespace HotelBooking.Server.Data.Migrations
                     b.Property<decimal?>("Rating")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("StayId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
-
-                    b.HasIndex("StayId");
 
                     b.ToTable("Reviews");
                 });
@@ -502,40 +450,6 @@ namespace HotelBooking.Server.Data.Migrations
                     b.HasIndex("HotelId");
 
                     b.ToTable("RoomTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "The Twin Room",
-                            HotelId = 1,
-                            Price = 2404m,
-                            Size = "25 sqm"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Deluxe Twin Room",
-                            HotelId = 1,
-                            Price = 2324m,
-                            Size = "20 sqm"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Single Office Room",
-                            HotelId = 2,
-                            Price = 1531m,
-                            Size = "15 sqm"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Single Room",
-                            HotelId = 4,
-                            Price = 592.5m,
-                            Size = "5 sqm"
-                        });
                 });
 
             modelBuilder.Entity("HotelBooking.Shared.Domain.Staff", b =>
@@ -561,40 +475,6 @@ namespace HotelBooking.Server.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Staffs");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Email = "T.amos@gmail.com",
-                            Mobile = "98765432",
-                            Name = "AMOS TAN",
-                            Password = "AT123"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Email = "JBman@hotmail.com",
-                            Mobile = "87654321",
-                            Name = "JACK BRYAN",
-                            Password = "JBpassword"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Email = "LSING@hotmail.com",
-                            Mobile = "65432109",
-                            Name = "LIM HSING",
-                            Password = "passwordLH"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Email = "TZXiang@gmail.com",
-                            Mobile = "12345678",
-                            Name = "TAY ZI XIANG",
-                            Password = "TZXTZX"
-                        });
                 });
 
             modelBuilder.Entity("HotelBooking.Shared.Domain.Stay", b =>
@@ -604,6 +484,9 @@ namespace HotelBooking.Server.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BookingId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ComplimentaryServices")
                         .HasColumnType("nvarchar(max)");
@@ -615,6 +498,8 @@ namespace HotelBooking.Server.Data.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BookingId");
 
                     b.ToTable("Stays");
                 });
@@ -797,19 +682,11 @@ namespace HotelBooking.Server.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HotelBooking.Shared.Domain.Stay", "Stay")
-                        .WithMany()
-                        .HasForeignKey("StayId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Customer");
 
                     b.Navigation("Hotel");
 
                     b.Navigation("Staff");
-
-                    b.Navigation("Stay");
                 });
 
             modelBuilder.Entity("HotelBooking.Shared.Domain.Review", b =>
@@ -820,15 +697,7 @@ namespace HotelBooking.Server.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HotelBooking.Shared.Domain.Stay", "Stay")
-                        .WithMany()
-                        .HasForeignKey("StayId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Customer");
-
-                    b.Navigation("Stay");
                 });
 
             modelBuilder.Entity("HotelBooking.Shared.Domain.Room", b =>
@@ -851,6 +720,17 @@ namespace HotelBooking.Server.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Hotel");
+                });
+
+            modelBuilder.Entity("HotelBooking.Shared.Domain.Stay", b =>
+                {
+                    b.HasOne("HotelBooking.Shared.Domain.Booking", "Booking")
+                        .WithMany()
+                        .HasForeignKey("BookingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Booking");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

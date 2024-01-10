@@ -1,5 +1,7 @@
 ﻿@page "/browse"
 
+<PageTitle>RoomScout.Org - Browse</PageTitle>
+
 <section>
     <div class="Booking-Container">
         <form>
@@ -34,7 +36,24 @@
         </form>
         <button class="btn"><img src="./css/img/magnifying-glass.png"></button>
     </div>
+
+
+    <div class="container">
+        <div class="filter-bar">
+            <div class="filter-container">
+                <label for="price-select">Price:</label>
+                <select id="price-select" name="price-select">
+                    <option value="default">--Please choose an option--</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+
+            <button id="filter-btn">Filter</button>
+        </div>
+    </div>
 </section>
 
 
-<SamplePageContentComponent />
+<BrowseComponent />

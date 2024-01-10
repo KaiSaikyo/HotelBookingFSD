@@ -14,7 +14,7 @@ namespace HotelBooking.Server.Configurations.Entities
                 {
                     Id = 1,
                     Name = "Hilton Hotel",
-                    Address= "333 Orchard Rd, Mandarin Orchard Singapore",
+                    Address = "333 Orchard Rd, Mandarin Orchard Singapore",
                     Description = "Hilton Hotels & Resorts is a global brand of full-service hotels and resorts.",
                     Amenities = "Breakfast, Wifi, Gym",
                     Rating = (decimal?)3.5,

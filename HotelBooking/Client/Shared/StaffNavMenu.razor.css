@@ -1,4 +1,4 @@
-.top-bar {
+﻿.top-bar-staff {
     background-color: #ffffff;
     opacity: 0.9;
 }
@@ -12,12 +12,12 @@
 }
 
 /* Styling for navigation items */
-.nav-item {
+.nav-item-staff {
     font-size: 0.9rem;
 }
 
 /* Styling for navigation links */
-.nav-item ::deep a {
+.nav-item-staff ::deep a {
     color: #343a40;
     border-radius: 4px;
     display: flex;
@@ -27,13 +27,13 @@
 }
 
 /* Active link styling */
-.nav-item ::deep a.active {
+.nav-item-staff ::deep a.active {
     background-color: #8eb4e5;
     color: white;
 }
 
 /* Hover effect for links */
-.nav-item ::deep a:hover {
+.nav-item-staff ::deep a:hover {
     background-color: rgba(142,180,229, 0.70);
     color: white;
 }
