@@ -16,7 +16,8 @@ namespace HotelBooking.Server.Configurations.Entities
                     EmergencyContact = "12345678", // 8-digit numerical emergency contact
                     OccupancyStatus = true,
                     ComplimentaryServices = "Wi-Fi, Breakfast",
-                    BookingId = 1
+                    BookingId = 1,
+                    RoomId = 1
                 },
                 new Stay
                 {
@@ -24,7 +25,8 @@ namespace HotelBooking.Server.Configurations.Entities
                     EmergencyContact = "87654321", // 8-digit numerical emergency contact
                     OccupancyStatus = false,
                     ComplimentaryServices = "Pool Access, Newspaper",
-                    BookingId = 2
+                    BookingId = 2,
+                    RoomId = 2
                 },
                 new Stay
                 {
@@ -32,7 +34,8 @@ namespace HotelBooking.Server.Configurations.Entities
                     EmergencyContact = "55558888", // 8-digit numerical emergency contact
                     OccupancyStatus = true,
                     ComplimentaryServices = "Gym Access, Parking",
-                    BookingId = 3
+                    BookingId = 3,
+                    RoomId = 3
                 },
                 new Stay
                 {
@@ -40,7 +43,8 @@ namespace HotelBooking.Server.Configurations.Entities
                     EmergencyContact = "33332222", // 8-digit numerical emergency contact
                     OccupancyStatus = false,
                     ComplimentaryServices = "Airport Shuttle",
-                    BookingId = 4
+                    BookingId = 4,
+                    RoomId = 4
                 }
             );
         }

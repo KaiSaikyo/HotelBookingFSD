@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooking.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240108032917_AddedDefaultDataUser")]
-    partial class AddedDefaultDataUser
+    [Migration("20240115021525_NewNewDataBase")]
+    partial class NewNewDataBase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -241,7 +241,7 @@ namespace HotelBooking.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9186f4b7-c05b-415a-a4e2-f45f649182f0",
+                            ConcurrencyStamp = "04302cfb-0702-45dd-a16b-a1d0cbb6329f",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -249,9 +249,9 @@ namespace HotelBooking.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHpdWKeysJN1ytvMRCastGBIHNodJjZd/mZouAeInvx6ogKQBh0mqIZ1J2XeOzAo+g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDfZ01U/jK0ubCOX/WeKWRbRn3aNfg5s1Kx9cjhmPr2CsV8lu9u2q+A4gjBgQBwlRQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a933c9cd-c1af-417c-bcbe-fa518b0ebcb4",
+                            SecurityStamp = "f1934db6-e507-4c28-8e33-e25952fe75e8",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -283,6 +283,9 @@ namespace HotelBooking.Server.Migrations
                     b.Property<int?>("NumGuest")
                         .HasColumnType("int");
 
+                    b.Property<int?>("RoomTypeId")
+                        .HasColumnType("int");
+
                     b.Property<int>("StaffId")
                         .HasColumnType("int");
 
@@ -294,6 +297,8 @@ namespace HotelBooking.Server.Migrations
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("HotelId");
+
+                    b.HasIndex("RoomTypeId");
 
                     b.HasIndex("StaffId");
 
@@ -309,6 +314,7 @@ namespace HotelBooking.Server.Migrations
                             Destination = "City A",
                             HotelId = 1,
                             NumGuest = 2,
+                            RoomTypeId = 1,
                             StaffId = 1,
                             Status = true
                         },
@@ -321,6 +327,7 @@ namespace HotelBooking.Server.Migrations
                             Destination = "City B",
                             HotelId = 2,
                             NumGuest = 1,
+                            RoomTypeId = 2,
                             StaffId = 2,
                             Status = true
                         },
@@ -333,6 +340,7 @@ namespace HotelBooking.Server.Migrations
                             Destination = "City C",
                             HotelId = 3,
                             NumGuest = 3,
+                            RoomTypeId = 3,
                             StaffId = 3,
                             Status = false
                         },
@@ -345,6 +353,7 @@ namespace HotelBooking.Server.Migrations
                             Destination = "City D",
                             HotelId = 4,
                             NumGuest = 2,
+                            RoomTypeId = 4,
                             StaffId = 4,
                             Status = true
                         });
@@ -530,9 +539,14 @@ namespace HotelBooking.Server.Migrations
                     b.Property<decimal?>("Rating")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int?>("StayId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
+
+                    b.HasIndex("StayId");
 
                     b.ToTable("Reviews");
 
@@ -543,7 +557,8 @@ namespace HotelBooking.Server.Migrations
                             CustomerId = 1,
                             Date = new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Enjoyed the stay, great service!",
-                            Rating = 4.5m
+                            Rating = 4.5m,
+                            StayId = 1
                         },
                         new
                         {
@@ -551,7 +566,8 @@ namespace HotelBooking.Server.Migrations
                             CustomerId = 2,
                             Date = new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Decent stay, room was comfortable",
-                            Rating = 3.0m
+                            Rating = 3.0m,
+                            StayId = 2
                         },
                         new
                         {
@@ -559,7 +575,8 @@ namespace HotelBooking.Server.Migrations
                             CustomerId = 3,
                             Date = new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Outstanding experience, highly recommended!",
-                            Rating = 5.0m
+                            Rating = 5.0m,
+                            StayId = 3
                         },
                         new
                         {
@@ -567,7 +584,8 @@ namespace HotelBooking.Server.Migrations
                             CustomerId = 4,
                             Date = new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Average stay, room cleanliness could be improved",
-                            Rating = 2.5m
+                            Rating = 2.5m,
+                            StayId = 4
                         });
                 });
 
@@ -779,9 +797,14 @@ namespace HotelBooking.Server.Migrations
                     b.Property<bool>("OccupancyStatus")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("RoomId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BookingId");
+
+                    b.HasIndex("RoomId");
 
                     b.ToTable("Stays");
 
@@ -792,7 +815,8 @@ namespace HotelBooking.Server.Migrations
                             BookingId = 1,
                             ComplimentaryServices = "Wi-Fi, Breakfast",
                             EmergencyContact = "12345678",
-                            OccupancyStatus = true
+                            OccupancyStatus = true,
+                            RoomId = 1
                         },
                         new
                         {
@@ -800,7 +824,8 @@ namespace HotelBooking.Server.Migrations
                             BookingId = 2,
                             ComplimentaryServices = "Pool Access, Newspaper",
                             EmergencyContact = "87654321",
-                            OccupancyStatus = false
+                            OccupancyStatus = false,
+                            RoomId = 2
                         },
                         new
                         {
@@ -808,7 +833,8 @@ namespace HotelBooking.Server.Migrations
                             BookingId = 3,
                             ComplimentaryServices = "Gym Access, Parking",
                             EmergencyContact = "55558888",
-                            OccupancyStatus = true
+                            OccupancyStatus = true,
+                            RoomId = 3
                         },
                         new
                         {
@@ -816,7 +842,8 @@ namespace HotelBooking.Server.Migrations
                             BookingId = 4,
                             ComplimentaryServices = "Airport Shuttle",
                             EmergencyContact = "33332222",
-                            OccupancyStatus = false
+                            OccupancyStatus = false,
+                            RoomId = 4
                         });
                 });
 
@@ -992,6 +1019,10 @@ namespace HotelBooking.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("HotelBooking.Shared.Domain.RoomType", "RoomType")
+                        .WithMany()
+                        .HasForeignKey("RoomTypeId");
+
                     b.HasOne("HotelBooking.Shared.Domain.Staff", "Staff")
                         .WithMany()
                         .HasForeignKey("StaffId")
@@ -1001,6 +1032,8 @@ namespace HotelBooking.Server.Migrations
                     b.Navigation("Customer");
 
                     b.Navigation("Hotel");
+
+                    b.Navigation("RoomType");
 
                     b.Navigation("Staff");
                 });
@@ -1013,7 +1046,13 @@ namespace HotelBooking.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("HotelBooking.Shared.Domain.Stay", "Stay")
+                        .WithMany()
+                        .HasForeignKey("StayId");
+
                     b.Navigation("Customer");
+
+                    b.Navigation("Stay");
                 });
 
             modelBuilder.Entity("HotelBooking.Shared.Domain.Room", b =>
@@ -1046,7 +1085,13 @@ namespace HotelBooking.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("HotelBooking.Shared.Domain.Room", "Room")
+                        .WithMany()
+                        .HasForeignKey("RoomId");
+
                     b.Navigation("Booking");
+
+                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

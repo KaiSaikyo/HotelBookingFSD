@@ -32,8 +32,8 @@ namespace HotelBooking.Shared.Domain
 
         public virtual Customer? Customer { get; set; }
 
-        //public int RoomTypeId { get; set; }
+        public int? RoomTypeId { get; set; }
 
-        //public virtual RoomType? RoomType { get; set; }
+        public virtual RoomType? RoomType { get; set; }
     }
 }

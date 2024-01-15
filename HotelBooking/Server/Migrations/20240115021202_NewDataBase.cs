@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HotelBooking.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class AddApplicationTables : Migration
+    public partial class NewDataBase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -272,28 +272,6 @@ namespace HotelBooking.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Reviews",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Rating = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CustomerId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Reviews", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Reviews_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "RoomTypes",
                 columns: table => new
                 {
@@ -328,7 +306,8 @@ namespace HotelBooking.Server.Migrations
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     HotelId = table.Column<int>(type: "int", nullable: false),
                     StaffId = table.Column<int>(type: "int", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false)
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    RoomTypeId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -345,6 +324,11 @@ namespace HotelBooking.Server.Migrations
                         principalTable: "Hotels",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Bookings_RoomTypes_RoomTypeId",
+                        column: x => x.RoomTypeId,
+                        principalTable: "RoomTypes",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Bookings_Staffs_StaffId",
                         column: x => x.StaffId,
@@ -385,7 +369,8 @@ namespace HotelBooking.Server.Migrations
                     EmergencyContact = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OccupancyStatus = table.Column<bool>(type: "bit", nullable: false),
                     ComplimentaryServices = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BookingId = table.Column<int>(type: "int", nullable: false)
+                    BookingId = table.Column<int>(type: "int", nullable: false),
+                    RoomId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -396,6 +381,39 @@ namespace HotelBooking.Server.Migrations
                         principalTable: "Bookings",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Stays_Rooms_RoomId",
+                        column: x => x.RoomId,
+                        principalTable: "Rooms",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Reviews",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Rating = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    StayId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reviews", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Reviews_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Reviews_Stays_StayId",
+                        column: x => x.StayId,
+                        principalTable: "Stays",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.InsertData(
@@ -410,12 +428,100 @@ namespace HotelBooking.Server.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "212a0327-6189-4d5c-b34c-1293a248bcb5", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAENhw5ml+yjkRC+a/2Y9Y+WL32vRxm3A7YBjOTq8hIJZVZ2FjAtQ6j4ThaSEFLIHbpA==", null, false, "af4266db-cd2d-43ae-a6d2-5c46ab22e2c7", false, "admin@localhost.com" });
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "9bcaa501-e36b-453f-8750-9214cd431bbf", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEPHEuSP1hQPqtC7AMRPyGesCoSyXl9pUldoW9bBKZfXbFOFbt2gv1TrsdAcSt8W3Ug==", null, false, "5906ba08-db78-401f-931e-207358c7d50c", false, "admin@localhost.com" });
+
+            migrationBuilder.InsertData(
+                table: "Customers",
+                columns: new[] { "Id", "CardNumber", "Cvv", "Email", "ExpiryDate", "Mobile", "Name", "Password", "PaymentType" },
+                values: new object[,]
+                {
+                    { 1, "1234567812345678", "123", "sara.jones@example.com", new DateTime(2025, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "87654321", "SARA JONES", "sara123", "CreditCard" },
+                    { 2, "9876543210987654", "456", "mike.smith@example.com", new DateTime(2024, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "98765432", "MIKE SMITH", "mikepass", "DebitCard" },
+                    { 3, "8765123412345678", "789", "jason.lee@example.com", new DateTime(2026, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "87651234", "JASON LEE", "jasonPass", "CreditCard" },
+                    { 4, "9876234512345678", "567", "emily.tan@example.com", new DateTime(2028, 8, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "98762345", "EMILY TAN", "emilyPwd", "DebitCard" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Hotels",
+                columns: new[] { "Id", "Address", "Amenities", "Availability", "Description", "Name", "Rating" },
+                values: new object[,]
+                {
+                    { 1, "333 Orchard Rd, Mandarin Orchard Singapore", "Breakfast, Wifi, Gym", true, "Hilton Hotels & Resorts is a global brand of full-service hotels and resorts.", "Hilton Hotel", 3.5m },
+                    { 2, "1 Fullerton Square, Singapore 049178", "Breakfast, Gym, Laundry", true, "The Fullerton Hotel Singapore offers 5-star luxury rooms & suites with exceptional services.", "Fullerton Hotel", 5m },
+                    { 3, "768 Upper Serangoon Rd, Singapore 534636", "Game Center, Swimming Pool, Wifi", false, "Your go-to hotel for awesome rates, comfortable rooms, and accessible locations.", "St 81 Hotel", 3m },
+                    { 4, "Desaru Coast, Jln Pantai 3, 81930, Johor, Malaysia", "Breakfast, Wifi, Gym", true, "Your ultimate destination getaway at the leading entertainment hotel in Desaru Coast, Johor, Malaysia.", "Hard Rock Hotel", 2.5m }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Staffs",
+                columns: new[] { "Id", "Email", "Mobile", "Name", "Password" },
+                values: new object[,]
+                {
+                    { 1, "T.amos@gmail.com", "98765432", "AMOS TAN", "AT123" },
+                    { 2, "JBman@hotmail.com", "87654321", "JACK BRYAN", "JBpassword" },
+                    { 3, "LSING@hotmail.com", "65432109", "LIM HSING", "passwordLH" },
+                    { 4, "TZXiang@gmail.com", "12345678", "TAY ZI XIANG", "TZXTZX" }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[] { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "3781efa7-66dc-47f0-860f-e506d04102e4" });
+
+            migrationBuilder.InsertData(
+                table: "Bookings",
+                columns: new[] { "Id", "CheckInDate", "CheckOutDate", "CustomerId", "Destination", "HotelId", "NumGuest", "RoomTypeId", "StaffId", "Status" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "City A", 1, 2, null, 1, true },
+                    { 2, new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "City B", 2, 1, null, 2, true },
+                    { 3, new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "City C", 3, 3, null, 3, false },
+                    { 4, new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "City D", 4, 2, null, 4, true }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Reviews",
+                columns: new[] { "Id", "CustomerId", "Date", "Description", "Rating", "StayId" },
+                values: new object[,]
+                {
+                    { 1, 1, new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Enjoyed the stay, great service!", 4.5m, null },
+                    { 2, 2, new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Decent stay, room was comfortable", 3.0m, null },
+                    { 3, 3, new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Outstanding experience, highly recommended!", 5.0m, null },
+                    { 4, 4, new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Average stay, room cleanliness could be improved", 2.5m, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RoomTypes",
+                columns: new[] { "Id", "Description", "HotelId", "Price", "Size" },
+                values: new object[,]
+                {
+                    { 1, "The Twin Room", 1, 2404m, "25 sqm" },
+                    { 2, "Deluxe Twin Room", 1, 2324m, "20 sqm" },
+                    { 3, "Single Office Room", 2, 1531m, "15 sqm" },
+                    { 4, "Single Room", 4, 592.5m, "5 sqm" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Rooms",
+                columns: new[] { "Id", "Amenities", "Number", "RoomMaxStay", "RoomMinStay", "RoomTypeId" },
+                values: new object[,]
+                {
+                    { 1, "2 King Beds", "704A", 5, 3, 1 },
+                    { 2, "1 King Bed, 1 Office Room", "680B", 3, 2, 2 },
+                    { 3, "2 Single Beds", "530F", 5, 4, 3 },
+                    { 4, "1 Single Bed, 1 Fax Machine", "745C", 3, 1, 4 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Stays",
+                columns: new[] { "Id", "BookingId", "ComplimentaryServices", "EmergencyContact", "OccupancyStatus", "RoomId" },
+                values: new object[,]
+                {
+                    { 1, 1, "Wi-Fi, Breakfast", "12345678", true, null },
+                    { 2, 2, "Pool Access, Newspaper", "87654321", false, null },
+                    { 3, 3, "Gym Access, Parking", "55558888", true, null },
+                    { 4, 4, "Airport Shuttle", "33332222", false, null }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -467,6 +573,11 @@ namespace HotelBooking.Server.Migrations
                 column: "HotelId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Bookings_RoomTypeId",
+                table: "Bookings",
+                column: "RoomTypeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Bookings_StaffId",
                 table: "Bookings",
                 column: "StaffId");
@@ -513,6 +624,11 @@ namespace HotelBooking.Server.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Reviews_StayId",
+                table: "Reviews",
+                column: "StayId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Rooms_RoomTypeId",
                 table: "Rooms",
                 column: "RoomTypeId");
@@ -526,6 +642,11 @@ namespace HotelBooking.Server.Migrations
                 name: "IX_Stays_BookingId",
                 table: "Stays",
                 column: "BookingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Stays_RoomId",
+                table: "Stays",
+                column: "RoomId");
         }
 
         /// <inheritdoc />
@@ -559,31 +680,31 @@ namespace HotelBooking.Server.Migrations
                 name: "Reviews");
 
             migrationBuilder.DropTable(
-                name: "Rooms");
-
-            migrationBuilder.DropTable(
-                name: "Stays");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "RoomTypes");
+                name: "Stays");
 
             migrationBuilder.DropTable(
                 name: "Bookings");
 
             migrationBuilder.DropTable(
+                name: "Rooms");
+
+            migrationBuilder.DropTable(
                 name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "Hotels");
+                name: "Staffs");
 
             migrationBuilder.DropTable(
-                name: "Staffs");
+                name: "RoomTypes");
+
+            migrationBuilder.DropTable(
+                name: "Hotels");
         }
     }
 }

@@ -20,7 +20,8 @@ namespace HotelBooking.Server.Configurations.Entities
                     Status = true,
                     HotelId = 1,
                     StaffId = 1,
-                    CustomerId = 1
+                    CustomerId = 1,
+                    RoomTypeId = 1
                 },
                 new Booking
                 {
@@ -32,7 +33,8 @@ namespace HotelBooking.Server.Configurations.Entities
                     Status = true,
                     HotelId = 2,
                     StaffId = 2,
-                    CustomerId = 2
+                    CustomerId = 2,
+                    RoomTypeId = 2
                 },
                 new Booking
                 {
@@ -44,7 +46,8 @@ namespace HotelBooking.Server.Configurations.Entities
                     Status = false,
                     HotelId = 3,
                     StaffId = 3,
-                    CustomerId = 3
+                    CustomerId = 3,
+                    RoomTypeId = 3
                 },
                 new Booking
                 {
@@ -56,7 +59,8 @@ namespace HotelBooking.Server.Configurations.Entities
                     Status = true,
                     HotelId = 4,
                     StaffId = 4,
-                    CustomerId = 4
+                    CustomerId = 4,
+                    RoomTypeId = 4
                 }
             );
         }

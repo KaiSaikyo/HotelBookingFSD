@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooking.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240108025616_AddApplicationTables")]
-    partial class AddApplicationTables
+    [Migration("20240115021202_NewDataBase")]
+    partial class NewDataBase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -241,7 +241,7 @@ namespace HotelBooking.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "212a0327-6189-4d5c-b34c-1293a248bcb5",
+                            ConcurrencyStamp = "9bcaa501-e36b-453f-8750-9214cd431bbf",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -249,9 +249,9 @@ namespace HotelBooking.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENhw5ml+yjkRC+a/2Y9Y+WL32vRxm3A7YBjOTq8hIJZVZ2FjAtQ6j4ThaSEFLIHbpA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPHEuSP1hQPqtC7AMRPyGesCoSyXl9pUldoW9bBKZfXbFOFbt2gv1TrsdAcSt8W3Ug==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "af4266db-cd2d-43ae-a6d2-5c46ab22e2c7",
+                            SecurityStamp = "5906ba08-db78-401f-931e-207358c7d50c",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -283,6 +283,9 @@ namespace HotelBooking.Server.Migrations
                     b.Property<int?>("NumGuest")
                         .HasColumnType("int");
 
+                    b.Property<int?>("RoomTypeId")
+                        .HasColumnType("int");
+
                     b.Property<int>("StaffId")
                         .HasColumnType("int");
 
@@ -295,9 +298,61 @@ namespace HotelBooking.Server.Migrations
 
                     b.HasIndex("HotelId");
 
+                    b.HasIndex("RoomTypeId");
+
                     b.HasIndex("StaffId");
 
                     b.ToTable("Bookings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CheckInDate = new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOutDate = new DateTime(2023, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CustomerId = 1,
+                            Destination = "City A",
+                            HotelId = 1,
+                            NumGuest = 2,
+                            StaffId = 1,
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CheckInDate = new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOutDate = new DateTime(2023, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CustomerId = 2,
+                            Destination = "City B",
+                            HotelId = 2,
+                            NumGuest = 1,
+                            StaffId = 2,
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CheckInDate = new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOutDate = new DateTime(2023, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CustomerId = 3,
+                            Destination = "City C",
+                            HotelId = 3,
+                            NumGuest = 3,
+                            StaffId = 3,
+                            Status = false
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CheckInDate = new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CheckOutDate = new DateTime(2023, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CustomerId = 4,
+                            Destination = "City D",
+                            HotelId = 4,
+                            NumGuest = 2,
+                            StaffId = 4,
+                            Status = true
+                        });
                 });
 
             modelBuilder.Entity("HotelBooking.Shared.Domain.Customer", b =>
@@ -335,6 +390,56 @@ namespace HotelBooking.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CardNumber = "1234567812345678",
+                            Cvv = "123",
+                            Email = "sara.jones@example.com",
+                            ExpiryDate = new DateTime(2025, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Mobile = "87654321",
+                            Name = "SARA JONES",
+                            Password = "sara123",
+                            PaymentType = "CreditCard"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CardNumber = "9876543210987654",
+                            Cvv = "456",
+                            Email = "mike.smith@example.com",
+                            ExpiryDate = new DateTime(2024, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Mobile = "98765432",
+                            Name = "MIKE SMITH",
+                            Password = "mikepass",
+                            PaymentType = "DebitCard"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CardNumber = "8765123412345678",
+                            Cvv = "789",
+                            Email = "jason.lee@example.com",
+                            ExpiryDate = new DateTime(2026, 11, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Mobile = "87651234",
+                            Name = "JASON LEE",
+                            Password = "jasonPass",
+                            PaymentType = "CreditCard"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CardNumber = "9876234512345678",
+                            Cvv = "567",
+                            Email = "emily.tan@example.com",
+                            ExpiryDate = new DateTime(2028, 8, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Mobile = "98762345",
+                            Name = "EMILY TAN",
+                            Password = "emilyPwd",
+                            PaymentType = "DebitCard"
+                        });
                 });
 
             modelBuilder.Entity("HotelBooking.Shared.Domain.Hotel", b =>
@@ -366,6 +471,48 @@ namespace HotelBooking.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Hotels");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "333 Orchard Rd, Mandarin Orchard Singapore",
+                            Amenities = "Breakfast, Wifi, Gym",
+                            Availability = true,
+                            Description = "Hilton Hotels & Resorts is a global brand of full-service hotels and resorts.",
+                            Name = "Hilton Hotel",
+                            Rating = 3.5m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "1 Fullerton Square, Singapore 049178",
+                            Amenities = "Breakfast, Gym, Laundry",
+                            Availability = true,
+                            Description = "The Fullerton Hotel Singapore offers 5-star luxury rooms & suites with exceptional services.",
+                            Name = "Fullerton Hotel",
+                            Rating = 5m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Address = "768 Upper Serangoon Rd, Singapore 534636",
+                            Amenities = "Game Center, Swimming Pool, Wifi",
+                            Availability = false,
+                            Description = "Your go-to hotel for awesome rates, comfortable rooms, and accessible locations.",
+                            Name = "St 81 Hotel",
+                            Rating = 3m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Address = "Desaru Coast, Jln Pantai 3, 81930, Johor, Malaysia",
+                            Amenities = "Breakfast, Wifi, Gym",
+                            Availability = true,
+                            Description = "Your ultimate destination getaway at the leading entertainment hotel in Desaru Coast, Johor, Malaysia.",
+                            Name = "Hard Rock Hotel",
+                            Rating = 2.5m
+                        });
                 });
 
             modelBuilder.Entity("HotelBooking.Shared.Domain.Review", b =>
@@ -388,11 +535,50 @@ namespace HotelBooking.Server.Migrations
                     b.Property<decimal?>("Rating")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int?>("StayId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
 
+                    b.HasIndex("StayId");
+
                     b.ToTable("Reviews");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CustomerId = 1,
+                            Date = new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Enjoyed the stay, great service!",
+                            Rating = 4.5m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CustomerId = 2,
+                            Date = new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Decent stay, room was comfortable",
+                            Rating = 3.0m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CustomerId = 3,
+                            Date = new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Outstanding experience, highly recommended!",
+                            Rating = 5.0m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CustomerId = 4,
+                            Date = new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Average stay, room cleanliness could be improved",
+                            Rating = 2.5m
+                        });
                 });
 
             modelBuilder.Entity("HotelBooking.Shared.Domain.Room", b =>
@@ -423,6 +609,44 @@ namespace HotelBooking.Server.Migrations
                     b.HasIndex("RoomTypeId");
 
                     b.ToTable("Rooms");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Amenities = "2 King Beds",
+                            Number = "704A",
+                            RoomMaxStay = 5,
+                            RoomMinStay = 3,
+                            RoomTypeId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Amenities = "1 King Bed, 1 Office Room",
+                            Number = "680B",
+                            RoomMaxStay = 3,
+                            RoomMinStay = 2,
+                            RoomTypeId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Amenities = "2 Single Beds",
+                            Number = "530F",
+                            RoomMaxStay = 5,
+                            RoomMinStay = 4,
+                            RoomTypeId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Amenities = "1 Single Bed, 1 Fax Machine",
+                            Number = "745C",
+                            RoomMaxStay = 3,
+                            RoomMinStay = 1,
+                            RoomTypeId = 4
+                        });
                 });
 
             modelBuilder.Entity("HotelBooking.Shared.Domain.RoomType", b =>
@@ -450,6 +674,40 @@ namespace HotelBooking.Server.Migrations
                     b.HasIndex("HotelId");
 
                     b.ToTable("RoomTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "The Twin Room",
+                            HotelId = 1,
+                            Price = 2404m,
+                            Size = "25 sqm"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Deluxe Twin Room",
+                            HotelId = 1,
+                            Price = 2324m,
+                            Size = "20 sqm"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Single Office Room",
+                            HotelId = 2,
+                            Price = 1531m,
+                            Size = "15 sqm"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Single Room",
+                            HotelId = 4,
+                            Price = 592.5m,
+                            Size = "5 sqm"
+                        });
                 });
 
             modelBuilder.Entity("HotelBooking.Shared.Domain.Staff", b =>
@@ -475,6 +733,40 @@ namespace HotelBooking.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Staffs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "T.amos@gmail.com",
+                            Mobile = "98765432",
+                            Name = "AMOS TAN",
+                            Password = "AT123"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "JBman@hotmail.com",
+                            Mobile = "87654321",
+                            Name = "JACK BRYAN",
+                            Password = "JBpassword"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Email = "LSING@hotmail.com",
+                            Mobile = "65432109",
+                            Name = "LIM HSING",
+                            Password = "passwordLH"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Email = "TZXiang@gmail.com",
+                            Mobile = "12345678",
+                            Name = "TAY ZI XIANG",
+                            Password = "TZXTZX"
+                        });
                 });
 
             modelBuilder.Entity("HotelBooking.Shared.Domain.Stay", b =>
@@ -497,11 +789,50 @@ namespace HotelBooking.Server.Migrations
                     b.Property<bool>("OccupancyStatus")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("RoomId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BookingId");
 
+                    b.HasIndex("RoomId");
+
                     b.ToTable("Stays");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BookingId = 1,
+                            ComplimentaryServices = "Wi-Fi, Breakfast",
+                            EmergencyContact = "12345678",
+                            OccupancyStatus = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BookingId = 2,
+                            ComplimentaryServices = "Pool Access, Newspaper",
+                            EmergencyContact = "87654321",
+                            OccupancyStatus = false
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BookingId = 3,
+                            ComplimentaryServices = "Gym Access, Parking",
+                            EmergencyContact = "55558888",
+                            OccupancyStatus = true
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BookingId = 4,
+                            ComplimentaryServices = "Airport Shuttle",
+                            EmergencyContact = "33332222",
+                            OccupancyStatus = false
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -676,6 +1007,10 @@ namespace HotelBooking.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("HotelBooking.Shared.Domain.RoomType", "RoomType")
+                        .WithMany()
+                        .HasForeignKey("RoomTypeId");
+
                     b.HasOne("HotelBooking.Shared.Domain.Staff", "Staff")
                         .WithMany()
                         .HasForeignKey("StaffId")
@@ -685,6 +1020,8 @@ namespace HotelBooking.Server.Migrations
                     b.Navigation("Customer");
 
                     b.Navigation("Hotel");
+
+                    b.Navigation("RoomType");
 
                     b.Navigation("Staff");
                 });
@@ -697,7 +1034,13 @@ namespace HotelBooking.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("HotelBooking.Shared.Domain.Stay", "Stay")
+                        .WithMany()
+                        .HasForeignKey("StayId");
+
                     b.Navigation("Customer");
+
+                    b.Navigation("Stay");
                 });
 
             modelBuilder.Entity("HotelBooking.Shared.Domain.Room", b =>
@@ -730,7 +1073,13 @@ namespace HotelBooking.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("HotelBooking.Shared.Domain.Room", "Room")
+                        .WithMany()
+                        .HasForeignKey("RoomId");
+
                     b.Navigation("Booking");
+
+                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

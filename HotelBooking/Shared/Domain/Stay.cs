@@ -20,8 +20,8 @@ namespace HotelBooking.Shared.Domain
 
         public virtual Booking? Booking { get; set; }
 
-        /*public int RoomId { get; set; }
+        public int? RoomId { get; set; }
 
-        public virtual Room? Room { get; set; }*/
+        public virtual Room? Room { get; set; }
     }
 }
