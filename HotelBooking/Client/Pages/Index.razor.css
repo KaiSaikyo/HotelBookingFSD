@@ -62,18 +62,20 @@
 
 	.Booking-Container label {
 		position: absolute;
-		top: 50%;
+		top: 0;
 		left: 0;
 		transform: translateY(-50%);
-		font-size: 1.2rem;
+		font-size: 1.1rem;
 		font-weight: 500;
 		pointer-events: none;
 		transition: 0.3s;
 	}
 
 	.Booking-Container input {
+		top: 0;
 		width: 100%;
-		padding: 10px 0;
+		padding-top: 0.75rem;
+		padding-bottom: 0.50rem;
 		font-size: 1rem;
 		outline: none;
 		border: none;
@@ -82,13 +84,12 @@
 		color: var(--text-dark);
 	}
 
-		.Booking-Container input:focus ~ label {
-			font-size: 0.8rem;
-			top: 0;
+		.Booking-Container input::placeholder {
+			color: var(--text-dark);
 		}
 
+
 	.Booking-Container .form-group p {
-		margin-top: 0.5rem;
 		font-size: 0.8rem;
 		color: var(--text-light);
 	}

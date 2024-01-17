@@ -151,6 +151,35 @@ namespace HotelBooking.Server.Controllers
             return CreatedAtAction("GetStay", new { id = stay.Id }, stay);
         }
 
+        [HttpGet("booking/{bookingId:int}")]
+        public async Task<ActionResult<Stay>> GetStayFromBooking(int bookingId)
+        {
+            var stay = await _unitOfWork.Stays.Get(q => q.BookingId == bookingId);
+
+            if (stay == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(stay);
+        }
+
+        [HttpPut("cascade-delete/{bookingId:int}")]
+        public async Task<ActionResult<Stay>> DeleteStayFromBooking(int bookingId)
+        {
+            var stay = await _unitOfWork.Stays.Get(q => q.BookingId == bookingId);
+
+            if (stay == null)
+            {
+                return NotFound();
+            }
+
+            await _unitOfWork.Stays.Delete(stay.Id);
+            await _unitOfWork.Save(HttpContext);
+
+            return NoContent();
+        }
+
         // DELETE: api/Stays/5
         [HttpDelete("{id}")]
         /*public async Task<IActionResult> DeleteStay(int id)

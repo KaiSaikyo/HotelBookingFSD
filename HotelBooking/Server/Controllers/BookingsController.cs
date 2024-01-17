@@ -194,7 +194,24 @@ namespace HotelBooking.Server.Controllers
             return NoContent();
         }
 
-        private async Task<bool> BookingExists(int id)
+        /*[HttpGet("{id:int}")]
+		public async Task<IActionResult> GetStayFromBooking(int id)
+        {
+			var booking = await _unitOfWork.Bookings.GetAll(q => q.Id == id,
+                includes: q => q.Include(x => x.Sta));
+
+			if (booking == null)
+			{
+				return NotFound();
+			}
+
+            var stay = booking.Boo
+
+			return Ok(stay);
+		}*/
+
+
+		private async Task<bool> BookingExists(int id)
         {
             var booking = await _unitOfWork.Bookings.Get(q => q.Id == id);
             return booking != null;

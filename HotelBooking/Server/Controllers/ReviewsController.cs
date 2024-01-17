@@ -126,6 +126,19 @@ namespace HotelBooking.Server.Controllers
             return NoContent();
         }
 
+        [HttpGet("stay/{stayId:int}")]
+        public async Task<ActionResult<Review>> GetReviewFromStay(int stayId)
+        {
+            var review = await _unitOfWork.Reviews.Get(q => q.StayId == stayId);
+
+            if (review == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(review);
+        }
+
         // POST: api/Reviews
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]

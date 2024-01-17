@@ -67,7 +67,7 @@
 
 .Customer-Header {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 0.5fr 1fr 1fr 0.5fr 1fr 1fr;
     grid-template-rows: 1fr;
     gap: 1rem;
     padding: 1rem;
@@ -75,4 +75,35 @@
 }
 
 .Customer-Data {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 0.5fr 1fr 1fr 0.5fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.Staff-List {
+    flex-grow: 1;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    overflow-y: auto;
+    max-height: 640px;
+}
+
+.Staff-Header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #f2f2f2;
+}
+
+.Staff-Data {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 1rem;
+    padding: 1rem;
 }
