@@ -12,6 +12,11 @@
 else
 {
 	<div class="main-background">
+		<div class="button-wrapper">
+			<a href="/customer/create" class="right-aligned-button nav-link">
+				Create Customer
+			</a>
+		</div>
 		<div class="table-background">
 			<table class="table table-responsive">
 				<thead>
@@ -43,11 +48,11 @@ else
 							<td><b>@customer.ExpiryDate</b></td>
 
 							<td>
-								<a href="/Customer/view/@customer.Id" class="btn btn-primary">
+								<a href="/customer/view/@customer.Id" class="btn btn-primary">
 									<span class="oi oi-magnifying-glass"></span>
 								</a>
 
-								<a href="/Customer/edit/@customer.Id" class="btn btn-warning">
+								<a href="/customer/edit/@customer.Id" class="btn btn-warning">
 									<span class="oi oi-script"></span>
 								</a>
 
@@ -62,7 +67,6 @@ else
 		</div>
 	</div>
 }
-
 
 @code {
 	private List<Customer>? Customers;

@@ -12,6 +12,11 @@
 else
 {
 	<div class="main-background">
+		<div class="button-wrapper">
+			<a href="/hotel/create" class="right-aligned-button nav-link">
+				Create Hotel
+			</a>
+		</div>
 		<div class="table-background">
 			<table class="table table-responsive">
 				<thead>
@@ -39,11 +44,11 @@ else
 							<td><b>@hotel.Availability</b></td>
 
 							<td>
-								<a href="/Hotel/view/@hotel.Id" class="btn btn-primary">
+								<a href="/hotel/view/@hotel.Id" class="btn btn-primary">
 									<span class="oi oi-magnifying-glass"></span>
 								</a>
 
-								<a href="/Hotel/edit/@hotel.Id" class="btn btn-warning">
+								<a href="/hotel/edit/@hotel.Id" class="btn btn-warning">
 									<span class="oi oi-script"></span>
 								</a>
 
@@ -58,7 +63,6 @@ else
 		</div>
 	</div>
 }
-
 
 @code {
 	private List<Hotel>? Hotels;

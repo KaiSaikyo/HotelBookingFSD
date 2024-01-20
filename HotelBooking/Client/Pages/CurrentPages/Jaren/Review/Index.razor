@@ -12,6 +12,11 @@
 else
 {
 	<div class="main-background">
+		<div class="button-wrapper">
+			<a href="/review/create" class="right-aligned-button nav-link">
+				Create Review
+			</a>
+		</div>
 		<div class="table-background">
 			<table class="table table-responsive">
 				<thead>
@@ -37,11 +42,11 @@ else
 							<td><b>@review.StayId</b></td>
 
 							<td>
-								<a href="/Review/view/@review.Id" class="btn btn-primary">
+								<a href="/review/view/@review.Id" class="btn btn-primary">
 									<span class="oi oi-magnifying-glass"></span>
 								</a>
 
-								<a href="/Review/edit/@review.Id" class="btn btn-warning">
+								<a href="/review/edit/@review.Id" class="btn btn-warning">
 									<span class="oi oi-script"></span>
 								</a>
 
@@ -56,7 +61,6 @@ else
 		</div>
 	</div>
 }
-
 
 @code {
 	private List<Review>? Reviews;
