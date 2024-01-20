@@ -1,0 +1,89 @@
+﻿@page "/stay"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<PageTitle>RoomScout.Org - Stays</PageTitle>
+
+@if (Stays == null)
+{
+    <div class="alert alert-info">Loading Stays...</div>
+}
+else
+{
+    <div class="main-background">
+        <div class="table-background">
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th style="border-top-left-radius: 0.5rem;">ID</th>
+                        <th>Emergency Contact</th>
+                        <th>Occupancy Status</th>
+                        <th>Complimentry Services</th>
+                        <th>Booking ID</th>
+                        <th>Room ID</th>
+                        <th style="border-top-right-radius: 0.5rem;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var stay in Stays)
+                    {
+                        <tr>
+                            <td><b>@stay.Id</b></td>
+                            <td><b>@stay.EmergencyContact</b></td>
+                            <td><b>@stay.OccupancyStatus</b></td>
+                            <td><b>@stay.ComplimentaryServices</b></td>
+                            <td><b>@stay.BookingId</b></td>
+                            <td><b>@stay.RoomId</b></td>
+
+                            <td>
+                                <a href="/Stay/view/@stay.Id" class="btn btn-primary">
+                                    <span class="oi oi-magnifying-glass"></span>
+                                </a>
+
+                                <a href="/Stay/edit/@stay.Id" class="btn btn-warning">
+                                    <span class="oi oi-script"></span>
+                                </a>
+
+                                <button class="btn btn-danger" @onclick="@(()=>Delete(stay.Id))">
+                                    <span class="oi oi-trash"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+@code {
+    private List<Stay>? Stays;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Stays = await _client.GetFromJsonAsync<List<Stay>>($"{Endpoints.StaysEndpoint}");
+    }
+
+    async Task Delete(int stayId)
+    {
+        if (Stays != null)
+        {
+            var stay = Stays.First(q => q.Id == stayId);
+
+            var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {stay.EmergencyContact}?");
+
+            if (confirm)
+            {
+                var review = await _client.GetFromJsonAsync<Review>($"{Endpoints.ReviewsEndpoint}/stay/{stayId}");
+                if (review != null)
+                {
+                    await _client.DeleteAsync($"{Endpoints.ReviewsEndpoint}/{review!.Id}");
+                }
+
+                await _client.DeleteAsync($"{Endpoints.StaysEndpoint}/{stayId}");
+                await OnInitializedAsync();
+            }
+        }
+    }
+}

@@ -32,9 +32,6 @@
 
   <ItemGroup>
     <Folder Include="Components\" />
-    <Folder Include="Pages\CurrentPages\Jaren\Booking\" />
-    <Folder Include="Pages\CurrentPages\Jaren\Stay\" />
-    <Folder Include="Pages\CurrentPages\Kai\Room\" />
   </ItemGroup>
 
 </Project>

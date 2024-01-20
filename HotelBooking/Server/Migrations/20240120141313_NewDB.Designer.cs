@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooking.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240115021525_NewNewDataBase")]
-    partial class NewNewDataBase
+    [Migration("20240120141313_NewDB")]
+    partial class NewDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -241,7 +241,7 @@ namespace HotelBooking.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "04302cfb-0702-45dd-a16b-a1d0cbb6329f",
+                            ConcurrencyStamp = "c46c00da-d8e8-4fe9-8897-1d8ce87e2192",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -249,9 +249,9 @@ namespace HotelBooking.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDfZ01U/jK0ubCOX/WeKWRbRn3aNfg5s1Kx9cjhmPr2CsV8lu9u2q+A4gjBgQBwlRQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENp490oXUE5MSOXfQAkkClOE14c1eUNXCdR8Ri8kYS7IJtd4V0w9ZgZB8xPcGzkYEQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f1934db6-e507-4c28-8e33-e25952fe75e8",
+                            SecurityStamp = "7dc3530e-23d9-4187-afa3-9f1b88021c39",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -785,7 +785,7 @@ namespace HotelBooking.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BookingId")
+                    b.Property<int?>("BookingId")
                         .HasColumnType("int");
 
                     b.Property<string>("ComplimentaryServices")
@@ -1081,9 +1081,7 @@ namespace HotelBooking.Server.Migrations
                 {
                     b.HasOne("HotelBooking.Shared.Domain.Booking", "Booking")
                         .WithMany()
-                        .HasForeignKey("BookingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BookingId");
 
                     b.HasOne("HotelBooking.Shared.Domain.Room", "Room")
                         .WithMany()

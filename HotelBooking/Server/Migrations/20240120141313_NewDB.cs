@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HotelBooking.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class NewDataBase : Migration
+    public partial class NewDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -369,7 +369,7 @@ namespace HotelBooking.Server.Migrations
                     EmergencyContact = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OccupancyStatus = table.Column<bool>(type: "bit", nullable: false),
                     ComplimentaryServices = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BookingId = table.Column<int>(type: "int", nullable: false),
+                    BookingId = table.Column<int>(type: "int", nullable: true),
                     RoomId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -379,8 +379,7 @@ namespace HotelBooking.Server.Migrations
                         name: "FK_Stays_Bookings_BookingId",
                         column: x => x.BookingId,
                         principalTable: "Bookings",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Stays_Rooms_RoomId",
                         column: x => x.RoomId,
@@ -428,7 +427,7 @@ namespace HotelBooking.Server.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "9bcaa501-e36b-453f-8750-9214cd431bbf", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEPHEuSP1hQPqtC7AMRPyGesCoSyXl9pUldoW9bBKZfXbFOFbt2gv1TrsdAcSt8W3Ug==", null, false, "5906ba08-db78-401f-931e-207358c7d50c", false, "admin@localhost.com" });
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "c46c00da-d8e8-4fe9-8897-1d8ce87e2192", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAENp490oXUE5MSOXfQAkkClOE14c1eUNXCdR8Ri8kYS7IJtd4V0w9ZgZB8xPcGzkYEQ==", null, false, "7dc3530e-23d9-4187-afa3-9f1b88021c39", false, "admin@localhost.com" });
 
             migrationBuilder.InsertData(
                 table: "Customers",
@@ -469,28 +468,6 @@ namespace HotelBooking.Server.Migrations
                 values: new object[] { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "3781efa7-66dc-47f0-860f-e506d04102e4" });
 
             migrationBuilder.InsertData(
-                table: "Bookings",
-                columns: new[] { "Id", "CheckInDate", "CheckOutDate", "CustomerId", "Destination", "HotelId", "NumGuest", "RoomTypeId", "StaffId", "Status" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "City A", 1, 2, null, 1, true },
-                    { 2, new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "City B", 2, 1, null, 2, true },
-                    { 3, new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "City C", 3, 3, null, 3, false },
-                    { 4, new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "City D", 4, 2, null, 4, true }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Reviews",
-                columns: new[] { "Id", "CustomerId", "Date", "Description", "Rating", "StayId" },
-                values: new object[,]
-                {
-                    { 1, 1, new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Enjoyed the stay, great service!", 4.5m, null },
-                    { 2, 2, new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Decent stay, room was comfortable", 3.0m, null },
-                    { 3, 3, new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Outstanding experience, highly recommended!", 5.0m, null },
-                    { 4, 4, new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Average stay, room cleanliness could be improved", 2.5m, null }
-                });
-
-            migrationBuilder.InsertData(
                 table: "RoomTypes",
                 columns: new[] { "Id", "Description", "HotelId", "Price", "Size" },
                 values: new object[,]
@@ -499,6 +476,17 @@ namespace HotelBooking.Server.Migrations
                     { 2, "Deluxe Twin Room", 1, 2324m, "20 sqm" },
                     { 3, "Single Office Room", 2, 1531m, "15 sqm" },
                     { 4, "Single Room", 4, 592.5m, "5 sqm" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Bookings",
+                columns: new[] { "Id", "CheckInDate", "CheckOutDate", "CustomerId", "Destination", "HotelId", "NumGuest", "RoomTypeId", "StaffId", "Status" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "City A", 1, 2, 1, 1, true },
+                    { 2, new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "City B", 2, 1, 2, 2, true },
+                    { 3, new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "City C", 3, 3, 3, 3, false },
+                    { 4, new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "City D", 4, 2, 4, 4, true }
                 });
 
             migrationBuilder.InsertData(
@@ -517,10 +505,21 @@ namespace HotelBooking.Server.Migrations
                 columns: new[] { "Id", "BookingId", "ComplimentaryServices", "EmergencyContact", "OccupancyStatus", "RoomId" },
                 values: new object[,]
                 {
-                    { 1, 1, "Wi-Fi, Breakfast", "12345678", true, null },
-                    { 2, 2, "Pool Access, Newspaper", "87654321", false, null },
-                    { 3, 3, "Gym Access, Parking", "55558888", true, null },
-                    { 4, 4, "Airport Shuttle", "33332222", false, null }
+                    { 1, 1, "Wi-Fi, Breakfast", "12345678", true, 1 },
+                    { 2, 2, "Pool Access, Newspaper", "87654321", false, 2 },
+                    { 3, 3, "Gym Access, Parking", "55558888", true, 3 },
+                    { 4, 4, "Airport Shuttle", "33332222", false, 4 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Reviews",
+                columns: new[] { "Id", "CustomerId", "Date", "Description", "Rating", "StayId" },
+                values: new object[,]
+                {
+                    { 1, 1, new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Enjoyed the stay, great service!", 4.5m, 1 },
+                    { 2, 2, new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Decent stay, room was comfortable", 3.0m, 2 },
+                    { 3, 3, new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Outstanding experience, highly recommended!", 5.0m, 3 },
+                    { 4, 4, new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Average stay, room cleanliness could be improved", 2.5m, 4 }
                 });
 
             migrationBuilder.CreateIndex(
