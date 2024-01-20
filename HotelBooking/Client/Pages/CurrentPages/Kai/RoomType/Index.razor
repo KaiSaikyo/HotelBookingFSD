@@ -1,0 +1,81 @@
+﻿@page "/roomtype"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<PageTitle>RoomScout.Org - Room Types</PageTitle>
+
+@if (RoomTypes == null)
+{
+	<div class="alert alert-info">Loading Room Types...</div>
+}
+else
+{
+	<div class="main-background">
+		<div class="table-background">
+			<table class="table table-responsive">
+				<thead>
+					<tr>
+						<th style="border-top-left-radius: 0.5rem;">ID</th>
+						<th>Description</th>
+						<th>Size</th>
+						<th>Price</th>
+						<th>Hotel ID</th>
+						<th style="border-top-right-radius: 0.5rem;">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var roomtype in RoomTypes)
+					{
+						<tr>
+							<td><b>@roomtype.Id</b></td>
+							<td><b>@roomtype.Description</b></td>
+							<td><b>@roomtype.Size</b></td>
+							<td><b>@roomtype.Price</b></td>
+							<td><b>@roomtype.HotelId</b></td>
+
+							<td>
+								<a href="/RoomType/view/@roomtype.Id" class="btn btn-primary">
+									<span class="oi oi-magnifying-glass"></span>
+								</a>
+
+								<a href="/RoomType/edit/@roomtype.Id" class="btn btn-warning">
+									<span class="oi oi-script"></span>
+								</a>
+
+								<button class="btn btn-danger" @onclick="@(()=>Delete(roomtype.Id))">
+									<span class="oi oi-trash"></span>
+								</button>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+}
+
+
+@code {
+	private List<RoomType>? RoomTypes;
+
+	protected async override Task OnInitializedAsync()
+	{
+		RoomTypes = await _client.GetFromJsonAsync<List<RoomType>>($"{Endpoints.RoomTypesEndpoint}");
+	}
+
+	async Task Delete(int roomtypeId)
+	{
+		if (RoomTypes != null)
+		{
+			var roomtype = RoomTypes.First(q => q.Id == roomtypeId);
+			var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {roomtype.Description}?");
+
+			if (confirm)
+			{
+				await _client.DeleteAsync($"{Endpoints.RoomTypesEndpoint}/{roomtypeId}");
+				await OnInitializedAsync();
+			}
+		}
+	}
+}

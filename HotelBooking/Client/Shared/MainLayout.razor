@@ -1,14 +1,12 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="page">
-    <header class="sticky-top">
+    <div class="sticky">
         <NavMenu />
-        <StaffNavMenu /> @* Temporary *@
-    </header>
+        <StaffNavMenu />
+    </div>
 
-    <main>
-        <section class="pearl-color borderless">
-			@Body
-		</section>
-    </main>
+    <div class="borderless">
+		@Body
+	</div>
 </div>

@@ -1,0 +1,89 @@
+﻿@page "/customer"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<PageTitle>RoomScout.Org - Customers</PageTitle>
+
+@if (Customers == null)
+{
+	<div class="alert alert-info">Loading Customers...</div>
+}
+else
+{
+	<div class="main-background">
+		<div class="table-background">
+			<table class="table table-responsive">
+				<thead>
+					<tr>
+						<th style="border-top-left-radius: 0.5rem;">ID</th>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Password</th>
+						<th>Mobile</th>
+						<th>Payment Type</th>
+						<th>Card Number</th>
+						<th>Cvv</th>
+						<th>Expiry Date</th>
+						<th style="border-top-right-radius: 0.5rem;">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var customer in Customers)
+					{
+						<tr>
+							<td><b>@customer.Id</b></td>
+							<td><b>@customer.Name</b></td>
+							<td><b>@customer.Email</b></td>
+							<td><b>@customer.Password</b></td>
+							<td><b>@customer.Mobile</b></td>
+							<td><b>@customer.PaymentType</b></td>
+							<td><b>@customer.CardNumber</b></td>
+							<td><b>@customer.Cvv</b></td>
+							<td><b>@customer.ExpiryDate</b></td>
+
+							<td>
+								<a href="/Customer/view/@customer.Id" class="btn btn-primary">
+									<span class="oi oi-magnifying-glass"></span>
+								</a>
+
+								<a href="/Customer/edit/@customer.Id" class="btn btn-warning">
+									<span class="oi oi-script"></span>
+								</a>
+
+								<button class="btn btn-danger" @onclick="@(()=>Delete(customer.Id))">
+									<span class="oi oi-trash"></span>
+								</button>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+}
+
+
+@code {
+	private List<Customer>? Customers;
+
+	protected async override Task OnInitializedAsync()
+	{
+		Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
+	}
+
+	async Task Delete(int customerId)
+	{
+		if (Customers != null)
+		{
+			var customer = Customers.First(q => q.Id == customerId);
+			var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {customer.Name}?");
+
+			if (confirm)
+			{
+				await _client.DeleteAsync($"{Endpoints.CustomersEndpoint}/{customerId}");
+				await OnInitializedAsync();
+			}
+		}
+	}
+}
