@@ -6,82 +6,87 @@
 		<EditForm Model="@customer" OnValidSubmit="@OnValidSubmit">
 			<DataAnnotationsValidator />
 			<ValidationSummary />
-
-			<div class="form-group">
-				<label>Name: </label>
-				<div>
-					<InputText @bind-Value="@customer.Name" class="form-control" />
-					<ValidationMessage For="@(() => customer.Name)" />
+			<fieldset disabled="@Disabled">
+				<div class="form-group">
+					<label>Name: </label>
+					<div>
+						<InputText @bind-Value="@customer.Name" class="form-control" />
+						<ValidationMessage For="@(() => customer.Name)" />
+					</div>
 				</div>
-			</div>
-			<br />
-			<div class="form-group">
-				<label>Email: </label>
-				<div>
-					<InputText @bind-Value="@customer.Email" class="form-control" />
-					<ValidationMessage For="@(() => customer.Email)" />
+				<br />
+				<div class="form-group">
+					<label>Email: </label>
+					<div>
+						<InputText @bind-Value="@customer.Email" class="form-control" />
+						<ValidationMessage For="@(() => customer.Email)" />
+					</div>
 				</div>
-			</div>
-			<br />
-			<div class="form-group">
-				<label>Password: </label>
-				<div>
-					<InputText @bind-Value="@customer.Password" class="form-control" />
-					<ValidationMessage For="@(() => customer.Password)" />
+				<br />
+				<div class="form-group">
+					<label>Password: </label>
+					<div>
+						<InputText @bind-Value="@customer.Password" class="form-control" />
+						<ValidationMessage For="@(() => customer.Password)" />
+					</div>
 				</div>
-			</div>
-			<br />
-			<div class="form-group">
-				<label>Mobile: </label>
-				<div>
-					<InputText @bind-Value="@customer.Mobile" class="form-control" />
-					<ValidationMessage For="@(() => customer.Mobile)" />
+				<br />
+				<div class="form-group">
+					<label>Mobile: </label>
+					<div>
+						<InputText @bind-Value="@customer.Mobile" class="form-control" />
+						<ValidationMessage For="@(() => customer.Mobile)" />
+					</div>
 				</div>
-			</div>
-			<br />
-			<div class="form-group">
-				<label>Payment Type: </label>
-				<div>
-					<InputText @bind-Value="@customer.PaymentType" class="form-control" />
-					<ValidationMessage For="@(() => customer.PaymentType)" />
+				<br />
+				<div class="form-group">
+					<label>Payment Type: </label>
+					<div>
+						<InputText @bind-Value="@customer.PaymentType" class="form-control" />
+						<ValidationMessage For="@(() => customer.PaymentType)" />
+					</div>
 				</div>
-			</div>
-			<br />
-			<div class="form-group">
-				<label>Card Number: </label>
-				<div>
-					<InputText @bind-Value="@customer.CardNumber" class="form-control" />
-					<ValidationMessage For="@(() => customer.CardNumber)" />
+				<br />
+				<div class="form-group">
+					<label>Card Number: </label>
+					<div>
+						<InputText @bind-Value="@customer.CardNumber" class="form-control" />
+						<ValidationMessage For="@(() => customer.CardNumber)" />
+					</div>
 				</div>
-			</div>
-			<br />
-			<div class="form-group">
-				<label>Cvv: </label>
-				<div>
-					<InputText @bind-Value="@customer.Cvv" class="form-control" />
-					<ValidationMessage For="@(() => customer.Cvv)" />
+				<br />
+				<div class="form-group">
+					<label>Cvv: </label>
+					<div>
+						<InputText @bind-Value="@customer.Cvv" class="form-control" />
+						<ValidationMessage For="@(() => customer.Cvv)" />
+					</div>
 				</div>
-			</div>
-			<br />
-			<div class="form-group">
-				<label>Expiry Date: </label>
-				<div>
-					<InputDate @bind-Value="@customer.ExpiryDate" class="form-control" />
-					<ValidationMessage For="@(() => customer.ExpiryDate)" />
+				<br />
+				<div class="form-group">
+					<label>Expiry Date: </label>
+					<div>
+						<InputDate @bind-Value="@customer.ExpiryDate" class="form-control" />
+						<ValidationMessage For="@(() => customer.ExpiryDate)" />
+					</div>
 				</div>
-			</div>
-			<br />
-			<div class="button-wrapper">
-				<button type="submit" class="left-aligned-button">
-					@ButtonText
-				</button>
-			</div>
+			</fieldset>
+			@if (!Disabled)
+			{
+				<br />
+				<div class="button-wrapper">
+					<button type="submit" class="left-aligned-button">
+						@ButtonText
+					</button>
+				</div>
+			}
 			<BackToList Target="customer" />
 		</EditForm>
 	</div>
 </div>
 
 @code {
+	[Parameter] public bool Disabled { get; set; } = false;
 	[Parameter] public Customer? customer { get; set; }
 	[Parameter] public string ButtonText { get; set; } = "Save";
 	[Parameter] public EventCallback OnValidSubmit { get; set; }

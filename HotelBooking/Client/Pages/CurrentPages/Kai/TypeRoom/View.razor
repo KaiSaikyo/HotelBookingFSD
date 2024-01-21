@@ -1,0 +1,17 @@
+﻿@page "/roomtype/view/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<PageTitle>RoomScout.Org - View Room Types</PageTitle>
+
+<FormComponent roomtype="roomtype" Disabled="true" />
+
+@code {
+	[Parameter] public int id { get; set; }
+	RoomType? roomtype = new RoomType();
+
+	protected async override Task OnParametersSetAsync()
+	{
+		roomtype = await _client.GetFromJsonAsync<RoomType>($"{Endpoints.RoomTypesEndpoint}/{id}");
+	}
+}

@@ -1,0 +1,17 @@
+﻿@page "/hotel/view/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<PageTitle>RoomScout.Org - View Hotels</PageTitle>
+
+<FormComponent hotel="hotel" Disabled="true" />
+
+@code {
+	[Parameter] public int id { get; set; }
+	Hotel? hotel = new Hotel();
+
+	protected async override Task OnParametersSetAsync()
+	{
+		hotel = await _client.GetFromJsonAsync<Hotel>($"{Endpoints.HotelsEndpoint}/{id}");
+	}
+}

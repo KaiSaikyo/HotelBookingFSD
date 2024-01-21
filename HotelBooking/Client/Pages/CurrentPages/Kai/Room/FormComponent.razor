@@ -9,60 +9,66 @@
 			<DataAnnotationsValidator />
 			<ValidationSummary />
 
-			<div class="form-group">
-				<label>Room No.: </label>
-				<div>
-					<InputText @bind-Value="@room.Number" class="form-control" />
-					<ValidationMessage For="@(() => room.Number)" />
+			<fieldset disabled="@Disabled">
+				<div class="form-group">
+					<label>Room No.: </label>
+					<div>
+						<InputText @bind-Value="@room.Number" class="form-control" />
+						<ValidationMessage For="@(() => room.Number)" />
+					</div>
 				</div>
-			</div>
-			<br />
-			<div class="form-group">
-				<label>Amenities: </label>
-				<div>
-					<InputTextArea @bind-Value="@room.Amenities" class="form-control" />
-					<ValidationMessage For="@(() => room.Amenities)" />
+				<br />
+				<div class="form-group">
+					<label>Amenities: </label>
+					<div>
+						<InputTextArea @bind-Value="@room.Amenities" class="form-control" />
+						<ValidationMessage For="@(() => room.Amenities)" />
+					</div>
 				</div>
-			</div>
-			<br />
-			<div class="form-group">
-				<label>Min Stay: </label>
-				<div>
-					<InputNumber @bind-Value="@room.RoomMinStay" class="form-control" />
-					<ValidationMessage For="@(() => room.RoomMinStay)" />
+				<br />
+				<div class="form-group">
+					<label>Min Stay: </label>
+					<div>
+						<InputNumber @bind-Value="@room.RoomMinStay" class="form-control" />
+						<ValidationMessage For="@(() => room.RoomMinStay)" />
+					</div>
 				</div>
-			</div>
-			<br />
-			<div class="form-group">
-				<label>Max Stay: </label>
-				<div>
-					<InputNumber @bind-Value="@room.RoomMaxStay" class="form-control" />
-					<ValidationMessage For="@(() => room.RoomMaxStay)" />
+				<br />
+				<div class="form-group">
+					<label>Max Stay: </label>
+					<div>
+						<InputNumber @bind-Value="@room.RoomMaxStay" class="form-control" />
+						<ValidationMessage For="@(() => room.RoomMaxStay)" />
+					</div>
 				</div>
-			</div>
-			<br />
-			<div class="form-group">
-				<label>Room Type: </label>
-				<div>
-					<InputSelect @bind-Value="@room.RoomTypeId" class="form-control">
-						<option value="">-- Select Room Type --</option>
-						@if (RoomTypes != null)
-						{
-							foreach (var roomtype in RoomTypes)
+				<br />
+				<div class="form-group">
+					<label>Room Type: </label>
+					<div>
+						<InputSelect @bind-Value="@room.RoomTypeId" class="form-control">
+							<option value="">-- Select Room Type --</option>
+							@if (RoomTypes != null)
 							{
-								<option value="@roomtype.Id">@roomtype.Description - $@roomtype.Price</option>
+								foreach (var roomtype in RoomTypes)
+								{
+									<option value="@roomtype.Id">@roomtype.Description - $@roomtype.Price</option>
+								}
 							}
-						}
-					</InputSelect>
-					<ValidationMessage For="@(() => room.RoomTypeId)" />
+						</InputSelect>
+						<ValidationMessage For="@(() => room.RoomTypeId)" />
+					</div>
 				</div>
-			</div>
-			<br />
-			<div class="button-wrapper">
-				<button type="submit" class="left-aligned-button">
-					@ButtonText
-				</button>
-			</div>
+			</fieldset>
+
+			@if (!Disabled)
+			{
+				<br />
+				<div class="button-wrapper">
+					<button type="submit" class="left-aligned-button">
+						@ButtonText
+					</button>
+				</div>
+			}
 			<BackToList Target="room" />
 		</EditForm>
 	</div>
@@ -72,6 +78,7 @@
 	[Parameter] public Room? room { get; set; }
 	[Parameter] public string ButtonText { get; set; } = "Save";
 	[Parameter] public EventCallback OnValidSubmit { get; set; }
+	[Parameter] public bool Disabled { get; set; } = false;
 
 	private IList<RoomType>? RoomTypes;
 

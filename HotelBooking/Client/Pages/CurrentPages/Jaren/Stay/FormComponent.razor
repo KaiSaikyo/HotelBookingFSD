@@ -8,80 +8,85 @@
 		<EditForm Model="@stay" OnValidSubmit="@OnValidSubmit">
 			<DataAnnotationsValidator />
 			<ValidationSummary />
-
-			<div class="form-group">
-				<label>Emergency Contact: </label>
-				<div>
-					<InputText @bind-Value="@stay.EmergencyContact" class="form-control" />
-					<ValidationMessage For="@(() => stay.EmergencyContact)" />
+			<fieldset disabled="@Disabled">
+				<div class="form-group">
+					<label>Emergency Contact: </label>
+					<div>
+						<InputText @bind-Value="@stay.EmergencyContact" class="form-control" />
+						<ValidationMessage For="@(() => stay.EmergencyContact)" />
+					</div>
 				</div>
-			</div>
-			<br />
-			<div class="form-group">
-				<label>Occupancy Status: </label>
-				<div>
-					<InputSelect @bind-Value="@stay.OccupancyStatus" class="form-control">
-						<option value="">-- Select Occupancy Status --</option>
-						<option value="true">True</option>
-						<option value="false">False</option>
-					</InputSelect>
-					<ValidationMessage For="@(() => stay.OccupancyStatus)" />
+				<br />
+				<div class="form-group">
+					<label>Occupancy Status: </label>
+					<div>
+						<InputSelect @bind-Value="@stay.OccupancyStatus" class="form-control">
+							<option value="">-- Select Occupancy Status --</option>
+							<option value="true">True</option>
+							<option value="false">False</option>
+						</InputSelect>
+						<ValidationMessage For="@(() => stay.OccupancyStatus)" />
+					</div>
 				</div>
-			</div>
-			<br />
-			<div class="form-group">
-				<label>Complimentry Services: </label>
-				<div>
-					<InputTextArea @bind-Value="@stay.ComplimentaryServices" class="form-control" />
-					<ValidationMessage For="@(() => stay.ComplimentaryServices)" />
+				<br />
+				<div class="form-group">
+					<label>Complimentry Services: </label>
+					<div>
+						<InputTextArea @bind-Value="@stay.ComplimentaryServices" class="form-control" />
+						<ValidationMessage For="@(() => stay.ComplimentaryServices)" />
+					</div>
 				</div>
-			</div>
-			<br />
-			<div class="form-group">
-				<label>Booking: </label>
-				<div>
-					<InputSelect @bind-Value="@stay.BookingId" class="form-control">
-						<option value="">-- Select Booking --</option>
-						@if (Bookings != null)
-						{
-							foreach (var booking in Bookings)
+				<br />
+				<div class="form-group">
+					<label>Booking: </label>
+					<div>
+						<InputSelect @bind-Value="@stay.BookingId" class="form-control">
+							<option value="">-- Select Booking --</option>
+							@if (Bookings != null)
 							{
-								<option value="@booking.Id">@booking.Destination, Check-in: @booking.CheckInDate - Check-out: @booking.CheckOutDate</option>
+								foreach (var booking in Bookings)
+								{
+									<option value="@booking.Id">@booking.Destination, Check-in: @booking.CheckInDate - Check-out: @booking.CheckOutDate</option>
+								}
 							}
-						}
-					</InputSelect>
-					<ValidationMessage For="@(() => stay.BookingId)" />
+						</InputSelect>
+						<ValidationMessage For="@(() => stay.BookingId)" />
+					</div>
 				</div>
-			</div>
-			<br />
-			<div class="form-group">
-				<label>Room: </label>
-				<div>
-					<InputSelect @bind-Value="@stay.RoomId" class="form-control">
-						<option value="">-- Select Room --</option>
-						@if (Rooms != null)
-						{
-							foreach (var room in Rooms)
+				<br />
+				<div class="form-group">
+					<label>Room: </label>
+					<div>
+						<InputSelect @bind-Value="@stay.RoomId" class="form-control">
+							<option value="">-- Select Room --</option>
+							@if (Rooms != null)
 							{
-								<option value="@room.Id">@room.Number, Min Stay: @room.RoomMinStay - Max Stay: @room.RoomMaxStay</option>
+								foreach (var room in Rooms)
+								{
+									<option value="@room.Id">@room.Number, Min Stay: @room.RoomMinStay - Max Stay: @room.RoomMaxStay</option>
+								}
 							}
-						}
-					</InputSelect>
-					<ValidationMessage For="@(() => stay.RoomId)" />
+						</InputSelect>
+						<ValidationMessage For="@(() => stay.RoomId)" />
+					</div>
 				</div>
-			</div>
-			<br />
-			<div class="button-wrapper">
-				<button type="submit" class="left-aligned-button">
-					@ButtonText
-				</button>
-			</div>
+			</fieldset>
+			@if (!Disabled)
+			{
+				<br />
+				<div class="button-wrapper">
+					<button type="submit" class="left-aligned-button">
+						@ButtonText
+					</button>
+				</div>
+			}
 			<BackToList Target="stay" />
 		</EditForm>
 	</div>
 </div>
 
 @code {
+	[Parameter] public bool Disabled { get; set; } = false;
 	[Parameter] public Stay? stay { get; set; }
 	[Parameter] public string ButtonText { get; set; } = "Save";
 	[Parameter] public EventCallback OnValidSubmit { get; set; }

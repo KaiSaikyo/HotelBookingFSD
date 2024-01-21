@@ -1,0 +1,14 @@
+﻿@page "/stay/view/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<FormComponent stay="stay" Disabled="true" />
+@code {
+    [Parameter] public int id { get; set; }
+    Stay? stay = new Stay();
+    protected async override Task OnParametersSetAsync()
+    {
+        stay = await
+        _client.GetFromJsonAsync<Stay>($"{Endpoints.StaysEndpoint}/{id}");
+    }
+}
