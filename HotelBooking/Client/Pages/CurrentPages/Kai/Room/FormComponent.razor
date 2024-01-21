@@ -1,4 +1,5 @@
-﻿@inject HttpClient _client
+﻿@using HotelBooking.Client.Components
+@inject HttpClient _client
 
 <PageTitle>RoomScout.Org - Update Rooms</PageTitle>
 
@@ -62,6 +63,7 @@
 					@ButtonText
 				</button>
 			</div>
+			<BackToList Target="room" />
 		</EditForm>
 	</div>
 </div>
