@@ -7,21 +7,40 @@ using System.Threading.Tasks;
 
 namespace HotelBooking.Shared.Domain
 {
-    public class Room
-    {
+    public class Room : IValidatableObject
+	{
         public int Id { get; set; }
 
-        //alphanumeric room numbers
+        [Required]
+        [RegularExpression(@"\d{3,}\w$", ErrorMessage = "Number must have at least 3 digits followed by a letter")]
         public string? Number { get; set; }
 
-        public string? Amenities { get; set; }
+		[Required]
+		[StringLength(500, MinimumLength = 3, ErrorMessage = "Amenities does not meet length requirements")]
+		public string? Amenities { get; set; }
 
-        public int? RoomMinStay { get; set; } // Short for small integer values
+		[Required]
+		[Range(1, 10)]
+		public int? RoomMinStay { get; set; }
 
-        public int? RoomMaxStay { get; set; } // Short for small integer values
+		[Required]
+		[Range(1, 10)]
+		public int? RoomMaxStay { get; set; }
 
-        public int RoomTypeId { get; set; }
+		[Required]
+		public int RoomTypeId { get; set; }
 
         public virtual RoomType? RoomType { get; set; }
-    }
+
+		public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+		{
+			if (RoomMaxStay != null && RoomMinStay != null)
+			{
+				if (RoomMaxStay < RoomMinStay)
+				{
+					yield return new ValidationResult("Max Stay must be greater than or equal to Min Stay", new[] { "RoomMaxStay" });
+				}
+			}
+		}
+	}
 }
