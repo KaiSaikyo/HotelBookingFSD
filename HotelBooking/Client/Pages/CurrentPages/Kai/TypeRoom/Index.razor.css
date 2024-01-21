@@ -1,0 +1,65 @@
+﻿﻿.main-background {
+    min-height: 100dvh;
+    background-color: #8EB4E5;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    padding-inline: 4rem;
+    padding-top: 1.5rem;
+    padding-bottom: 3rem;
+}
+
+.table-background {
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    flex-grow: 1;
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+    border-radius: 0.5rem;
+    width: 100%;
+}
+
+td {
+    padding: 0.5rem;
+}
+
+th {
+    padding-inline: 0.5rem;
+    padding-block: 1rem;
+}
+
+thead {
+    background-color: #f2f2f2;
+    border-bottom: 2px solid #ddd;
+}
+
+.right-aligned-button {
+    width: 180px;
+    height: 40px;
+    background-color: #1b6ec2;
+    border-radius: 0.5rem;
+    border: none;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+}
+
+    .right-aligned-button:active {
+        outline: 3px solid white;
+        outline-offset: 2px;
+    }
+
+    .right-aligned-button:hover {
+        background-color: #0b5ed7;
+    }
+
+.button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 1.5rem;
+}

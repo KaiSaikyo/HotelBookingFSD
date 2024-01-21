@@ -1,0 +1,74 @@
+﻿@using HotelBooking.Client.Components
+@inject HttpClient _client
+
+<PageTitle>RoomScout.Org - Update Room Types</PageTitle>
+
+<div class="main-background">
+	<div class="form-background">
+		<EditForm Model="@roomtype" OnValidSubmit="@OnValidSubmit">
+			<DataAnnotationsValidator />
+			<ValidationSummary />
+
+			<div class="form-group">
+				<label>Description: </label>
+				<div>
+					<InputTextArea @bind-Value="@roomtype.Description" class="form-control" />
+					<ValidationMessage For="@(() => roomtype.Description)" />
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<label>Size: </label>
+				<div>
+					<InputText @bind-Value="@roomtype.Size" class="form-control" />
+					<ValidationMessage For="@(() => roomtype.Size)" />
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<label>Price: </label>
+				<div>
+					<InputNumber @bind-Value="@roomtype.Price" class="form-control" />
+					<ValidationMessage For="@(() => roomtype.Price)" />
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<label>Hotel: </label>
+				<div>
+					<InputSelect @bind-Value="@roomtype.HotelId" class="form-control">
+						<option value="">-- Select Hotel --</option>
+						@if (Hotels != null)
+						{
+							foreach (var hotel in Hotels)
+							{
+								<option value="@hotel.Id">@hotel.Name - @hotel.Rating</option>
+							}
+						}
+					</InputSelect>
+					<ValidationMessage For="@(() => roomtype.HotelId)" />
+				</div>
+			</div>
+			<br />
+			<div class="button-wrapper">
+				<button type="submit" class="left-aligned-button">
+					@ButtonText
+				</button>
+			</div>
+			<BackToList Target="roomtype" />
+		</EditForm>
+	</div>
+</div>
+
+@code {
+	[Parameter] public RoomType? roomtype { get; set; }
+	[Parameter] public string ButtonText { get; set; } = "Save";
+	[Parameter] public EventCallback OnValidSubmit { get; set; }
+
+	private IList<Hotel>? Hotels;
+
+	protected async override Task OnInitializedAsync()
+	{
+		Hotels = await _client.GetFromJsonAsync<List<Hotel>>($"{Endpoints.HotelsEndpoint}");
+	}
+}

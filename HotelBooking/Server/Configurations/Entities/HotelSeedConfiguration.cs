@@ -18,7 +18,7 @@ namespace HotelBooking.Server.Configurations.Entities
                     Description = "Hilton Hotels & Resorts is a global brand of full-service hotels and resorts.",
                     Amenities = "Breakfast, Wifi, Gym",
                     Rating = (decimal?)3.5,
-                    Availability = true
+                    Availability = "true"
                 },
                 new Hotel
                 {
@@ -28,7 +28,7 @@ namespace HotelBooking.Server.Configurations.Entities
                     Description = "The Fullerton Hotel Singapore offers 5-star luxury rooms & suites with exceptional services.",
                     Amenities = "Breakfast, Gym, Laundry",
                     Rating = (decimal?)5.0,
-                    Availability = true
+                    Availability = "true"
                 },
                 new Hotel
                 {
@@ -38,7 +38,7 @@ namespace HotelBooking.Server.Configurations.Entities
                     Description = "Your go-to hotel for awesome rates, comfortable rooms, and accessible locations.",
                     Amenities = "Game Center, Swimming Pool, Wifi",
                     Rating = (decimal?)3.0,
-                    Availability = false
+                    Availability = "false"
                 },
                 new Hotel
                 {
@@ -48,7 +48,7 @@ namespace HotelBooking.Server.Configurations.Entities
                     Description = "Your ultimate destination getaway at the leading entertainment hotel in Desaru Coast, Johor, Malaysia.",
                     Amenities = "Breakfast, Wifi, Gym",
                     Rating = (decimal?)2.5,
-                    Availability = true
+                    Availability = "true"
                 }
             );
         }

@@ -1,0 +1,146 @@
+﻿@page "/staffviewcustomer"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<PageTitle>RoomScout.Org - Customers</PageTitle>
+
+@if (Customers == null)
+{
+	<div class="alert alert-info">Loading Customers...</div>
+}
+else
+{
+	<section class="background-color">
+		<div class="Dashboard-Container">
+			<div class="button-wrapper">
+				<button class="right-aligned-button">Lorem</button>
+			</div>
+			<div class="Customer-List">
+				<div class="Customer-Header">
+					<div><h2>Customer ID</h2></div>
+					<div><h2>Name</h2></div>
+					<div><h2>Email</h2></div>
+					<div><h2>Mobile</h2></div>
+					<div><h2>Payment Type</h2></div>
+					<div><h2>Card Number</h2></div>
+					<div><h2>CVV</h2></div>
+					<div><h2>Expiry Date</h2></div>
+					<div></div>
+				</div>
+				<hr>
+				<div class="Customer-Data">
+					@foreach (var customer in Customers)
+					{
+						<div><h2>@customer.Id</h2></div>
+						<div><h2>@customer.Name</h2></div>
+						<div><h2>@customer.Email</h2></div>
+						<div><h2>@customer.Mobile</h2></div>
+						<div><h2>@customer.PaymentType</h2></div>
+						<div><h2>@customer.CardNumber</h2></div>
+						<div><h2>@customer.Cvv</h2></div>
+						<div><h2>@customer.ExpiryDate</h2></div>
+						<div>
+							<a href="/staffviewcustomer/view/@customer.Id" class="btn btn-primary">
+								<span class="oi oi-book"></span>
+							</a>
+							<a href="/staffviewcustomer/edit/@customer.Id" class="btn btn-warning">
+								<span class="oi oi-pencil"></span>
+							</a>
+							<button class="btn btn-danger" @onclick="@(()=>Delete(customer.Id))">
+								<span class="oi oi-delete"></span>
+							</button>
+						</div>	
+					}
+				</div>
+			</div>
+		</div>
+	</section>
+}
+
+@if (Staffs == null)
+{
+	<div class="alert alert-info">Loading Staffs...</div>
+}
+else
+{
+	<section class="background-color">
+		<div class="Dashboard-Container">
+			<div class="button-wrapper">
+				<button class="right-aligned-button">Lorem</button>
+			</div>
+			<div class="Staff-List">
+				<div class="Staff-Header">
+					<div><h2>Staff ID</h2></div>
+					<div><h2>Name</h2></div>
+					<div><h2>Email</h2></div>
+					<div><h2>Mobile</h2></div>
+					<div></div>
+				</div>
+				<hr>
+				<div class="Staff-Data">
+					@foreach (var staff in Staffs)
+					{
+						<div><h2>@staff.Id</h2></div>
+						<div><h2>@staff.Name</h2></div>
+						<div><h2>@staff.Email</h2></div>
+						<div><h2>@staff.Mobile</h2></div>
+						<div>
+							<a href="/staffviewcustomer/view/@staff.Id" class="btn btn-primary">
+								<span class="oi oi-book"></span>
+							</a>
+							<a href="/staffviewcustomer/edit/@staff.Id" class="btn btn-warning">
+								<span class="oi oi-pencil"></span>
+							</a>
+							<button class="btn btn-danger" @onclick="@(()=>DeleteStaff(staff.Id))">
+								<span class="oi oi-delete"></span>
+							</button>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</section>
+}
+
+
+@code {
+	private List<Customer>? Customers;
+	private List<Staff>? Staffs;
+
+	protected async override Task OnInitializedAsync()
+	{
+		Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
+		Staffs = await _client.GetFromJsonAsync<List<Staff>>($"{Endpoints.StaffsEndpoint}");
+	}
+
+	async Task Delete(int customerId)
+	{
+		if (Customers != null)
+		{
+			var customer = Customers.First(q => q.Id == customerId);
+			var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {customer.Name}?");
+
+			if (confirm)
+			{
+				await _client.DeleteAsync($"{Endpoints.CustomersEndpoint}/{customerId}");
+				await OnInitializedAsync();
+			}
+		}
+	}
+
+	async Task DeleteStaff(int staffId)
+	{
+		if (Staffs != null)
+		{
+			var staff = Staffs.First(q => q.Id == staffId);
+			var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {staff.Name}?");
+
+			if (confirm)
+			{
+				await _client.DeleteAsync($"{Endpoints.StaffsEndpoint}/{staffId}");
+				await OnInitializedAsync();
+			}
+		}
+	}
+}

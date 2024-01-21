@@ -8,8 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using HotelBooking.Server.Data;
 using HotelBooking.Shared.Domain;
 using HotelBooking.Server.IRepository;
-using HotelBooking.Server.IRepository;
-using HotelBooking.Shared.Domain;
 
 namespace HotelBooking.Server.Controllers
 {

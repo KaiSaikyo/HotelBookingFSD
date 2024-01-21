@@ -1,0 +1,110 @@
+﻿@page "/booking"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<PageTitle>RoomScout.Org - Bookings</PageTitle>
+
+
+@if (Bookings == null)
+{
+    <div class="alert alert-info">Loading Bookings...</div>
+}
+else
+{
+    <div class="main-background">
+        <div class="button-wrapper">
+            <a href="/booking/create" class="right-aligned-button nav-link">
+                Create Booking
+            </a>
+        </div>
+        <div class="table-background">
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th style="border-top-left-radius: 0.5rem;">ID</th>
+                        <th>Check-in</th>
+                        <th>Check-out</th>
+                        <th>Destination</th>
+                        <th>No. of Guest</th>
+                        <th>Status</th>
+                        <th>Hotel ID</th>
+                        <th>Room Type ID</th>
+                        <th>Staff ID</th>
+                        <th>Customer ID</th>
+                        <th style="border-top-right-radius: 0.5rem;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var booking in Bookings)
+                    {
+                        <tr>
+                            <td><b>@booking.Id</b></td>
+                            <td><b>@booking.CheckInDate</b></td>
+                            <td><b>@booking.CheckOutDate</b></td>
+                            <td><b>@booking.Destination</b></td>
+                            <td><b>@booking.NumGuest</b></td>
+                            <td><b>@booking.Status</b></td>
+                            <td><b>@booking.HotelId</b></td>
+                            <td><b>@booking.RoomTypeId</b></td>
+                            <td><b>@booking.StaffId</b></td>
+                            <td><b>@booking.CustomerId</b></td>
+
+                            <td>
+                                <a href="/booking/view/@booking.Id" class="btn btn-primary">
+                                    <span class="oi oi-magnifying-glass"></span>
+                                </a>
+
+                                <a href="/booking/edit/@booking.Id" class="btn btn-warning">
+                                    <span class="oi oi-script"></span>
+                                </a>
+
+                                <button class="btn btn-danger" @onclick="@(()=>Delete(booking.Id))">
+                                    <span class="oi oi-trash"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+@code {
+    private List<Booking>? Bookings;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Bookings = await _client.GetFromJsonAsync<List<Booking>>($"{Endpoints.BookingsEndpoint}");
+    }
+
+    async Task Delete(int bookingId)
+    {
+        if (Bookings != null)
+        {
+            var booking = Bookings.First(q => q.Id == bookingId);
+
+            var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {booking.Destination}?");
+
+            if (confirm)
+            {
+                var stay = await _client.GetFromJsonAsync<Stay>($"{Endpoints.StaysEndpoint}/booking/{bookingId}");
+                if (stay != null)
+                {
+                    await _client.DeleteAsync($"{Endpoints.StaysEndpoint}/{stay!.Id}");
+
+                    var review = await _client.GetFromJsonAsync<Review>($"{Endpoints.ReviewsEndpoint}/stay/{stay!.Id}");
+
+                    if (review != null)
+                    {
+                        await _client.DeleteAsync($"{Endpoints.ReviewsEndpoint}/{review!.Id}");
+                    }
+                }
+
+                await _client.DeleteAsync($"{Endpoints.BookingsEndpoint}/{bookingId}");
+                await OnInitializedAsync();
+            }
+        }
+    }
+}

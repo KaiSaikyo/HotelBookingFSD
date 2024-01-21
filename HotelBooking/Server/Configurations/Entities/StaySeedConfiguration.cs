@@ -14,7 +14,7 @@ namespace HotelBooking.Server.Configurations.Entities
                 {
                     Id = 1,
                     EmergencyContact = "12345678", // 8-digit numerical emergency contact
-                    OccupancyStatus = true,
+                    OccupancyStatus = "true",
                     ComplimentaryServices = "Wi-Fi, Breakfast",
                     BookingId = 1,
                     RoomId = 1
@@ -23,7 +23,7 @@ namespace HotelBooking.Server.Configurations.Entities
                 {
                     Id = 2,
                     EmergencyContact = "87654321", // 8-digit numerical emergency contact
-                    OccupancyStatus = false,
+                    OccupancyStatus = "false",
                     ComplimentaryServices = "Pool Access, Newspaper",
                     BookingId = 2,
                     RoomId = 2
@@ -32,7 +32,7 @@ namespace HotelBooking.Server.Configurations.Entities
                 {
                     Id = 3,
                     EmergencyContact = "55558888", // 8-digit numerical emergency contact
-                    OccupancyStatus = true,
+                    OccupancyStatus = "true",
                     ComplimentaryServices = "Gym Access, Parking",
                     BookingId = 3,
                     RoomId = 3
@@ -41,7 +41,7 @@ namespace HotelBooking.Server.Configurations.Entities
                 {
                     Id = 4,
                     EmergencyContact = "33332222", // 8-digit numerical emergency contact
-                    OccupancyStatus = false,
+                    OccupancyStatus = "false",
                     ComplimentaryServices = "Airport Shuttle",
                     BookingId = 4,
                     RoomId = 4

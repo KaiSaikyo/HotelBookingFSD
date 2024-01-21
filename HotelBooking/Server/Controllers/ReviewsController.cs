@@ -126,6 +126,35 @@ namespace HotelBooking.Server.Controllers
             return NoContent();
         }
 
+        [HttpGet("stay/{stayId:int}")]
+        public async Task<ActionResult<Review>> GetReviewFromStay(int stayId)
+        {
+            var review = await _unitOfWork.Reviews.Get(q => q.StayId == stayId);
+
+            if (review == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(review);
+        }
+
+        [HttpPut("cascade-delete/{stayId:int}")]
+        public async Task<ActionResult<Review>> DeleteReviewFromStay(int stayId)
+        {
+            var review = await _unitOfWork.Reviews.Get(q => q.StayId == stayId);
+
+            if (review == null)
+            {
+                return NotFound();
+            }
+
+            await _unitOfWork.Stays.Delete(review.Id);
+            await _unitOfWork.Save(HttpContext);
+
+            return NoContent();
+        }
+
         // POST: api/Reviews
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]

@@ -238,7 +238,7 @@ namespace HotelBooking.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "04302cfb-0702-45dd-a16b-a1d0cbb6329f",
+                            ConcurrencyStamp = "a33c744e-5315-4d68-ac48-a7f2cc6384c7",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -246,9 +246,9 @@ namespace HotelBooking.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDfZ01U/jK0ubCOX/WeKWRbRn3aNfg5s1Kx9cjhmPr2CsV8lu9u2q+A4gjBgQBwlRQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEN0k4SABTnYeAtm8kr1pX1vKmrhbZtbUEro9E/kH9mt6JgcOmJ6wI0slksoSg4FNew==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f1934db6-e507-4c28-8e33-e25952fe75e8",
+                            SecurityStamp = "1eaba735-4b67-4c0c-85b3-ab0778575ffe",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -263,21 +263,26 @@ namespace HotelBooking.Server.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("CheckInDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("CheckOutDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<string>("Destination")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<int>("HotelId")
                         .HasColumnType("int");
 
                     b.Property<int?>("NumGuest")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("RoomTypeId")
@@ -286,8 +291,9 @@ namespace HotelBooking.Server.Migrations
                     b.Property<int>("StaffId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -313,7 +319,7 @@ namespace HotelBooking.Server.Migrations
                             NumGuest = 2,
                             RoomTypeId = 1,
                             StaffId = 1,
-                            Status = true
+                            Status = "true"
                         },
                         new
                         {
@@ -326,7 +332,7 @@ namespace HotelBooking.Server.Migrations
                             NumGuest = 1,
                             RoomTypeId = 2,
                             StaffId = 2,
-                            Status = true
+                            Status = "true"
                         },
                         new
                         {
@@ -339,7 +345,7 @@ namespace HotelBooking.Server.Migrations
                             NumGuest = 3,
                             RoomTypeId = 3,
                             StaffId = 3,
-                            Status = false
+                            Status = "false"
                         },
                         new
                         {
@@ -352,7 +358,7 @@ namespace HotelBooking.Server.Migrations
                             NumGuest = 2,
                             RoomTypeId = 4,
                             StaffId = 4,
-                            Status = true
+                            Status = "true"
                         });
                 });
 
@@ -365,28 +371,38 @@ namespace HotelBooking.Server.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CardNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Cvv")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ExpiryDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Mobile")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PaymentType")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -452,21 +468,31 @@ namespace HotelBooking.Server.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Amenities")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
-                    b.Property<bool>("Availability")
-                        .HasColumnType("bit");
+                    b.Property<string>("Availability")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<decimal?>("Rating")
+                        .IsRequired()
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
@@ -479,7 +505,7 @@ namespace HotelBooking.Server.Migrations
                             Id = 1,
                             Address = "333 Orchard Rd, Mandarin Orchard Singapore",
                             Amenities = "Breakfast, Wifi, Gym",
-                            Availability = true,
+                            Availability = "true",
                             Description = "Hilton Hotels & Resorts is a global brand of full-service hotels and resorts.",
                             Name = "Hilton Hotel",
                             Rating = 3.5m
@@ -489,7 +515,7 @@ namespace HotelBooking.Server.Migrations
                             Id = 2,
                             Address = "1 Fullerton Square, Singapore 049178",
                             Amenities = "Breakfast, Gym, Laundry",
-                            Availability = true,
+                            Availability = "true",
                             Description = "The Fullerton Hotel Singapore offers 5-star luxury rooms & suites with exceptional services.",
                             Name = "Fullerton Hotel",
                             Rating = 5m
@@ -499,7 +525,7 @@ namespace HotelBooking.Server.Migrations
                             Id = 3,
                             Address = "768 Upper Serangoon Rd, Singapore 534636",
                             Amenities = "Game Center, Swimming Pool, Wifi",
-                            Availability = false,
+                            Availability = "false",
                             Description = "Your go-to hotel for awesome rates, comfortable rooms, and accessible locations.",
                             Name = "St 81 Hotel",
                             Rating = 3m
@@ -509,7 +535,7 @@ namespace HotelBooking.Server.Migrations
                             Id = 4,
                             Address = "Desaru Coast, Jln Pantai 3, 81930, Johor, Malaysia",
                             Amenities = "Breakfast, Wifi, Gym",
-                            Availability = true,
+                            Availability = "true",
                             Description = "Your ultimate destination getaway at the leading entertainment hotel in Desaru Coast, Johor, Malaysia.",
                             Name = "Hard Rock Hotel",
                             Rating = 2.5m
@@ -524,16 +550,21 @@ namespace HotelBooking.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("Date")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<decimal?>("Rating")
+                        .IsRequired()
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("StayId")
@@ -595,15 +626,20 @@ namespace HotelBooking.Server.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Amenities")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Number")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("RoomMaxStay")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("RoomMinStay")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int>("RoomTypeId")
@@ -663,15 +699,19 @@ namespace HotelBooking.Server.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<int>("HotelId")
                         .HasColumnType("int");
 
                     b.Property<decimal?>("Price")
+                        .IsRequired()
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Size")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -724,15 +764,20 @@ namespace HotelBooking.Server.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Mobile")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -782,17 +827,21 @@ namespace HotelBooking.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BookingId")
+                    b.Property<int?>("BookingId")
                         .HasColumnType("int");
 
                     b.Property<string>("ComplimentaryServices")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("EmergencyContact")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("OccupancyStatus")
-                        .HasColumnType("bit");
+                    b.Property<string>("OccupancyStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("RoomId")
                         .HasColumnType("int");
@@ -812,7 +861,7 @@ namespace HotelBooking.Server.Migrations
                             BookingId = 1,
                             ComplimentaryServices = "Wi-Fi, Breakfast",
                             EmergencyContact = "12345678",
-                            OccupancyStatus = true,
+                            OccupancyStatus = "true",
                             RoomId = 1
                         },
                         new
@@ -821,7 +870,7 @@ namespace HotelBooking.Server.Migrations
                             BookingId = 2,
                             ComplimentaryServices = "Pool Access, Newspaper",
                             EmergencyContact = "87654321",
-                            OccupancyStatus = false,
+                            OccupancyStatus = "false",
                             RoomId = 2
                         },
                         new
@@ -830,7 +879,7 @@ namespace HotelBooking.Server.Migrations
                             BookingId = 3,
                             ComplimentaryServices = "Gym Access, Parking",
                             EmergencyContact = "55558888",
-                            OccupancyStatus = true,
+                            OccupancyStatus = "true",
                             RoomId = 3
                         },
                         new
@@ -839,7 +888,7 @@ namespace HotelBooking.Server.Migrations
                             BookingId = 4,
                             ComplimentaryServices = "Airport Shuttle",
                             EmergencyContact = "33332222",
-                            OccupancyStatus = false,
+                            OccupancyStatus = "false",
                             RoomId = 4
                         });
                 });
@@ -1078,9 +1127,7 @@ namespace HotelBooking.Server.Migrations
                 {
                     b.HasOne("HotelBooking.Shared.Domain.Booking", "Booking")
                         .WithMany()
-                        .HasForeignKey("BookingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BookingId");
 
                     b.HasOne("HotelBooking.Shared.Domain.Room", "Room")
                         .WithMany()

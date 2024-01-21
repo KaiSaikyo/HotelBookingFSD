@@ -1,0 +1,100 @@
+﻿@page "/room"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<PageTitle>RoomScout.Org - Rooms</PageTitle>
+
+@if (Rooms == null)
+{
+	<div class="alert alert-info">Loading Rooms...</div>
+}
+else
+{
+	<div class="main-background">
+		<div class="button-wrapper">
+			<a href="/room/create" class="right-aligned-button nav-link">
+				Create Room
+			</a>
+		</div>
+		<div class="table-background">
+			<table class="table table-responsive">
+				<thead>
+					<tr>
+						<th style="border-top-left-radius: 0.5rem;">ID</th>
+						<th>Room No.</th>
+						<th>Amenities</th>
+						<th>Min Stay</th>
+						<th>Max Stay</th>
+						<th>Room Type ID</th>
+						<th style="border-top-right-radius: 0.5rem;">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var room in Rooms)
+					{
+						<tr>
+							<td><b>@room.Id</b></td>
+							<td><b>@room.Number</b></td>
+							<td><b>@room.Amenities</b></td>
+							<td><b>@room.RoomMinStay</b></td>
+							<td><b>@room.RoomMaxStay</b></td>
+							<td><b>@room.RoomTypeId</b></td>
+
+							<td>
+								<a href="/room/view/@room.Id" class="btn btn-primary">
+									<span class="oi oi-magnifying-glass"></span>
+								</a>
+
+								<a href="/room/edit/@room.Id" class="btn btn-warning">
+									<span class="oi oi-script"></span>
+								</a>
+
+								<button class="btn btn-danger" @onclick="@(()=>Delete(room.Id))">
+									<span class="oi oi-trash"></span>
+								</button>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+}
+
+@code {
+	private List<Room>? Rooms;
+
+	protected async override Task OnInitializedAsync()
+	{
+		Rooms = await _client.GetFromJsonAsync<List<Room>>($"{Endpoints.RoomsEndpoint}");
+	}
+
+	async Task Delete(int roomId)
+	{
+		if (Rooms != null)
+		{
+			var room = Rooms.First(q => q.Id == roomId);
+			var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {room.Number}?");
+
+			if (confirm)
+			{
+				var stay = await _client.GetFromJsonAsync<Stay>($"{Endpoints.StaysEndpoint}/room/{roomId}");
+				if (stay != null)
+				{
+					await _client.DeleteAsync($"{Endpoints.StaysEndpoint}/{stay!.Id}");
+
+					var review = await _client.GetFromJsonAsync<Review>($"{Endpoints.ReviewsEndpoint}/stay/{stay!.Id}");
+
+					if (review != null)
+					{
+						await _client.DeleteAsync($"{Endpoints.ReviewsEndpoint}/{review!.Id}");
+					}
+				}
+
+				await _client.DeleteAsync($"{Endpoints.RoomsEndpoint}/{roomId}");
+				await OnInitializedAsync();
+			}
+		}
+	}
+}

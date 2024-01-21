@@ -1,0 +1,88 @@
+﻿@page "/room/create"
+@using HotelBooking.Client.Components
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<PageTitle>RoomScout.Org - Create Rooms</PageTitle>
+
+<div class="main-background">
+	<div class="form-background">
+		<EditForm Model="@room" OnValidSubmit="CreateRoom">
+			<DataAnnotationsValidator />
+			<ValidationSummary />
+
+			<div class="form-group">
+				<label>Room No.: </label>
+				<div>
+					<InputText @bind-Value="@room.Number" class="form-control" />
+					<ValidationMessage For="@(() => room.Number)" />
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<label>Amenities: </label>
+				<div>
+					<InputTextArea @bind-Value="@room.Amenities" class="form-control" />
+					<ValidationMessage For="@(() => room.Amenities)" />
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<label>Min Stay: </label>
+				<div>
+					<InputNumber @bind-Value="@room.RoomMinStay" class="form-control" />
+					<ValidationMessage For="@(() => room.RoomMinStay)" />
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<label>Max Stay: </label>
+				<div>
+					<InputNumber @bind-Value="@room.RoomMaxStay" class="form-control" />
+					<ValidationMessage For="@(() => room.RoomMaxStay)" />
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<label>Room Type: </label>
+				<div>
+					<InputSelect @bind-Value="@room.RoomTypeId" class="form-control">
+						<option value="">-- Select Room Type --</option>
+						@if (RoomTypes != null)
+						{
+							foreach (var roomtype in RoomTypes)
+							{
+								<option value="@roomtype.Id">@roomtype.Description - $@roomtype.Price</option>
+							}
+						}
+					</InputSelect>
+					<ValidationMessage For="@(() => room.RoomTypeId)" />
+				</div>
+			</div>
+			<br />
+			<div class="button-wrapper">
+				<button type="submit" class="left-aligned-button">
+					Create Room
+				</button>
+			</div>
+			<BackToList Target="room" />
+		</EditForm>
+	</div>
+</div>
+
+@code {
+	private Room room = new Room();
+
+	private IList<RoomType>? RoomTypes;
+
+	protected async override Task OnInitializedAsync()
+	{
+		RoomTypes = await _client.GetFromJsonAsync<List<RoomType>>($"{Endpoints.RoomTypesEndpoint}");
+	}
+
+	private async Task CreateRoom()
+	{
+		await _client.PostAsJsonAsync(Endpoints.RoomsEndpoint, room);
+		_navManager.NavigateTo("/room/");
+	}
+}

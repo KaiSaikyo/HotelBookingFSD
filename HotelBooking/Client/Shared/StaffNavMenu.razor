@@ -4,7 +4,7 @@
 
     <div class="container-fluid d-flex align-items-center justify-content-between">
         <div class="d-flex align-items-center">
-            <a href="/staffviewdashboard">
+            <a href="/staff">
                 <img src="/css/img/roomscout.png" alt="RoomScout.Org" height="54">
             </a>
         </div>
@@ -12,26 +12,26 @@
         <div class="top-bar-scrollable">
             <nav class="d-flex">
                 <div class="nav-item-staff px-3">
-                    <NavLink class="nav-link" href="staffviewdashboard" Match="NavLinkMatch.All">
-                        <span class="oi oi-pie-chart" aria-hidden="true"></span> Dashboard
+                    <NavLink class="nav-link" href="staff" Match="NavLinkMatch.All">
+                        <span class="oi oi-people" aria-hidden="true"></span> Staff
                     </NavLink>
                 </div>
 
                 <div class="nav-item-staff px-3">
-                    <NavLink class="nav-link" href="staffviewcustomer">
-                        <span class="oi oi-people" aria-hidden="true"></span> Customers
+                    <NavLink class="nav-link" href="hotel">
+                        <span class="oi oi-briefcase" aria-hidden="true"></span> Hotel
                     </NavLink>
                 </div>
 
                 <div class="nav-item-staff px-3">
-                    <NavLink class="nav-link" href="staffviewbooking">
-                        <span class="oi oi-spreadsheet" aria-hidden="true"></span> Booking Status
+                    <NavLink class="nav-link" href="roomtype">
+                        <span class="oi oi-image" aria-hidden="true"></span> Room Type
                     </NavLink>
                 </div>
 
                 <div class="nav-item-staff px-3">
-                    <NavLink class="nav-link" href="staffviewstay">
-                        <span class="oi oi-spreadsheet" aria-hidden="true"></span> Occupancy Status
+                    <NavLink class="nav-link" href="room">
+                        <span class="oi oi-inbox" aria-hidden="true"></span> Room
                     </NavLink>
                 </div>
 
@@ -51,11 +51,11 @@
                     </Authorized>
                     <NotAuthorized>
                         <!-- Login link for non-authenticated users -->
-                        @* <div class="nav-item px-3">
+                        <div class="nav-item-staff px-3">
                             <NavLink class="nav-link" href="authentication/login" Match="NavLinkMatch.All">
                                 <span class="oi oi-account-login" aria-hidden="true"></span> Log in
                             </NavLink>
-                        </div> *@
+                        </div>
                     </NotAuthorized>
                 </AuthorizeView>
 

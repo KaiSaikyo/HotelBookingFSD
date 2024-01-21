@@ -8,8 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using HotelBooking.Server.Data;
 using HotelBooking.Shared.Domain;
 using HotelBooking.Server.IRepository;
-using HotelBooking.Server.IRepository;
-using HotelBooking.Shared.Domain;
 
 namespace HotelBooking.Server.Controllers
 {
@@ -149,6 +147,35 @@ namespace HotelBooking.Server.Controllers
             await _unitOfWork.Save(HttpContext);
 
             return CreatedAtAction("GetStay", new { id = stay.Id }, stay);
+        }
+
+        [HttpGet("booking/{bookingId:int}")]
+        public async Task<ActionResult<Stay>> GetStayFromBooking(int bookingId)
+        {
+            var stay = await _unitOfWork.Stays.Get(q => q.BookingId == bookingId);
+
+            if (stay == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(stay);
+        }
+
+        [HttpPut("cascade-delete/{bookingId:int}")]
+        public async Task<ActionResult<Stay>> DeleteStayFromBooking(int bookingId)
+        {
+            var stay = await _unitOfWork.Stays.Get(q => q.BookingId == bookingId);
+
+            if (stay == null)
+            {
+                return NotFound();
+            }
+
+            await _unitOfWork.Stays.Delete(stay.Id);
+            await _unitOfWork.Save(HttpContext);
+
+            return NoContent();
         }
 
         // DELETE: api/Stays/5

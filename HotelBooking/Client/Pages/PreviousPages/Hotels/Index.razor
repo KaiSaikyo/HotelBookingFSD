@@ -1,0 +1,119 @@
+﻿@page "/browse/"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<PageTitle>RoomScout.Org - Browse</PageTitle>
+
+<section>
+    <div class="Booking-Container">
+        <form>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" />
+                    <label>Destination</label>
+                </div>
+                <p>Where are you going?</p>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" />
+                    <label>Check In</label>
+                </div>
+                <p>Add date</p>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" />
+                    <label>Check Out</label>
+                </div>
+                <p>Add date</p>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" />
+                    <label>Guests & Rooms</label>
+                </div>
+                <p>Add guests & rooms</p>
+            </div>
+        </form>
+        <button class="btn"><img src="./css/img/magnifying-glass.png"></button>
+    </div>
+
+
+    <div class="container">
+        <div class="filter-bar">
+            <div class="filter-container">
+                <label for="price-select">Price:</label>
+                <select id="price-select" name="price-select">
+                    <option value="default">--Please choose an option--</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+
+            <button id="filter-btn">Filter</button>
+        </div>
+    </div>
+</section>
+
+@if (Hotels == null)
+{
+<div class="alert alert-info">Loading Hotels...</div>
+}
+else
+{
+<div class="Page-Container">
+    <div class="Hotel-Grid">
+        @foreach (var hotel in Hotels)
+        {
+            <div class="Hotel-Card">
+                <img src="css/img/popular1.jpg" alt="Hotel Image" style="max-width: 100%; height: auto; border-radius: 8px;">
+                    
+                <h3>@hotel.Name</h3>
+                <p>@hotel.Description</p>
+
+                <a href="/hoteldescription" style="text-decoration: none; color: white;"> <button>Book Now</button></a>
+            </div>
+        }
+
+        <div class="Map-Container">
+            <div class="Map">
+                <p>
+                    Lorem ipsum dolor sit amet. Eum omnis voluptatibus qui fugit voluptatum vel eligendi error ut distinctio velit est voluptas molestias id molestias nisi! Ut voluptatem magni ut praesentium enim aut dolores quis aut nihil iusto et consequatur rerum ut mollitia illo ut illum animi. Ut rerum aperiam quo adipisci fugit aut dolores aspernatur et eaque unde aut fuga molestiae!
+
+                    Nam dolor sunt cum possimus possimus sit aliquam numquam ut facilis assumenda. Qui doloribus dicta ut minus tempore aut quibusdam sint a corrupti eaque ea consequuntur fugiat ut error odio id dolores soluta.
+
+                    Sit inventore cumque cum inventore tempora qui magnam autem est quia voluptatibus in ipsam sunt sed sint necessitatibus! Sed cumque beatae est sint quidem a quia perferendis est quam delectus. Eum dolores adipisci nam perspiciatis minima et aspernatur exercitationem sit iste nesciunt est mollitia nostrum.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+
+@code
+{
+    private List<Hotel>? Hotels;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Hotels = await _client.GetFromJsonAsync<List<Hotel>>($"{Endpoints.HotelsEndpoint}");
+    }
+
+    async Task Delete(int hotelId)
+    {
+        if (Hotels != null)
+        {
+            var hotel = Hotels.First(q => q.Id == hotelId);
+            var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {hotel.Name}?");
+            if (confirm)
+            {
+                await _client.DeleteAsync($"{Endpoints.HotelsEndpoint}/{hotelId}");
+                await OnInitializedAsync();
+            }
+        }
+    }
+}

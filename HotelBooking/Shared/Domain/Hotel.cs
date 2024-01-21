@@ -1,27 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelBooking.Shared.Domain
 {
-    public class Hotel
-    {
+    public class Hotel : IValidatableObject
+	{
         public int Id { get; set; }
 
-        public string? Name { get; set; }
+		[Required]
+		[StringLength(100, MinimumLength = 3, ErrorMessage = "Name does not meet length requirements")]
+		public string? Name { get; set; }
 
-        public string? Address { get; set; }
+		[Required]
+		[StringLength(200, MinimumLength = 3, ErrorMessage = "Address does not meet length requirements")]
+		public string? Address { get; set; }
 
-        public string? Description { get; set; }
+		[Required]
+		[StringLength(500, MinimumLength = 3, ErrorMessage = "Description does not meet length requirements")]
+		public string? Description { get; set; }
 
-        public string? Amenities { get; set; }
+		[Required]
+		[StringLength(500, MinimumLength = 3, ErrorMessage = "Description does not meet length requirements")]
+		public string? Amenities { get; set; }
 
-        //decimal(2,1) for numerical rating 0.0 to 5.0 Stars
-        public decimal? Rating { get; set; }
+		[Required]
+		[Range(0.0, 5.0, ErrorMessage = "Rating must be between 0.0 and 5.0")]
+		public decimal? Rating { get; set; }
+		
+		[Required]
+		[RegularExpression(@"^(true|false)$", ErrorMessage = "Availability must be either 'true' or 'false'")]
+		public string? Availability { get; set; }
 
-        //staff to limit hotel availability for booking
-        public bool Availability { get; set; }
-    }
+		public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

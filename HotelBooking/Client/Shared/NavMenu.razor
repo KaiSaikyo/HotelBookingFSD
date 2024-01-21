@@ -11,27 +11,33 @@
 
         <div class="top-bar-scrollable"> 
             <nav class="d-flex">
-                <div class="nav-item px-3">
+                @* <div class="nav-item px-3">
                     <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                         <span class="oi oi-home" aria-hidden="true"></span> Home
                     </NavLink>
-                </div>
+                </div> *@
 
                 <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="browse">
-                        <span class="oi oi-list-rich" aria-hidden="true"></span> Browse
+                    <NavLink class="nav-link" href="customer">
+                        <span class="oi oi-people" aria-hidden="true"></span> Customer
                     </NavLink>
                 </div>
 
                 <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="bookings">
-                        <span class="oi oi-book" aria-hidden="true"></span> Bookings
+                    <NavLink class="nav-link" href="booking">
+                        <span class="oi oi-book" aria-hidden="true"></span> Booking
                     </NavLink>
                 </div>
 
                 <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="payments">
-                        <span class="oi oi-dollar" aria-hidden="true"></span> Payments
+                    <NavLink class="nav-link" href="stay">
+                        <span class="oi oi-location" aria-hidden="true"></span> Stay
+                    </NavLink>
+                </div>
+
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="review">
+                        <span class="oi oi-chat" aria-hidden="true"></span> Review
                     </NavLink>
                 </div>
 
@@ -40,7 +46,7 @@
                         <!-- Profile and Logout links for authenticated users -->
                         <div class="nav-item px-3">
                             <NavLink class="nav-link" href="authentication/profile" Match="NavLinkMatch.All">
-                                <span class="oi oi-person" aria-hidden="true"></span> Hello Customer, @context.User.Identity?.Name!
+                                <span class="oi oi-person" aria-hidden="true"></span> Hello Guest, @context.User.Identity?.Name!
                             </NavLink>
                         </div>
                         <div class="nav-item px-3">

@@ -1,0 +1,89 @@
+﻿@page "/bookings"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+<PageTitle>RoomScout.Org - Bookings</PageTitle>
+
+
+@if (Bookings == null)
+{
+	<div class="alert alert-info">Loading Bookings...</div>
+}
+else
+{
+    <section class="background-color">
+        <table class="Booking-Container">
+            <thead>
+                <tr class="Booking-Header">
+                    <th></th>
+                    <th>Booking ID</th>
+                    <th>Check-in</th>
+                    <th>Check-out</th>
+                    <th>Destination</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody class="Booking-Data">
+                @foreach (var booking in Bookings)
+                {
+                    <tr>
+                        <td>@booking.Id</td>
+                        <td></td>
+                        <td></td>
+                        <td>@booking.Destination</td>
+                        <td>
+                            <a href="/bookings/view/@booking.Id" class="btn btn-primary">
+                                <span class="oi oi-book"></span>
+                            </a>
+                            <a href="/bookings/edit/@booking.Id" class="btn btn-warning">
+                                <span class="oi oi-pencil"></span>
+                            </a>
+                            <button class="btn btn-danger" @onclick="@(()=>Delete(booking.Id))">
+                                <span class="oi oi-delete"></span>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+}
+
+@code {
+    private List<Booking>? Bookings;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Bookings = await _client.GetFromJsonAsync<List<Booking>>($"{Endpoints.BookingsEndpoint}");
+    }
+
+    async Task Delete(int bookingId)
+    {
+        if (Bookings != null)
+        {
+            var booking = Bookings.First(q => q.Id == bookingId);
+
+            var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {booking.Destination}?");
+
+            if (confirm)
+            {
+                var stay = await _client.GetFromJsonAsync<Stay>($"{Endpoints.StaysEndpoint}/booking/{bookingId}");
+                if (stay != null)
+                {
+                    await _client.DeleteAsync($"{Endpoints.StaysEndpoint}/{stay!.Id}");
+
+                    var review = await _client.GetFromJsonAsync<Review>($"{Endpoints.ReviewsEndpoint}/stay/{stay!.Id}");
+
+                    if (review != null)
+                    {
+                        await _client.DeleteAsync($"{Endpoints.ReviewsEndpoint}/{review!.Id}");
+                    }
+                }
+
+                await _client.DeleteAsync($"{Endpoints.BookingsEndpoint}/{bookingId}");
+                await OnInitializedAsync();
+            }
+        }
+    }
+}
