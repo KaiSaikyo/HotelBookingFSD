@@ -12,7 +12,7 @@ namespace HotelBooking.Shared.Domain
 
         public string? EmergencyContact { get; set; }
 
-        public bool OccupancyStatus { get; set; }
+        public string? OccupancyStatus { get; set; }
 
         public string? ComplimentaryServices { get; set; }
 

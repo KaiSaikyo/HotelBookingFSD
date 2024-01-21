@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooking.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240120141313_NewDB")]
-    partial class NewDB
+    [Migration("20240121094832_newDB")]
+    partial class newDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -241,7 +241,7 @@ namespace HotelBooking.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c46c00da-d8e8-4fe9-8897-1d8ce87e2192",
+                            ConcurrencyStamp = "9d72e8fe-8f9b-4e1a-ad03-af4f1e8f9302",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -249,9 +249,9 @@ namespace HotelBooking.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENp490oXUE5MSOXfQAkkClOE14c1eUNXCdR8Ri8kYS7IJtd4V0w9ZgZB8xPcGzkYEQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHJqQniggBkeFQXrHJY9Gj89z8AE/U+bNXm2jmvv8hTwXGy8hZnA6SVfPyZXWWDa1Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7dc3530e-23d9-4187-afa3-9f1b88021c39",
+                            SecurityStamp = "7bf6b97d-ed15-481a-9883-ed644fa96d53",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -289,8 +289,8 @@ namespace HotelBooking.Server.Migrations
                     b.Property<int>("StaffId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -316,7 +316,7 @@ namespace HotelBooking.Server.Migrations
                             NumGuest = 2,
                             RoomTypeId = 1,
                             StaffId = 1,
-                            Status = true
+                            Status = "true"
                         },
                         new
                         {
@@ -329,7 +329,7 @@ namespace HotelBooking.Server.Migrations
                             NumGuest = 1,
                             RoomTypeId = 2,
                             StaffId = 2,
-                            Status = true
+                            Status = "true"
                         },
                         new
                         {
@@ -342,7 +342,7 @@ namespace HotelBooking.Server.Migrations
                             NumGuest = 3,
                             RoomTypeId = 3,
                             StaffId = 3,
-                            Status = false
+                            Status = "false"
                         },
                         new
                         {
@@ -355,7 +355,7 @@ namespace HotelBooking.Server.Migrations
                             NumGuest = 2,
                             RoomTypeId = 4,
                             StaffId = 4,
-                            Status = true
+                            Status = "true"
                         });
                 });
 
@@ -460,8 +460,8 @@ namespace HotelBooking.Server.Migrations
                     b.Property<string>("Amenities")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Availability")
-                        .HasColumnType("bit");
+                    b.Property<string>("Availability")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -482,7 +482,7 @@ namespace HotelBooking.Server.Migrations
                             Id = 1,
                             Address = "333 Orchard Rd, Mandarin Orchard Singapore",
                             Amenities = "Breakfast, Wifi, Gym",
-                            Availability = true,
+                            Availability = "true",
                             Description = "Hilton Hotels & Resorts is a global brand of full-service hotels and resorts.",
                             Name = "Hilton Hotel",
                             Rating = 3.5m
@@ -492,7 +492,7 @@ namespace HotelBooking.Server.Migrations
                             Id = 2,
                             Address = "1 Fullerton Square, Singapore 049178",
                             Amenities = "Breakfast, Gym, Laundry",
-                            Availability = true,
+                            Availability = "true",
                             Description = "The Fullerton Hotel Singapore offers 5-star luxury rooms & suites with exceptional services.",
                             Name = "Fullerton Hotel",
                             Rating = 5m
@@ -502,7 +502,7 @@ namespace HotelBooking.Server.Migrations
                             Id = 3,
                             Address = "768 Upper Serangoon Rd, Singapore 534636",
                             Amenities = "Game Center, Swimming Pool, Wifi",
-                            Availability = false,
+                            Availability = "false",
                             Description = "Your go-to hotel for awesome rates, comfortable rooms, and accessible locations.",
                             Name = "St 81 Hotel",
                             Rating = 3m
@@ -512,7 +512,7 @@ namespace HotelBooking.Server.Migrations
                             Id = 4,
                             Address = "Desaru Coast, Jln Pantai 3, 81930, Johor, Malaysia",
                             Amenities = "Breakfast, Wifi, Gym",
-                            Availability = true,
+                            Availability = "true",
                             Description = "Your ultimate destination getaway at the leading entertainment hotel in Desaru Coast, Johor, Malaysia.",
                             Name = "Hard Rock Hotel",
                             Rating = 2.5m
@@ -794,8 +794,8 @@ namespace HotelBooking.Server.Migrations
                     b.Property<string>("EmergencyContact")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("OccupancyStatus")
-                        .HasColumnType("bit");
+                    b.Property<string>("OccupancyStatus")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("RoomId")
                         .HasColumnType("int");
@@ -815,7 +815,7 @@ namespace HotelBooking.Server.Migrations
                             BookingId = 1,
                             ComplimentaryServices = "Wi-Fi, Breakfast",
                             EmergencyContact = "12345678",
-                            OccupancyStatus = true,
+                            OccupancyStatus = "true",
                             RoomId = 1
                         },
                         new
@@ -824,7 +824,7 @@ namespace HotelBooking.Server.Migrations
                             BookingId = 2,
                             ComplimentaryServices = "Pool Access, Newspaper",
                             EmergencyContact = "87654321",
-                            OccupancyStatus = false,
+                            OccupancyStatus = "false",
                             RoomId = 2
                         },
                         new
@@ -833,7 +833,7 @@ namespace HotelBooking.Server.Migrations
                             BookingId = 3,
                             ComplimentaryServices = "Gym Access, Parking",
                             EmergencyContact = "55558888",
-                            OccupancyStatus = true,
+                            OccupancyStatus = "true",
                             RoomId = 3
                         },
                         new
@@ -842,7 +842,7 @@ namespace HotelBooking.Server.Migrations
                             BookingId = 4,
                             ComplimentaryServices = "Airport Shuttle",
                             EmergencyContact = "33332222",
-                            OccupancyStatus = false,
+                            OccupancyStatus = "false",
                             RoomId = 4
                         });
                 });

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HotelBooking.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class NewDB : Migration
+    public partial class newDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -104,7 +104,7 @@ namespace HotelBooking.Server.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Amenities = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Rating = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    Availability = table.Column<bool>(type: "bit", nullable: false)
+                    Availability = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -303,7 +303,7 @@ namespace HotelBooking.Server.Migrations
                     CheckOutDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Destination = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NumGuest = table.Column<int>(type: "int", nullable: true),
-                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HotelId = table.Column<int>(type: "int", nullable: false),
                     StaffId = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
@@ -367,7 +367,7 @@ namespace HotelBooking.Server.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     EmergencyContact = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OccupancyStatus = table.Column<bool>(type: "bit", nullable: false),
+                    OccupancyStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ComplimentaryServices = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BookingId = table.Column<int>(type: "int", nullable: true),
                     RoomId = table.Column<int>(type: "int", nullable: true)
@@ -427,7 +427,7 @@ namespace HotelBooking.Server.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "c46c00da-d8e8-4fe9-8897-1d8ce87e2192", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAENp490oXUE5MSOXfQAkkClOE14c1eUNXCdR8Ri8kYS7IJtd4V0w9ZgZB8xPcGzkYEQ==", null, false, "7dc3530e-23d9-4187-afa3-9f1b88021c39", false, "admin@localhost.com" });
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "9d72e8fe-8f9b-4e1a-ad03-af4f1e8f9302", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEHJqQniggBkeFQXrHJY9Gj89z8AE/U+bNXm2jmvv8hTwXGy8hZnA6SVfPyZXWWDa1Q==", null, false, "7bf6b97d-ed15-481a-9883-ed644fa96d53", false, "admin@localhost.com" });
 
             migrationBuilder.InsertData(
                 table: "Customers",
@@ -445,10 +445,10 @@ namespace HotelBooking.Server.Migrations
                 columns: new[] { "Id", "Address", "Amenities", "Availability", "Description", "Name", "Rating" },
                 values: new object[,]
                 {
-                    { 1, "333 Orchard Rd, Mandarin Orchard Singapore", "Breakfast, Wifi, Gym", true, "Hilton Hotels & Resorts is a global brand of full-service hotels and resorts.", "Hilton Hotel", 3.5m },
-                    { 2, "1 Fullerton Square, Singapore 049178", "Breakfast, Gym, Laundry", true, "The Fullerton Hotel Singapore offers 5-star luxury rooms & suites with exceptional services.", "Fullerton Hotel", 5m },
-                    { 3, "768 Upper Serangoon Rd, Singapore 534636", "Game Center, Swimming Pool, Wifi", false, "Your go-to hotel for awesome rates, comfortable rooms, and accessible locations.", "St 81 Hotel", 3m },
-                    { 4, "Desaru Coast, Jln Pantai 3, 81930, Johor, Malaysia", "Breakfast, Wifi, Gym", true, "Your ultimate destination getaway at the leading entertainment hotel in Desaru Coast, Johor, Malaysia.", "Hard Rock Hotel", 2.5m }
+                    { 1, "333 Orchard Rd, Mandarin Orchard Singapore", "Breakfast, Wifi, Gym", "true", "Hilton Hotels & Resorts is a global brand of full-service hotels and resorts.", "Hilton Hotel", 3.5m },
+                    { 2, "1 Fullerton Square, Singapore 049178", "Breakfast, Gym, Laundry", "true", "The Fullerton Hotel Singapore offers 5-star luxury rooms & suites with exceptional services.", "Fullerton Hotel", 5m },
+                    { 3, "768 Upper Serangoon Rd, Singapore 534636", "Game Center, Swimming Pool, Wifi", "false", "Your go-to hotel for awesome rates, comfortable rooms, and accessible locations.", "St 81 Hotel", 3m },
+                    { 4, "Desaru Coast, Jln Pantai 3, 81930, Johor, Malaysia", "Breakfast, Wifi, Gym", "true", "Your ultimate destination getaway at the leading entertainment hotel in Desaru Coast, Johor, Malaysia.", "Hard Rock Hotel", 2.5m }
                 });
 
             migrationBuilder.InsertData(
@@ -483,10 +483,10 @@ namespace HotelBooking.Server.Migrations
                 columns: new[] { "Id", "CheckInDate", "CheckOutDate", "CustomerId", "Destination", "HotelId", "NumGuest", "RoomTypeId", "StaffId", "Status" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "City A", 1, 2, 1, 1, true },
-                    { 2, new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "City B", 2, 1, 2, 2, true },
-                    { 3, new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "City C", 3, 3, 3, 3, false },
-                    { 4, new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "City D", 4, 2, 4, 4, true }
+                    { 1, new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "City A", 1, 2, 1, 1, "true" },
+                    { 2, new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "City B", 2, 1, 2, 2, "true" },
+                    { 3, new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "City C", 3, 3, 3, 3, "false" },
+                    { 4, new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "City D", 4, 2, 4, 4, "true" }
                 });
 
             migrationBuilder.InsertData(
@@ -505,10 +505,10 @@ namespace HotelBooking.Server.Migrations
                 columns: new[] { "Id", "BookingId", "ComplimentaryServices", "EmergencyContact", "OccupancyStatus", "RoomId" },
                 values: new object[,]
                 {
-                    { 1, 1, "Wi-Fi, Breakfast", "12345678", true, 1 },
-                    { 2, 2, "Pool Access, Newspaper", "87654321", false, 2 },
-                    { 3, 3, "Gym Access, Parking", "55558888", true, 3 },
-                    { 4, 4, "Airport Shuttle", "33332222", false, 4 }
+                    { 1, 1, "Wi-Fi, Breakfast", "12345678", "true", 1 },
+                    { 2, 2, "Pool Access, Newspaper", "87654321", "false", 2 },
+                    { 3, 3, "Gym Access, Parking", "55558888", "true", 3 },
+                    { 4, 4, "Airport Shuttle", "33332222", "false", 4 }
                 });
 
             migrationBuilder.InsertData(

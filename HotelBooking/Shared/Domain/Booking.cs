@@ -18,7 +18,7 @@ namespace HotelBooking.Shared.Domain
 
         public int? NumGuest { get; set; }
 
-        public bool Status { get; set; }
+        public string? Status { get; set; }
 
         public int HotelId { get; set; }
 

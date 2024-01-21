@@ -1,0 +1,44 @@
+﻿﻿.main-background {
+    min-height: 100dvh;
+    background-color: #8EB4E5;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    padding-inline: 4rem;
+    padding-block: 3rem;
+}
+
+.form-background {
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    flex-grow: 1;
+    padding-block: 1rem;
+    padding-inline: 2rem;
+}
+
+.left-aligned-button {
+    width: 180px;
+    height: 40px;
+    background-color: #1b6ec2;
+    border-radius: 0.5rem;
+    border: none;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+}
+
+    .left-aligned-button:active {
+        outline: 3px solid #0d6efd;
+        outline-offset: 2px;
+    }
+
+    .left-aligned-button:hover {
+        background-color: #0b5ed7;
+    }
+
+.button-wrapper {
+    display: flex;
+    justify-content: flex-start;
+}

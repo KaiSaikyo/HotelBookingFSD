@@ -22,6 +22,6 @@ namespace HotelBooking.Shared.Domain
         public decimal? Rating { get; set; }
 
         //staff to limit hotel availability for booking
-        public bool Availability { get; set; }
+        public string? Availability { get; set; }
     }
 }
