@@ -5,73 +5,7 @@
 
 <PageTitle>RoomScout.Org - Create Hotels</PageTitle>
 
-<div class="main-background">
-	<div class="form-background">
-		<EditForm Model="@hotel" OnValidSubmit="CreateHotel">
-			<DataAnnotationsValidator />
-			<ValidationSummary />
-
-			<div class="form-group">
-				<label>Name: </label>
-				<div>
-					<InputText @bind-Value="@hotel.Name" class="form-control" />
-					<ValidationMessage For="@(() => hotel.Name)" />
-				</div>
-			</div>
-			<br />
-			<div class="form-group">
-				<label>Address: </label>
-				<div>
-					<InputTextArea @bind-Value="@hotel.Address" class="form-control" />
-					<ValidationMessage For="@(() => hotel.Address)" />
-				</div>
-			</div>
-			<br />
-			<div class="form-group">
-				<label>Description: </label>
-				<div>
-					<InputTextArea @bind-Value="@hotel.Description" class="form-control" />
-					<ValidationMessage For="@(() => hotel.Description)" />
-				</div>
-			</div>
-			<br />
-			<div class="form-group">
-				<label>Amenities: </label>
-				<div>
-					<InputTextArea @bind-Value="@hotel.Amenities" class="form-control" />
-					<ValidationMessage For="@(() => hotel.Amenities)" />
-				</div>
-			</div>
-			<br />
-			<div class="form-group">
-				<label>Rating: </label>
-				<div>
-					<InputNumber @bind-Value="@hotel.Rating" class="form-control" />
-					<ValidationMessage For="@(() => hotel.Rating)" />
-				</div>
-			</div>
-			<br />
-			<div class="form-group">
-				<label>Availability: </label>
-				<div>
-					<InputSelect @bind-Value="@hotel.Availability" class="form-control">
-						<option value="">-- Select Availability --</option>
-						<option value="true">True</option>
-						<option value="false">False</option>
-					</InputSelect>
-					<ValidationMessage For="@(() => hotel.Availability)" />
-				</div>
-			</div>
-			<br />
-			<div class="button-wrapper">
-				<button type="submit" class="left-aligned-button">
-					Create Hotel
-				</button>
-			</div>
-			<BackToList Target="hotel" />
-		</EditForm>
-	</div>
-</div>
+<FormComponent ButtonText="Create Hotel" hotel="hotel" OnValidSubmit="@CreateHotel" />
 
 @code {
 	private Hotel hotel = new Hotel();
