@@ -1,0 +1,21 @@
+﻿@page "/roomtype/edit/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<FormComponent ButtonText="Update Room Type" OnValidSubmit="EditRoomType" roomtype="roomtype" />
+
+@code {
+	[Parameter] public int id { get; set; }
+	RoomType? roomtype = new RoomType();
+
+	protected async override Task OnParametersSetAsync()
+	{
+		roomtype = await _client.GetFromJsonAsync<RoomType>($"{Endpoints.RoomTypesEndpoint}/{id}");
+	}
+
+	async Task EditRoomType()
+	{
+		await _client.PutAsJsonAsync($"{Endpoints.RoomTypesEndpoint}/{id}", roomtype);
+		_navManager.NavigateTo("/roomtype/");
+	}
+}
