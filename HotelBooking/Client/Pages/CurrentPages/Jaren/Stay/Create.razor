@@ -1,4 +1,5 @@
 ﻿@page "/stay/create"
+@using HotelBooking.Client.Components
 @inject HttpClient _client
 @inject NavigationManager _navManager
 
@@ -77,6 +78,7 @@
 					Create Stay
 				</button>
 			</div>
+			<BackToList Target="stay" />
 		</EditForm>
 	</div>
 </div>

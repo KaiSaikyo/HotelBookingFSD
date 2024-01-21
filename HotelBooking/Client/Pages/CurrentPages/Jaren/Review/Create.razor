@@ -1,4 +1,5 @@
 ﻿@page "/review/create"
+@using HotelBooking.Client.Components
 @inject HttpClient _client
 @inject NavigationManager _navManager
 
@@ -73,6 +74,7 @@
 					Create Review
 				</button>
 			</div>
+			<BackToList Target="review" />
 		</EditForm>
 	</div>
 </div>
