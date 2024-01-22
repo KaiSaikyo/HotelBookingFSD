@@ -1,0 +1,11 @@
+﻿.EH-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.EH-value {
+    margin: 0 auto;
+}
