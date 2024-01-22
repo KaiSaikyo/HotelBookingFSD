@@ -2,8 +2,8 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
-@inject HttpInterceptorService _interceptor
 @implements IDisposable
+@inject HttpInterceptorService _interceptor
 
 <PageTitle>RoomScout.Org - Room Types</PageTitle>
 
@@ -20,7 +20,7 @@ else
 			</a>
 		</div>
 		<div class="table-background">
-			<table class="table table-responsive">
+			<table class="table table-responsive" id="typesTable">
 				<thead>
 					<tr>
 						<th style="border-top-left-radius: 0.5rem;">ID</th>
@@ -86,8 +86,14 @@ else
 		}
 	}
 
+	//protected async override Task OnAfterRenderAsync(bool firstRender)
+	//{
+	//	await js.InvokeVoidAsync("AddDataTable", "#typesTable");
+	//}
+
 	public void Dispose()
 	{
+		//js.InvokeVoidAsync("DataTablesDispose", "#typesTable");
 		_interceptor.DisposeEvent();
 	}
 }
