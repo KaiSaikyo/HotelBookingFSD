@@ -75,17 +75,10 @@ else
         if (Stays != null)
         {
             var stay = Stays.First(q => q.Id == stayId);
-
             var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {stay.EmergencyContact}?");
 
             if (confirm)
             {
-                var review = await _client.GetFromJsonAsync<Review>($"{Endpoints.ReviewsEndpoint}/stay/{stayId}");
-                if (review != null)
-                {
-                    await _client.DeleteAsync($"{Endpoints.ReviewsEndpoint}/{review!.Id}");
-                }
-
                 await _client.DeleteAsync($"{Endpoints.StaysEndpoint}/{stayId}");
                 await OnInitializedAsync();
             }

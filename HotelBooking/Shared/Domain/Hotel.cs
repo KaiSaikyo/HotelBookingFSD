@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HotelBooking.Shared.Domain
 {
-    public class Hotel : IValidatableObject
+    public class Hotel 
 	{
         public int Id { get; set; }
 
@@ -35,9 +35,5 @@ namespace HotelBooking.Shared.Domain
 		[RegularExpression(@"^(true|false)$", ErrorMessage = "Availability must be either 'true' or 'false'")]
 		public string? Availability { get; set; }
 
-		public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

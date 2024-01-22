@@ -89,19 +89,6 @@ else
 
             if (confirm)
             {
-                var stay = await _client.GetFromJsonAsync<Stay>($"{Endpoints.StaysEndpoint}/booking/{bookingId}");
-                if (stay != null)
-                {
-                    await _client.DeleteAsync($"{Endpoints.StaysEndpoint}/{stay!.Id}");
-
-                    var review = await _client.GetFromJsonAsync<Review>($"{Endpoints.ReviewsEndpoint}/stay/{stay!.Id}");
-
-                    if (review != null)
-                    {
-                        await _client.DeleteAsync($"{Endpoints.ReviewsEndpoint}/{review!.Id}");
-                    }
-                }
-
                 await _client.DeleteAsync($"{Endpoints.BookingsEndpoint}/{bookingId}");
                 await OnInitializedAsync();
             }
