@@ -24,6 +24,7 @@ table {
 
 td {
     padding: 0.5rem;
+    max-width: 290px;
 }
 
 th {

@@ -27,8 +27,8 @@ else
 						<th>Rating</th>
 						<th>Description</th>
 						<th>Date</th>
-						<th>Customer ID</th>
-						<th>Stay ID</th>
+						<th>Name</th>
+						<th>Complimentary Services</th>
 						<th style="border-top-right-radius: 0.5rem;">Actions</th>
 					</tr>
 				</thead>
@@ -40,8 +40,8 @@ else
 							<td><b>@review.Rating</b></td>
 							<td><b>@review.Description</b></td>
 							<td><b>@review.Date</b></td>
-							<td><b>@review.CustomerId</b></td>
-							<td><b>@review.StayId</b></td>
+							<td><b>@review.Customer.Name</b></td>
+							<td><b>@review.Stay.ComplimentaryServices</b></td>
 
 							<td>
 								<a href="/review/view/@review.Id" class="btn btn-primary">

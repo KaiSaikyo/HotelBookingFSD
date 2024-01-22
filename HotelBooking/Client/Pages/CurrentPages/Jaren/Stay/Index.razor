@@ -26,9 +26,9 @@ else
                         <th style="border-top-left-radius: 0.5rem;">ID</th>
                         <th>Emergency Contact</th>
                         <th>Occupancy Status</th>
-                        <th>Complimentry Services</th>
-                        <th>Booking ID</th>
-                        <th>Room ID</th>
+                        <th>Complimentary Services</th>
+                        <th>Booking Details</th>
+                        <th>Room Number</th>
                         <th style="border-top-right-radius: 0.5rem;">Actions</th>
                     </tr>
                 </thead>
@@ -40,8 +40,8 @@ else
                             <td><b>@stay.EmergencyContact</b></td>
                             <td><b>@stay.OccupancyStatus</b></td>
                             <td><b>@stay.ComplimentaryServices</b></td>
-                            <td><b>@stay.BookingId</b></td>
-                            <td><b>@stay.RoomId</b></td>
+                            <td><b>@stay.Booking.Destination, Check-in: @stay.Booking.CheckInDate - Check-out: @stay.Booking.CheckOutDate</b></td>
+                            <td><b>@stay.Room.Number, Min Stay: @stay.Room.RoomMinStay - Max Stay: @stay.Room.RoomMaxStay</b></td>
 
                             <td>
                                 <a href="/stay/view/@stay.Id" class="btn btn-primary">

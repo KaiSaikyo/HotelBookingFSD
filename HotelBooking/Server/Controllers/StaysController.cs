@@ -34,7 +34,8 @@ namespace HotelBooking.Server.Controllers
         }*/
         public async Task<IActionResult> GetStays()
         {
-            var stays = await _unitOfWork.Stays.GetAll();
+            var stays = await _unitOfWork.Stays.GetAll(
+				includes: q => q.Include(x => x.Booking!).Include(x => x.Room!));
             return Ok(stays);
         }
 

@@ -28,7 +28,7 @@ else
 						<th>Amenities</th>
 						<th>Min Stay</th>
 						<th>Max Stay</th>
-						<th>Room Type ID</th>
+						<th>Price Description</th>
 						<th style="border-top-right-radius: 0.5rem;">Actions</th>
 					</tr>
 				</thead>
@@ -41,7 +41,7 @@ else
 							<td><b>@room.Amenities</b></td>
 							<td><b>@room.RoomMinStay</b></td>
 							<td><b>@room.RoomMaxStay</b></td>
-							<td><b>@room.RoomTypeId</b></td>
+							<td><b>@room.RoomType.Description - $@room.RoomType.Price</b></td>
 
 							<td>
 								<a href="/room/view/@room.Id" class="btn btn-primary">

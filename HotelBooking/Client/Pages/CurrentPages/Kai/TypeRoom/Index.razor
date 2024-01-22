@@ -27,7 +27,7 @@ else
 						<th>Description</th>
 						<th>Size</th>
 						<th>Price</th>
-						<th>Hotel ID</th>
+						<th>Hotel Rating</th>
 						<th style="border-top-right-radius: 0.5rem;">Actions</th>
 					</tr>
 				</thead>
@@ -39,7 +39,7 @@ else
 							<td><b>@roomtype.Description</b></td>
 							<td><b>@roomtype.Size</b></td>
 							<td><b>@roomtype.Price</b></td>
-							<td><b>@roomtype.HotelId</b></td>
+							<td><b>@roomtype.Hotel.Name - @roomtype.Hotel.Rating</b></td>
 
 							<td>
 								<a href="/roomtype/view/@roomtype.Id" class="btn btn-primary">
