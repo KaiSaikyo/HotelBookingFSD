@@ -22,16 +22,7 @@ namespace HotelBooking.Server.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        // GET: api/Bookings
         [HttpGet]
-        /*public async Task<ActionResult<IEnumerable<Booking>>> GetBookings()
-        {
-          if (_context.Bookings == null)
-          {
-              return NotFound();
-          }
-            return await _context.Bookings.ToListAsync();
-        }*/
         public async Task<IActionResult> GetBookings()
         {
             var bookings = await _unitOfWork.Bookings.GetAll(
@@ -39,23 +30,7 @@ namespace HotelBooking.Server.Controllers
             return Ok(bookings);
         }
 
-        // GET: api/Bookings/5
         [HttpGet("{id}")]
-        /*public async Task<ActionResult<Booking>> GetBooking(int id)
-        {
-          if (_context.Bookings == null)
-          {
-              return NotFound();
-          }
-            var booking = await _context.Bookings.FindAsync(id);
-
-            if (booking == null)
-            {
-                return NotFound();
-            }
-
-            return booking;
-        }*/
         public async Task<IActionResult> GetBooking(int id)
         {
             var booking = await _unitOfWork.Bookings.Get(q => q.Id == id);
@@ -68,37 +43,7 @@ namespace HotelBooking.Server.Controllers
             return Ok(booking);
         }
 
-        // PUT: api/Bookings/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        /*public async Task<IActionResult> PutBooking(int id, Booking booking)
-        {
-            if (id != booking.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(booking).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BookingExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }*/
-
         public async Task<IActionResult> PutBooking(int id, Booking booking)
         {
             if (id != booking.Id)
@@ -127,21 +72,7 @@ namespace HotelBooking.Server.Controllers
             return NoContent();
         }
 
-        // POST: api/Bookings
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        /*public async Task<ActionResult<Booking>> PostBooking(Booking booking)
-        {
-          if (_context.Bookings == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.Bookings'  is null.");
-          }
-            _context.Bookings.Add(booking);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetBooking", new { id = booking.Id }, booking);
-        }*/
-
         public async Task<ActionResult<Booking>> PostBooking(Booking booking)
         {
             await _unitOfWork.Bookings.Insert(booking);
@@ -150,31 +81,131 @@ namespace HotelBooking.Server.Controllers
             return CreatedAtAction("GetBooking", new { id = booking.Id }, booking);
         }
 
-        // DELETE: api/Bookings/5
-        [HttpDelete("{id}")]
-        /*public async Task<IActionResult> DeleteBooking(int id)
+        //
+        [HttpGet("hotel/{hotelId:int}")]
+        public async Task<ActionResult<bool>> DoesHotelExistinBooking(int hotelId)
         {
-            if (_context.Bookings == null)
+            var booking = await _unitOfWork.Bookings.Get(q => q.HotelId == hotelId);
+
+            if (booking == null)
             {
-                return NotFound();
+                return Ok(false);
             }
-            var booking = await _context.Bookings.FindAsync(id);
+
+            return Ok(true);
+        }
+
+        [HttpPut("cascade-delete/{hotelId:int}")]
+        public async Task<ActionResult<Booking>> DeleteHotelFromBooking(int hotelId)
+        {
+            var booking = await _unitOfWork.Bookings.Get(q => q.HotelId == hotelId);
+
             if (booking == null)
             {
                 return NotFound();
             }
 
-            _context.Bookings.Remove(booking);
-            await _context.SaveChangesAsync();
+            await _unitOfWork.Stays.Delete(booking.Id);
+            await _unitOfWork.Save(HttpContext);
 
             return NoContent();
         }
+		//
 
-        private bool BookingExists(int id)
-        {
-            return (_context.Bookings?.Any(e => e.Id == id)).GetValueOrDefault();
-        }*/
+		//
+		[HttpGet("roomtype/{roomtypeId:int}")]
+		public async Task<ActionResult<bool>> DoesRoomTypeExistinBooking(int roomtypeId)
+		{
+			var booking = await _unitOfWork.Bookings.Get(q => q.RoomTypeId == roomtypeId);
 
+			if (booking == null)
+			{
+				return Ok(false);
+			}
+
+			return Ok(true);
+		}
+
+		[HttpPut("cascade-delete/{roomtypeId:int}")]
+		public async Task<ActionResult<Booking>> DeleteRoomTypeFromBooking(int roomtypeId)
+		{
+			var booking = await _unitOfWork.Bookings.Get(q => q.RoomTypeId == roomtypeId);
+
+			if (booking == null)
+			{
+				return NotFound();
+			}
+
+			await _unitOfWork.Bookings.Delete(booking.Id);
+			await _unitOfWork.Save(HttpContext);
+
+			return NoContent();
+		}
+		//
+
+		//
+		[HttpGet("customer/{customerId:int}")]
+		public async Task<ActionResult<bool>> DoesCustomerExistinBooking(int customerId)
+		{
+			var booking = await _unitOfWork.Bookings.Get(q => q.CustomerId == customerId);
+
+			if (booking == null)
+			{
+				return Ok(false);
+			}
+
+			return Ok(true);
+		}
+
+		[HttpPut("cascade-delete/{customerId:int}")]
+		public async Task<ActionResult<Booking>> DeleteCustomerFromBooking(int customerId)
+		{
+			var booking = await _unitOfWork.Bookings.Get(q => q.CustomerId == customerId);
+
+			if (booking == null)
+			{
+				return NotFound();
+			}
+
+			await _unitOfWork.Bookings.Delete(booking.Id);
+			await _unitOfWork.Save(HttpContext);
+
+			return NoContent();
+		}
+		//
+
+		//
+		[HttpGet("staff/{staffId:int}")]
+		public async Task<ActionResult<bool>> DoesStaffExistinBooking(int staffId)
+		{
+			var booking = await _unitOfWork.Bookings.Get(q => q.StaffId == staffId);
+
+			if (booking == null)
+			{
+				return Ok(false);
+			}
+
+			return Ok(true);
+		}
+
+		[HttpPut("cascade-delete/{staffId:int}")]
+		public async Task<ActionResult<Booking>> DeleteStaffFromBooking(int staffId)
+		{
+			var booking = await _unitOfWork.Bookings.Get(q => q.StaffId == staffId);
+
+			if (booking == null)
+			{
+				return NotFound();
+			}
+
+			await _unitOfWork.Bookings.Delete(booking.Id);
+			await _unitOfWork.Save(HttpContext);
+
+			return NoContent();
+		}
+		//
+
+		[HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBooking(int id)
         {
             if (_unitOfWork.Bookings == null)
@@ -194,23 +225,6 @@ namespace HotelBooking.Server.Controllers
 
             return NoContent();
         }
-
-        /*[HttpGet("{id:int}")]
-		public async Task<IActionResult> GetStayFromBooking(int id)
-        {
-			var booking = await _unitOfWork.Bookings.GetAll(q => q.Id == id,
-                includes: q => q.Include(x => x.Sta));
-
-			if (booking == null)
-			{
-				return NotFound();
-			}
-
-            var stay = booking.Boo
-
-			return Ok(stay);
-		}*/
-
 
 		private async Task<bool> BookingExists(int id)
         {

@@ -76,12 +76,31 @@ else
 		if (RoomTypes != null)
 		{
 			var roomtype = RoomTypes.First(q => q.Id == roomtypeId);
+
 			var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {roomtype.Description}?");
 
 			if (confirm)
 			{
-				await _client.DeleteAsync($"{Endpoints.RoomTypesEndpoint}/{roomtypeId}");
-				await OnInitializedAsync();
+				var bookingExists = await _client.GetFromJsonAsync<bool>($"{Endpoints.BookingsEndpoint}/roomtype/{roomtypeId}");
+				var roomExists = await _client.GetFromJsonAsync<bool>($"{Endpoints.RoomsEndpoint}/roomtype/{roomtypeId}");
+
+				if (bookingExists || roomExists)
+				{
+					if (bookingExists)
+					{
+						await js.InvokeAsync<bool>("confirm", $"You currently have an existing ID in Bookings.");
+					}
+					if (roomExists)
+					{
+						await js.InvokeAsync<bool>("confirm", $"You currently have an existing ID in Rooms.");
+					}
+					return;
+				}
+				else
+				{
+					await _client.DeleteAsync($"{Endpoints.RoomTypesEndpoint}/{roomtypeId}");
+					await OnInitializedAsync();
+				}
 			}
 		}
 	}

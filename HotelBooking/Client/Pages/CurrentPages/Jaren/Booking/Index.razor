@@ -92,8 +92,17 @@ else
 
             if (confirm)
             {
-                await _client.DeleteAsync($"{Endpoints.BookingsEndpoint}/{bookingId}");
-                await OnInitializedAsync();
+                var stayExists = await _client.GetFromJsonAsync<bool>($"{Endpoints.StaysEndpoint}/booking/{bookingId}");
+                if (stayExists)
+                {
+                    await js.InvokeAsync<bool>("confirm", $"You currently have an existing ID in Stays.");
+                    return;
+                }
+                else
+                {
+                    await _client.DeleteAsync($"{Endpoints.BookingsEndpoint}/{bookingId}");
+                    await OnInitializedAsync();
+                }
             }
         }
     }

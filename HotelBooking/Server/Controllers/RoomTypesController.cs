@@ -22,39 +22,14 @@ namespace HotelBooking.Server.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        // GET: api/RoomTypes
         [HttpGet]
-        /*public async Task<ActionResult<IEnumerable<RoomType>>> GetRoomTypes()
-        {
-          if (_context.RoomTypes == null)
-          {
-              return NotFound();
-          }
-            return await _context.RoomTypes.ToListAsync();
-        }*/
         public async Task<IActionResult> GetRoomTypes()
         {
             var roomtypes = await _unitOfWork.RoomTypes.GetAll(includes: q => q.Include(x => x.Hotel!));
             return Ok(roomtypes);
         }
 
-        // GET: api/RoomTypes/5
         [HttpGet("{id}")]
-        /*public async Task<ActionResult<RoomType>> GetRoomType(int id)
-        {
-          if (_context.RoomTypes == null)
-          {
-              return NotFound();
-          }
-            var roomtype = await _context.RoomTypes.FindAsync(id);
-
-            if (roomtype == null)
-            {
-                return NotFound();
-            }
-
-            return roomtype;
-        }*/
         public async Task<IActionResult> GetRoomType(int id)
         {
             var roomtype = await _unitOfWork.RoomTypes.Get(q => q.Id == id);
@@ -67,37 +42,7 @@ namespace HotelBooking.Server.Controllers
             return Ok(roomtype);
         }
 
-        // PUT: api/RoomTypes/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        /*public async Task<IActionResult> PutRoomType(int id, RoomType roomtype)
-        {
-            if (id != roomtype.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(roomtype).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!RoomTypeExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }*/
-
         public async Task<IActionResult> PutRoomType(int id, RoomType roomtype)
         {
             if (id != roomtype.Id)
@@ -126,21 +71,7 @@ namespace HotelBooking.Server.Controllers
             return NoContent();
         }
 
-        // POST: api/RoomTypes
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        /*public async Task<ActionResult<RoomType>> PostRoomType(RoomType roomtype)
-        {
-          if (_context.RoomTypes == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.RoomTypes'  is null.");
-          }
-            _context.RoomTypes.Add(roomtype);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetRoomType", new { id = roomtype.Id }, roomtype);
-        }*/
-
         public async Task<ActionResult<RoomType>> PostRoomType(RoomType roomtype)
         {
             await _unitOfWork.RoomTypes.Insert(roomtype);
@@ -149,31 +80,38 @@ namespace HotelBooking.Server.Controllers
             return CreatedAtAction("GetRoomType", new { id = roomtype.Id }, roomtype);
         }
 
-        // DELETE: api/RoomTypes/5
-        [HttpDelete("{id}")]
-        /*public async Task<IActionResult> DeleteRoomType(int id)
-        {
-            if (_context.RoomTypes == null)
-            {
-                return NotFound();
-            }
-            var roomtype = await _context.RoomTypes.FindAsync(id);
-            if (roomtype == null)
-            {
-                return NotFound();
-            }
+		//
+		[HttpGet("hotel/{hotelId:int}")]
+		public async Task<ActionResult<bool>> DoesHotelExistinRoomType(int hotelId)
+		{
+			var roomtype = await _unitOfWork.RoomTypes.Get(q => q.HotelId == hotelId);
 
-            _context.RoomTypes.Remove(roomtype);
-            await _context.SaveChangesAsync();
+			if (roomtype == null)
+			{
+				return Ok(false);
+			}
 
-            return NoContent();
-        }
+			return Ok(true);
+		}
 
-        private bool RoomTypeExists(int id)
-        {
-            return (_context.RoomTypes?.Any(e => e.Id == id)).GetValueOrDefault();
-        }*/
+		[HttpPut("cascade-delete/{hotelId:int}")]
+		public async Task<ActionResult<RoomType>> DeleteHotelFromRoomType(int hotelId)
+		{
+			var roomtype = await _unitOfWork.RoomTypes.Get(q => q.HotelId == hotelId);
 
+			if (roomtype == null)
+			{
+				return NotFound();
+			}
+
+			await _unitOfWork.Stays.Delete(roomtype.Id);
+			await _unitOfWork.Save(HttpContext);
+
+			return NoContent();
+		}
+		//
+
+		[HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRoomType(int id)
         {
             if (_unitOfWork.RoomTypes == null)

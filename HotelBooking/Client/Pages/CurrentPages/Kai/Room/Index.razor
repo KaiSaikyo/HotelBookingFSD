@@ -78,12 +78,22 @@ else
 		if (Rooms != null)
 		{
 			var room = Rooms.First(q => q.Id == roomId);
+
 			var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {room.Number}?");
 
 			if (confirm)
 			{
-				await _client.DeleteAsync($"{Endpoints.RoomsEndpoint}/{roomId}");
-				await OnInitializedAsync();
+				var stayExists = await _client.GetFromJsonAsync<bool>($"{Endpoints.StaysEndpoint}/room/{roomId}");
+				if (stayExists)
+				{
+					await js.InvokeAsync<bool>("confirm", $"You currently have an existing ID in Stays.");
+					return;
+				}
+				else
+				{
+					await _client.DeleteAsync($"{Endpoints.RoomsEndpoint}/{roomId}");
+					await OnInitializedAsync();
+				}
 			}
 		}
 	}
