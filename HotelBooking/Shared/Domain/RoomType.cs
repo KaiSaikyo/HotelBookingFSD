@@ -23,6 +23,7 @@ namespace HotelBooking.Shared.Domain
 		[Range(0, 9999.99)]
 		public decimal? Price { get; set; }
 
+		[Required]
 		public int? HotelId { get; set; }
 
         public virtual Hotel? Hotel { get; set; }
