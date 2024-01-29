@@ -238,7 +238,7 @@ namespace HotelBooking.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a33c744e-5315-4d68-ac48-a7f2cc6384c7",
+                            ConcurrencyStamp = "195ef76f-a514-4361-9909-76aadff41c11",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -246,9 +246,9 @@ namespace HotelBooking.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEN0k4SABTnYeAtm8kr1pX1vKmrhbZtbUEro9E/kH9mt6JgcOmJ6wI0slksoSg4FNew==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDzRU3R4SmqO0TTnjNIV1wORPSQKUSlQcFw4A5WCjTqezHQi94Z/qf4jKIrshJ50Hw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1eaba735-4b67-4c0c-85b3-ab0778575ffe",
+                            SecurityStamp = "26d1e76b-0b39-4afa-9d97-2edcec4f3e64",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -270,7 +270,7 @@ namespace HotelBooking.Server.Migrations
                         .IsRequired()
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<string>("Destination")
@@ -278,7 +278,7 @@ namespace HotelBooking.Server.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<int>("HotelId")
+                    b.Property<int?>("HotelId")
                         .HasColumnType("int");
 
                     b.Property<int?>("NumGuest")
@@ -288,7 +288,7 @@ namespace HotelBooking.Server.Migrations
                     b.Property<int?>("RoomTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("StaffId")
+                    b.Property<int?>("StaffId")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
@@ -551,7 +551,6 @@ namespace HotelBooking.Server.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("CustomerId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("Date")
@@ -642,7 +641,7 @@ namespace HotelBooking.Server.Migrations
                         .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("RoomTypeId")
+                    b.Property<int?>("RoomTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -703,7 +702,7 @@ namespace HotelBooking.Server.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<int>("HotelId")
+                    b.Property<int?>("HotelId")
                         .HasColumnType("int");
 
                     b.Property<decimal?>("Price")
@@ -1055,15 +1054,11 @@ namespace HotelBooking.Server.Migrations
                 {
                     b.HasOne("HotelBooking.Shared.Domain.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
                     b.HasOne("HotelBooking.Shared.Domain.Hotel", "Hotel")
                         .WithMany()
-                        .HasForeignKey("HotelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("HotelId");
 
                     b.HasOne("HotelBooking.Shared.Domain.RoomType", "RoomType")
                         .WithMany()
@@ -1071,9 +1066,7 @@ namespace HotelBooking.Server.Migrations
 
                     b.HasOne("HotelBooking.Shared.Domain.Staff", "Staff")
                         .WithMany()
-                        .HasForeignKey("StaffId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StaffId");
 
                     b.Navigation("Customer");
 
@@ -1088,9 +1081,7 @@ namespace HotelBooking.Server.Migrations
                 {
                     b.HasOne("HotelBooking.Shared.Domain.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
                     b.HasOne("HotelBooking.Shared.Domain.Stay", "Stay")
                         .WithMany()
@@ -1105,9 +1096,7 @@ namespace HotelBooking.Server.Migrations
                 {
                     b.HasOne("HotelBooking.Shared.Domain.RoomType", "RoomType")
                         .WithMany()
-                        .HasForeignKey("RoomTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RoomTypeId");
 
                     b.Navigation("RoomType");
                 });
@@ -1116,9 +1105,7 @@ namespace HotelBooking.Server.Migrations
                 {
                     b.HasOne("HotelBooking.Shared.Domain.Hotel", "Hotel")
                         .WithMany()
-                        .HasForeignKey("HotelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("HotelId");
 
                     b.Navigation("Hotel");
                 });

@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HotelBooking.Shared.Domain
 {
-    public class Staff : IValidatableObject
+    public class Staff
     {
         public int Id { get; set; }
 		
@@ -29,9 +29,5 @@ namespace HotelBooking.Shared.Domain
 		[RegularExpression(@"\d{8}", ErrorMessage = "Contact Number must be 8 digits")]
 		public string? Mobile { get; set; }
 
-		public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

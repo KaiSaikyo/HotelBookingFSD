@@ -2,6 +2,8 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
+@implements IDisposable
+@inject HttpInterceptorService _interceptor
 
 <PageTitle>RoomScout.Org - Room Types</PageTitle>
 
@@ -18,14 +20,14 @@ else
 			</a>
 		</div>
 		<div class="table-background">
-			<table class="table table-responsive">
+			<table class="table table-responsive" id="typesTable">
 				<thead>
 					<tr>
 						<th style="border-top-left-radius: 0.5rem;">ID</th>
 						<th>Description</th>
 						<th>Size</th>
 						<th>Price</th>
-						<th>Hotel ID</th>
+						<th>Hotel Rating</th>
 						<th style="border-top-right-radius: 0.5rem;">Actions</th>
 					</tr>
 				</thead>
@@ -37,7 +39,7 @@ else
 							<td><b>@roomtype.Description</b></td>
 							<td><b>@roomtype.Size</b></td>
 							<td><b>@roomtype.Price</b></td>
-							<td><b>@roomtype.HotelId</b></td>
+							<td><b>@roomtype.Hotel.Name - @roomtype.Hotel.Rating</b></td>
 
 							<td>
 								<a href="/roomtype/view/@roomtype.Id" class="btn btn-primary">
@@ -65,6 +67,7 @@ else
 
 	protected async override Task OnInitializedAsync()
 	{
+		_interceptor.MonitorEvent();
 		RoomTypes = await _client.GetFromJsonAsync<List<RoomType>>($"{Endpoints.RoomTypesEndpoint}");
 	}
 
@@ -73,13 +76,43 @@ else
 		if (RoomTypes != null)
 		{
 			var roomtype = RoomTypes.First(q => q.Id == roomtypeId);
+
 			var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {roomtype.Description}?");
 
 			if (confirm)
 			{
-				await _client.DeleteAsync($"{Endpoints.RoomTypesEndpoint}/{roomtypeId}");
-				await OnInitializedAsync();
+				var bookingExists = await _client.GetFromJsonAsync<bool>($"{Endpoints.BookingsEndpoint}/roomtype/{roomtypeId}");
+				var roomExists = await _client.GetFromJsonAsync<bool>($"{Endpoints.RoomsEndpoint}/roomtype/{roomtypeId}");
+
+				if (bookingExists || roomExists)
+				{
+					if (bookingExists)
+					{
+						await js.InvokeAsync<bool>("confirm", $"You currently have an existing ID in Bookings.");
+					}
+					if (roomExists)
+					{
+						await js.InvokeAsync<bool>("confirm", $"You currently have an existing ID in Rooms.");
+					}
+					return;
+				}
+				else
+				{
+					await _client.DeleteAsync($"{Endpoints.RoomTypesEndpoint}/{roomtypeId}");
+					await OnInitializedAsync();
+				}
 			}
 		}
+	}
+
+	//protected async override Task OnAfterRenderAsync(bool firstRender)
+	//{
+	//	await js.InvokeVoidAsync("AddDataTable", "#typesTable");
+	//}
+
+	public void Dispose()
+	{
+		//js.InvokeVoidAsync("DataTablesDispose", "#typesTable");
+		_interceptor.DisposeEvent();
 	}
 }

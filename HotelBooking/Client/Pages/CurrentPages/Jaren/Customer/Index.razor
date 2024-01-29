@@ -2,6 +2,8 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
+@inject HttpInterceptorService _interceptor
+@implements IDisposable
 
 <PageTitle>RoomScout.Org - Customers</PageTitle>
 
@@ -73,6 +75,7 @@ else
 
 	protected async override Task OnInitializedAsync()
 	{
+		_interceptor.MonitorEvent();
 		Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
 	}
 
@@ -81,13 +84,37 @@ else
 		if (Customers != null)
 		{
 			var customer = Customers.First(q => q.Id == customerId);
+		
 			var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {customer.Name}?");
 
 			if (confirm)
 			{
-				await _client.DeleteAsync($"{Endpoints.CustomersEndpoint}/{customerId}");
-				await OnInitializedAsync();
+				var bookingExists = await _client.GetFromJsonAsync<bool>($"{Endpoints.BookingsEndpoint}/customer/{customerId}");
+				var reviewExists = await _client.GetFromJsonAsync<bool>($"{Endpoints.ReviewsEndpoint}/customer/{customerId}");
+
+				if (bookingExists || reviewExists)
+				{
+					if (bookingExists)
+					{
+						await js.InvokeAsync<bool>("confirm", $"You currently have an existing ID in Bookings.");
+					}
+					if (reviewExists)
+					{
+						await js.InvokeAsync<bool>("confirm", $"You currently have an existing ID in Reviews.");
+					}
+					return;
+				}
+				else
+				{
+					await _client.DeleteAsync($"{Endpoints.CustomersEndpoint}/{customerId}");
+					await OnInitializedAsync();
+				}
 			}
 		}
+	}
+
+	public void Dispose()
+	{
+		_interceptor.DisposeEvent();
 	}
 }

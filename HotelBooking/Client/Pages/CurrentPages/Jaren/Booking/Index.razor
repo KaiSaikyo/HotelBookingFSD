@@ -2,6 +2,8 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
+@inject HttpInterceptorService _interceptor
+@implements IDisposable
 
 <PageTitle>RoomScout.Org - Bookings</PageTitle>
 
@@ -26,12 +28,12 @@ else
                         <th>Check-in</th>
                         <th>Check-out</th>
                         <th>Destination</th>
-                        <th>No. of Guest</th>
+                        <th>Guest No.</th>
                         <th>Status</th>
-                        <th>Hotel ID</th>
-                        <th>Room Type ID</th>
-                        <th>Staff ID</th>
-                        <th>Customer ID</th>
+                        <th>Hotel Rating</th>
+                        <th>Price Description</th>
+                        <th>Staff Name</th>
+                        <th>Customer Name</th>
                         <th style="border-top-right-radius: 0.5rem;">Actions</th>
                     </tr>
                 </thead>
@@ -45,10 +47,10 @@ else
                             <td><b>@booking.Destination</b></td>
                             <td><b>@booking.NumGuest</b></td>
                             <td><b>@booking.Status</b></td>
-                            <td><b>@booking.HotelId</b></td>
-                            <td><b>@booking.RoomTypeId</b></td>
-                            <td><b>@booking.StaffId</b></td>
-                            <td><b>@booking.CustomerId</b></td>
+                            <td><b>@booking.Hotel.Name - @booking.Hotel.Rating</b></td>
+                            <td><b>@booking.RoomType.Description - $@booking.RoomType.Price</b></td>
+                            <td><b>@booking.Staff.Name</b></td>
+                            <td><b>@booking.Customer.Name</b></td>
 
                             <td>
                                 <a href="/booking/view/@booking.Id" class="btn btn-primary">
@@ -76,6 +78,7 @@ else
 
     protected async override Task OnInitializedAsync()
     {
+        _interceptor.MonitorEvent();
         Bookings = await _client.GetFromJsonAsync<List<Booking>>($"{Endpoints.BookingsEndpoint}");
     }
 
@@ -89,22 +92,23 @@ else
 
             if (confirm)
             {
-                var stay = await _client.GetFromJsonAsync<Stay>($"{Endpoints.StaysEndpoint}/booking/{bookingId}");
-                if (stay != null)
+                var stayExists = await _client.GetFromJsonAsync<bool>($"{Endpoints.StaysEndpoint}/booking/{bookingId}");
+                if (stayExists)
                 {
-                    await _client.DeleteAsync($"{Endpoints.StaysEndpoint}/{stay!.Id}");
-
-                    var review = await _client.GetFromJsonAsync<Review>($"{Endpoints.ReviewsEndpoint}/stay/{stay!.Id}");
-
-                    if (review != null)
-                    {
-                        await _client.DeleteAsync($"{Endpoints.ReviewsEndpoint}/{review!.Id}");
-                    }
+                    await js.InvokeAsync<bool>("confirm", $"You currently have an existing ID in Stays.");
+                    return;
                 }
-
-                await _client.DeleteAsync($"{Endpoints.BookingsEndpoint}/{bookingId}");
-                await OnInitializedAsync();
+                else
+                {
+                    await _client.DeleteAsync($"{Endpoints.BookingsEndpoint}/{bookingId}");
+                    await OnInitializedAsync();
+                }
             }
         }
+    }
+
+    public void Dispose()
+    {
+        _interceptor.DisposeEvent();
     }
 }

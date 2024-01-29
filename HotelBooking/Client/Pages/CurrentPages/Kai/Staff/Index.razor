@@ -1,7 +1,9 @@
-﻿@page "/staff"
+﻿@page "/staff/"
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
+@inject HttpInterceptorService _interceptor
+@implements IDisposable
 
 <PageTitle>RoomScout.Org - Staffs</PageTitle>
 
@@ -65,6 +67,7 @@ else
 
 	protected async override Task OnInitializedAsync()
 	{
+		_interceptor.MonitorEvent();
 		Staffs = await _client.GetFromJsonAsync<List<Staff>>($"{Endpoints.StaffsEndpoint}");
 	}
 
@@ -77,9 +80,23 @@ else
 
 			if (confirm)
 			{
-				await _client.DeleteAsync($"{Endpoints.StaffsEndpoint}/{staffId}");
-				await OnInitializedAsync();
+				var bookingExists = await _client.GetFromJsonAsync<bool>($"{Endpoints.BookingsEndpoint}/staff/{staffId}");
+				if (bookingExists)
+				{
+					await js.InvokeAsync<bool>("confirm", $"You currently have an existing ID in Bookings.");
+					return;
+				}
+				else
+				{
+					await _client.DeleteAsync($"{Endpoints.StaffsEndpoint}/{staffId}");
+					await OnInitializedAsync();
+				}
 			}
 		}
+	}
+
+	public void Dispose()
+	{
+		_interceptor.DisposeEvent();
 	}
 }

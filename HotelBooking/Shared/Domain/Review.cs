@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HotelBooking.Shared.Domain
 {
-	public class Review : IValidatableObject
+	public class Review
 	{
 		public int Id { get; set; }
 
@@ -27,12 +27,9 @@ namespace HotelBooking.Shared.Domain
 		public int? CustomerId { get; set; }
 		public virtual Customer? Customer { get; set; }
 
+		[Required]
 		public int? StayId { get; set; }
 		public virtual Stay? Stay { get; set; }
 
-		public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

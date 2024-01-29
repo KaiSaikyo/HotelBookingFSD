@@ -2,6 +2,8 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
+@inject HttpInterceptorService _interceptor
+@implements IDisposable
 
 <PageTitle>RoomScout.Org - Rooms</PageTitle>
 
@@ -26,7 +28,7 @@ else
 						<th>Amenities</th>
 						<th>Min Stay</th>
 						<th>Max Stay</th>
-						<th>Room Type ID</th>
+						<th>Price Description</th>
 						<th style="border-top-right-radius: 0.5rem;">Actions</th>
 					</tr>
 				</thead>
@@ -39,7 +41,7 @@ else
 							<td><b>@room.Amenities</b></td>
 							<td><b>@room.RoomMinStay</b></td>
 							<td><b>@room.RoomMaxStay</b></td>
-							<td><b>@room.RoomTypeId</b></td>
+							<td><b>@room.RoomType.Description - $@room.RoomType.Price</b></td>
 
 							<td>
 								<a href="/room/view/@room.Id" class="btn btn-primary">
@@ -67,6 +69,7 @@ else
 
 	protected async override Task OnInitializedAsync()
 	{
+		_interceptor.MonitorEvent();
 		Rooms = await _client.GetFromJsonAsync<List<Room>>($"{Endpoints.RoomsEndpoint}");
 	}
 
@@ -75,26 +78,28 @@ else
 		if (Rooms != null)
 		{
 			var room = Rooms.First(q => q.Id == roomId);
+
 			var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {room.Number}?");
 
 			if (confirm)
 			{
-				var stay = await _client.GetFromJsonAsync<Stay>($"{Endpoints.StaysEndpoint}/room/{roomId}");
-				if (stay != null)
+				var stayExists = await _client.GetFromJsonAsync<bool>($"{Endpoints.StaysEndpoint}/room/{roomId}");
+				if (stayExists)
 				{
-					await _client.DeleteAsync($"{Endpoints.StaysEndpoint}/{stay!.Id}");
-
-					var review = await _client.GetFromJsonAsync<Review>($"{Endpoints.ReviewsEndpoint}/stay/{stay!.Id}");
-
-					if (review != null)
-					{
-						await _client.DeleteAsync($"{Endpoints.ReviewsEndpoint}/{review!.Id}");
-					}
+					await js.InvokeAsync<bool>("confirm", $"You currently have an existing ID in Stays.");
+					return;
 				}
-
-				await _client.DeleteAsync($"{Endpoints.RoomsEndpoint}/{roomId}");
-				await OnInitializedAsync();
+				else
+				{
+					await _client.DeleteAsync($"{Endpoints.RoomsEndpoint}/{roomId}");
+					await OnInitializedAsync();
+				}
 			}
 		}
+	}
+
+	public void Dispose()
+	{
+		_interceptor.DisposeEvent();
 	}
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HotelBooking.Shared.Domain
 {
-	public class Stay : IValidatableObject
+	public class Stay
 	{
 		public int Id { get; set; }
 
@@ -24,15 +24,13 @@ namespace HotelBooking.Shared.Domain
 		[StringLength(500, MinimumLength = 3, ErrorMessage = "Complimentry Services does not meet length requirements")]
 		public string? ComplimentaryServices { get; set; }
 
+		[Required]
 		public int? BookingId { get; set; }
 		public virtual Booking? Booking { get; set; }
 
+		[Required]
 		public int? RoomId { get; set; }
 		public virtual Room? Room { get; set; }
 
-		public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

@@ -2,6 +2,8 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
+@inject HttpInterceptorService _interceptor
+@implements IDisposable
 
 <PageTitle>RoomScout.Org - Stays</PageTitle>
 
@@ -24,9 +26,9 @@ else
                         <th style="border-top-left-radius: 0.5rem;">ID</th>
                         <th>Emergency Contact</th>
                         <th>Occupancy Status</th>
-                        <th>Complimentry Services</th>
-                        <th>Booking ID</th>
-                        <th>Room ID</th>
+                        <th>Complimentary Services</th>
+                        <th>Booking Details</th>
+                        <th>Room Number</th>
                         <th style="border-top-right-radius: 0.5rem;">Actions</th>
                     </tr>
                 </thead>
@@ -38,8 +40,8 @@ else
                             <td><b>@stay.EmergencyContact</b></td>
                             <td><b>@stay.OccupancyStatus</b></td>
                             <td><b>@stay.ComplimentaryServices</b></td>
-                            <td><b>@stay.BookingId</b></td>
-                            <td><b>@stay.RoomId</b></td>
+                            <td><b>@stay.Booking.Destination, Check-in: @stay.Booking.CheckInDate - Check-out: @stay.Booking.CheckOutDate</b></td>
+                            <td><b>@stay.Room.Number, Min Stay: @stay.Room.RoomMinStay - Max Stay: @stay.Room.RoomMaxStay</b></td>
 
                             <td>
                                 <a href="/stay/view/@stay.Id" class="btn btn-primary">
@@ -67,6 +69,7 @@ else
 
     protected async override Task OnInitializedAsync()
     {
+        _interceptor.MonitorEvent();
         Stays = await _client.GetFromJsonAsync<List<Stay>>($"{Endpoints.StaysEndpoint}");
     }
 
@@ -80,15 +83,23 @@ else
 
             if (confirm)
             {
-                var review = await _client.GetFromJsonAsync<Review>($"{Endpoints.ReviewsEndpoint}/stay/{stayId}");
-                if (review != null)
+                var reviewExists = await _client.GetFromJsonAsync<bool>($"{Endpoints.ReviewsEndpoint}/stay/{stayId}");
+                if (reviewExists)
                 {
-                    await _client.DeleteAsync($"{Endpoints.ReviewsEndpoint}/{review!.Id}");
+                    await js.InvokeAsync<bool>("confirm", $"You currently have an existing ID in Reviews.");
+                    return;
                 }
-
-                await _client.DeleteAsync($"{Endpoints.StaysEndpoint}/{stayId}");
-                await OnInitializedAsync();
+                else
+                {
+                    await _client.DeleteAsync($"{Endpoints.StaysEndpoint}/{stayId}");
+                    await OnInitializedAsync();
+                }
             }
         }
+    }
+
+    public void Dispose()
+    {
+        _interceptor.DisposeEvent();
     }
 }
