@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooking.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240129191041_NewDB")]
-    partial class NewDB
+    [Migration("20240130170046_Newdb")]
+    partial class Newdb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -241,7 +241,7 @@ namespace HotelBooking.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "195ef76f-a514-4361-9909-76aadff41c11",
+                            ConcurrencyStamp = "48c77995-b207-4ec3-9b08-cd7b3eceafef",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -249,9 +249,9 @@ namespace HotelBooking.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDzRU3R4SmqO0TTnjNIV1wORPSQKUSlQcFw4A5WCjTqezHQi94Z/qf4jKIrshJ50Hw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFzDcifIBVrbS71RdYw3E2L6vgmqeUVDJCUCTdl/Yga6gtn2o7nj0qOMa/zSxkVJWw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "26d1e76b-0b39-4afa-9d97-2edcec4f3e64",
+                            SecurityStamp = "f70398f3-93e3-478f-831d-a32864536e03",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -488,6 +488,9 @@ namespace HotelBooking.Server.Migrations
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()

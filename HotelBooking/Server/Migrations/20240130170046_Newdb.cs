@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HotelBooking.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class NewDB : Migration
+    public partial class Newdb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -104,7 +104,8 @@ namespace HotelBooking.Server.Migrations
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Amenities = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Rating = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Availability = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Availability = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -421,7 +422,7 @@ namespace HotelBooking.Server.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "195ef76f-a514-4361-9909-76aadff41c11", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEDzRU3R4SmqO0TTnjNIV1wORPSQKUSlQcFw4A5WCjTqezHQi94Z/qf4jKIrshJ50Hw==", null, false, "26d1e76b-0b39-4afa-9d97-2edcec4f3e64", false, "admin@localhost.com" });
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "48c77995-b207-4ec3-9b08-cd7b3eceafef", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEFzDcifIBVrbS71RdYw3E2L6vgmqeUVDJCUCTdl/Yga6gtn2o7nj0qOMa/zSxkVJWw==", null, false, "f70398f3-93e3-478f-831d-a32864536e03", false, "admin@localhost.com" });
 
             migrationBuilder.InsertData(
                 table: "Customers",
@@ -436,13 +437,13 @@ namespace HotelBooking.Server.Migrations
 
             migrationBuilder.InsertData(
                 table: "Hotels",
-                columns: new[] { "Id", "Address", "Amenities", "Availability", "Description", "Name", "Rating" },
+                columns: new[] { "Id", "Address", "Amenities", "Availability", "Description", "ImagePath", "Name", "Rating" },
                 values: new object[,]
                 {
-                    { 1, "333 Orchard Rd, Mandarin Orchard Singapore", "Breakfast, Wifi, Gym", "true", "Hilton Hotels & Resorts is a global brand of full-service hotels and resorts.", "Hilton Hotel", 3.5m },
-                    { 2, "1 Fullerton Square, Singapore 049178", "Breakfast, Gym, Laundry", "true", "The Fullerton Hotel Singapore offers 5-star luxury rooms & suites with exceptional services.", "Fullerton Hotel", 5m },
-                    { 3, "768 Upper Serangoon Rd, Singapore 534636", "Game Center, Swimming Pool, Wifi", "false", "Your go-to hotel for awesome rates, comfortable rooms, and accessible locations.", "St 81 Hotel", 3m },
-                    { 4, "Desaru Coast, Jln Pantai 3, 81930, Johor, Malaysia", "Breakfast, Wifi, Gym", "true", "Your ultimate destination getaway at the leading entertainment hotel in Desaru Coast, Johor, Malaysia.", "Hard Rock Hotel", 2.5m }
+                    { 1, "333 Orchard Rd, Mandarin Orchard Singapore", "Breakfast, Wifi, Gym", "true", "Hilton Hotels & Resorts is a global brand of full-service hotels and resorts.", null, "Hilton Hotel", 3.5m },
+                    { 2, "1 Fullerton Square, Singapore 049178", "Breakfast, Gym, Laundry", "true", "The Fullerton Hotel Singapore offers 5-star luxury rooms & suites with exceptional services.", null, "Fullerton Hotel", 5m },
+                    { 3, "768 Upper Serangoon Rd, Singapore 534636", "Game Center, Swimming Pool, Wifi", "false", "Your go-to hotel for awesome rates, comfortable rooms, and accessible locations.", null, "St 81 Hotel", 3m },
+                    { 4, "Desaru Coast, Jln Pantai 3, 81930, Johor, Malaysia", "Breakfast, Wifi, Gym", "true", "Your ultimate destination getaway at the leading entertainment hotel in Desaru Coast, Johor, Malaysia.", null, "Hard Rock Hotel", 2.5m }
                 });
 
             migrationBuilder.InsertData(

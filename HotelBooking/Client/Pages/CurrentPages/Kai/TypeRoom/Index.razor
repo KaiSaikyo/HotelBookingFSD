@@ -105,14 +105,14 @@ else
 		}
 	}
 
-	//protected async override Task OnAfterRenderAsync(bool firstRender)
-	//{
-	//	await js.InvokeVoidAsync("AddDataTable", "#typesTable");
-	//}
+	protected async override Task OnAfterRenderAsync(bool firstRender)
+	{
+		await js.InvokeVoidAsync("AddDataTable", "#typesTable");
+	}
 
 	public void Dispose()
 	{
-		//js.InvokeVoidAsync("DataTablesDispose", "#typesTable");
+		js.InvokeVoidAsync("DataTablesDispose", "#typesTable");
 		_interceptor.DisposeEvent();
 	}
 }

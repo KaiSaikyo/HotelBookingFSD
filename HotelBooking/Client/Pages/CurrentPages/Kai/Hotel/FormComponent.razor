@@ -6,8 +6,16 @@
 		<EditForm Model="@hotel" OnValidSubmit="@OnValidSubmit">
 			<DataAnnotationsValidator />
 			<ValidationSummary />
-
+				
 			<fieldset disabled="@Disabled">
+
+				<div class="form-group">
+					<label>Upload Image: </label>
+					<div>
+						<InputFile OnChange="HandleFileUpload" class="form-control" />
+					</div>
+				</div>
+				<br />
 				<div class="form-group">
 					<label>Name: </label>
 					<div>
@@ -80,4 +88,31 @@
 	[Parameter] public string ButtonText { get; set; } = "Save";
 	[Parameter] public EventCallback OnValidSubmit { get; set; }
 	[Parameter] public bool Disabled { get; set; } = false;
+
+	private async Task HandleFileUpload(InputFileChangeEventArgs e)
+	{
+		var file = e.File;
+
+		if (file != null)
+		{
+			// Use the original file name
+			var fileName = Path.GetFileName(file.Name);
+
+			var uploadDir = Path.Combine("css", "img", "hotel");
+
+			if (!Directory.Exists(uploadDir))
+			{
+				Directory.CreateDirectory(uploadDir);
+			}
+
+			var filePath = Path.Combine(uploadDir, fileName);
+
+			using (var fileStream = new FileStream(filePath, FileMode.Create))
+			{
+				await file.OpenReadStream().CopyToAsync(fileStream);
+			}
+
+			hotel.ImagePath = filePath;
+		}
+	}
 }

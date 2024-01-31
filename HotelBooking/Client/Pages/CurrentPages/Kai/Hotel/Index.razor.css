@@ -64,3 +64,9 @@ thead {
     justify-content: flex-end;
     padding-bottom: 1.5rem;
 }
+
+.scaled-image {
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+}
