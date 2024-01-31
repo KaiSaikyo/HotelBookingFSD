@@ -65,3 +65,7 @@ thead {
     justify-content: flex-end;
     padding-bottom: 1.5rem;
 }
+
+.btn {
+    padding: 0.200rem 0.45rem 0.200rem 0.55rem;
+}
