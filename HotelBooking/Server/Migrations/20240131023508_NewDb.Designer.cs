@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooking.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240130170046_Newdb")]
-    partial class Newdb
+    [Migration("20240131023508_NewDb")]
+    partial class NewDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -241,7 +241,7 @@ namespace HotelBooking.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "48c77995-b207-4ec3-9b08-cd7b3eceafef",
+                            ConcurrencyStamp = "43ceba8d-eb93-47cc-af63-466ad4340e6f",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -249,9 +249,9 @@ namespace HotelBooking.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFzDcifIBVrbS71RdYw3E2L6vgmqeUVDJCUCTdl/Yga6gtn2o7nj0qOMa/zSxkVJWw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPF36ow/8fMqaAJgPOeO8k7W74WNgaK6uix/ezlffcSEFInyScSHQb8Li5I6cWMJlw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f70398f3-93e3-478f-831d-a32864536e03",
+                            SecurityStamp = "a1ada88e-e55c-4e5f-bc75-ac03735555bf",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -513,6 +513,7 @@ namespace HotelBooking.Server.Migrations
                             Amenities = "Breakfast, Wifi, Gym",
                             Availability = "true",
                             Description = "Hilton Hotels & Resorts is a global brand of full-service hotels and resorts.",
+                            ImagePath = "css/img/hotel/hilton_hotel.jpg",
                             Name = "Hilton Hotel",
                             Rating = 3.5m
                         },
@@ -523,6 +524,7 @@ namespace HotelBooking.Server.Migrations
                             Amenities = "Breakfast, Gym, Laundry",
                             Availability = "true",
                             Description = "The Fullerton Hotel Singapore offers 5-star luxury rooms & suites with exceptional services.",
+                            ImagePath = "css/img/hotel/fullerton_hotel.jpg",
                             Name = "Fullerton Hotel",
                             Rating = 5m
                         },
@@ -533,6 +535,7 @@ namespace HotelBooking.Server.Migrations
                             Amenities = "Game Center, Swimming Pool, Wifi",
                             Availability = "false",
                             Description = "Your go-to hotel for awesome rates, comfortable rooms, and accessible locations.",
+                            ImagePath = "css/img/hotel/st_81_hotel.jpg",
                             Name = "St 81 Hotel",
                             Rating = 3m
                         },
@@ -543,6 +546,7 @@ namespace HotelBooking.Server.Migrations
                             Amenities = "Breakfast, Wifi, Gym",
                             Availability = "true",
                             Description = "Your ultimate destination getaway at the leading entertainment hotel in Desaru Coast, Johor, Malaysia.",
+                            ImagePath = "css/img/hotel/hard_rock_hotel.jpg",
                             Name = "Hard Rock Hotel",
                             Rating = 2.5m
                         });

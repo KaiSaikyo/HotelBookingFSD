@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HotelBooking.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class Newdb : Migration
+    public partial class NewDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -422,7 +422,7 @@ namespace HotelBooking.Server.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "48c77995-b207-4ec3-9b08-cd7b3eceafef", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEFzDcifIBVrbS71RdYw3E2L6vgmqeUVDJCUCTdl/Yga6gtn2o7nj0qOMa/zSxkVJWw==", null, false, "f70398f3-93e3-478f-831d-a32864536e03", false, "admin@localhost.com" });
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "43ceba8d-eb93-47cc-af63-466ad4340e6f", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEPF36ow/8fMqaAJgPOeO8k7W74WNgaK6uix/ezlffcSEFInyScSHQb8Li5I6cWMJlw==", null, false, "a1ada88e-e55c-4e5f-bc75-ac03735555bf", false, "admin@localhost.com" });
 
             migrationBuilder.InsertData(
                 table: "Customers",
@@ -440,10 +440,10 @@ namespace HotelBooking.Server.Migrations
                 columns: new[] { "Id", "Address", "Amenities", "Availability", "Description", "ImagePath", "Name", "Rating" },
                 values: new object[,]
                 {
-                    { 1, "333 Orchard Rd, Mandarin Orchard Singapore", "Breakfast, Wifi, Gym", "true", "Hilton Hotels & Resorts is a global brand of full-service hotels and resorts.", null, "Hilton Hotel", 3.5m },
-                    { 2, "1 Fullerton Square, Singapore 049178", "Breakfast, Gym, Laundry", "true", "The Fullerton Hotel Singapore offers 5-star luxury rooms & suites with exceptional services.", null, "Fullerton Hotel", 5m },
-                    { 3, "768 Upper Serangoon Rd, Singapore 534636", "Game Center, Swimming Pool, Wifi", "false", "Your go-to hotel for awesome rates, comfortable rooms, and accessible locations.", null, "St 81 Hotel", 3m },
-                    { 4, "Desaru Coast, Jln Pantai 3, 81930, Johor, Malaysia", "Breakfast, Wifi, Gym", "true", "Your ultimate destination getaway at the leading entertainment hotel in Desaru Coast, Johor, Malaysia.", null, "Hard Rock Hotel", 2.5m }
+                    { 1, "333 Orchard Rd, Mandarin Orchard Singapore", "Breakfast, Wifi, Gym", "true", "Hilton Hotels & Resorts is a global brand of full-service hotels and resorts.", "css/img/hotel/hilton_hotel.jpg", "Hilton Hotel", 3.5m },
+                    { 2, "1 Fullerton Square, Singapore 049178", "Breakfast, Gym, Laundry", "true", "The Fullerton Hotel Singapore offers 5-star luxury rooms & suites with exceptional services.", "css/img/hotel/fullerton_hotel.jpg", "Fullerton Hotel", 5m },
+                    { 3, "768 Upper Serangoon Rd, Singapore 534636", "Game Center, Swimming Pool, Wifi", "false", "Your go-to hotel for awesome rates, comfortable rooms, and accessible locations.", "css/img/hotel/st_81_hotel.jpg", "St 81 Hotel", 3m },
+                    { 4, "Desaru Coast, Jln Pantai 3, 81930, Johor, Malaysia", "Breakfast, Wifi, Gym", "true", "Your ultimate destination getaway at the leading entertainment hotel in Desaru Coast, Johor, Malaysia.", "css/img/hotel/hard_rock_hotel.jpg", "Hard Rock Hotel", 2.5m }
                 });
 
             migrationBuilder.InsertData(

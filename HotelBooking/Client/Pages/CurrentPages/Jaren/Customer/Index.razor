@@ -20,7 +20,7 @@ else
 			</a>
 		</div>
 		<div class="table-background">
-			<table class="table table-responsive">
+			<table class="table table-responsive" id="customersTable">
 				<thead>
 					<tr>
 						<th style="border-top-left-radius: 0.5rem;">ID</th>
@@ -113,8 +113,14 @@ else
 		}
 	}
 
+	protected async override Task OnAfterRenderAsync(bool firstRender)
+	{
+		await js.InvokeVoidAsync("AddDataTable", "#customersTable");
+	}
+
 	public void Dispose()
 	{
+		js.InvokeVoidAsync("DataTablesDispose", "#customersTable");
 		_interceptor.DisposeEvent();
 	}
 }

@@ -238,7 +238,7 @@ namespace HotelBooking.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4b6a0f6a-4a39-47a2-8623-81105dcc98fe",
+                            ConcurrencyStamp = "43ceba8d-eb93-47cc-af63-466ad4340e6f",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -246,9 +246,9 @@ namespace HotelBooking.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECmJ/dsX9VukY5RRCSNkg0u82BFlEw+FiOiztKFxGlDRKaFBJ4D2KikCUCBb2Kp9Aw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPF36ow/8fMqaAJgPOeO8k7W74WNgaK6uix/ezlffcSEFInyScSHQb8Li5I6cWMJlw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "dd20cc51-738e-4f9a-a6d2-a8f6df15d8d0",
+                            SecurityStamp = "a1ada88e-e55c-4e5f-bc75-ac03735555bf",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
