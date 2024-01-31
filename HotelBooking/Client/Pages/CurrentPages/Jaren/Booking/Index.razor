@@ -41,7 +41,7 @@ else
                     {
                         <tr>
                             <td><b>@booking.Id</b></td>
-                            <td><b>Check-in: @booking.CheckInDate<br />Check-out: @booking.CheckOutDate</b></td>
+                            <td><b>Check-in: @booking.CheckInDate.ToString().Split()[0] <br />Check-out: @booking.CheckOutDate.ToString().Split()[0] </b></td>
                             <td><b>@booking.Destination</b></td>
                             <td><b>@booking.NumGuest</b></td>
                             <td><b>@booking.Status</b></td>

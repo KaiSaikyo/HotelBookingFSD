@@ -40,7 +40,11 @@ else
                             <td><b>@stay.EmergencyContact</b></td>
                             <td><b>@stay.OccupancyStatus</b></td>
                             <td><b>@stay.ComplimentaryServices</b></td>
-                            <td><b>@stay.Booking.Destination<br />Check-in: @stay.Booking.CheckInDate<br />Check-out: @stay.Booking.CheckOutDate</b></td>
+                            <td>
+                                <b>@stay.Booking.Destination</b><br />
+                                <b>Check-in: @stay.Booking.CheckInDate.ToString().Split()[0]</b><br />
+                                <b>Check-out: @stay.Booking.CheckOutDate.ToString().Split()[0]</b>
+                            </td>
                             <td><b>@stay.Room.Number<br />Min Stay: @stay.Room.RoomMinStay<br />Max Stay: @stay.Room.RoomMaxStay</b></td>
 
                             <td>
