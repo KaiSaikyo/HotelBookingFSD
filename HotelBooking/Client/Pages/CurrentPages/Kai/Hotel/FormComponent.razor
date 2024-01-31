@@ -8,6 +8,16 @@
             <DataAnnotationsValidator />
             <ValidationSummary />
 
+            @if (!string.IsNullOrEmpty(ImagePath))
+            {
+                <div class="form-group">
+                    <label>Uploaded Image: </label>
+                    <div>
+                        <img src="@ImagePath" alt="Uploaded Image" style="max-width: 300px; max-height: 300px;" />
+                    </div>
+                </div>
+            }
+
             <fieldset disabled="@Disabled">
                 <div class="form-group">
                     <label>Upload Image: </label>
@@ -68,16 +78,6 @@
                     </div>
                 </div>
             </fieldset>
-
-            @if (!string.IsNullOrEmpty(ImagePath))
-            {
-                <div class="form-group">
-                    <label>Uploaded Image: </label>
-                    <div>
-                        <img src="@ImagePath" alt="Uploaded Image" style="max-width: 300px; max-height: 300px;" />
-                    </div>
-                </div>
-            }
 
             @if (!Disabled)
             {

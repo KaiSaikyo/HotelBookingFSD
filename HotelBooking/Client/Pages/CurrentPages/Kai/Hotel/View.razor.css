@@ -1,30 +1,13 @@
-﻿.image-grid {
-    box-sizing: border-box;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 150px;
-    gap: 24px;
-    padding: 1rem 7.5rem;
+﻿.image-hotel{
+    padding: 1rem;
 }
 
-    .image-grid > img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 10px;
-    }
-
-.image-grid-col-2 {
-    grid-column: span 2;
-}
-
-.image-grid-row-2 {
-    grid-row: span 2;
-}
-
-.Hotel-Info {
-    display: flex;
-    flex: 1;
+.image-hotel img {
+    max-height: 350px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 0.5rem;
 }
 
 .Hotel-Name {
@@ -34,43 +17,51 @@
     padding: 1rem;
 }
 
+.Hotel-Info {
+    width: 500px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
 .Hotel-Description {
-    max-width: 720px;
-    padding-left: 7.5rem;
-    padding-top: 1rem;
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 20px;
 }
 
 .Hotel-Amentities {
-    padding-left: 7.5rem;
-}
-
-h1, h2 {
-    margin-bottom: 0.5rem;
-}
-
-ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
-li {
-    padding-top: 0.5rem;
+    .Hotel-Amentities li {
+        margin-bottom: 5px;
+    }
+
+.left-aligned-button {
+    width: 180px;
+    height: 40px;
+    background-color: #1b6ec2;
+    border-radius: 0.5rem;
+    border: none;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
 }
 
-.Map-Container {
-    display: inline-block;
-    vertical-align: top;
-    width: 50%;
-    box-sizing: border-box;
-    padding-right: 7.5rem;
-    padding-top: 1rem;
-    padding-left: 9rem;
-}
+    .left-aligned-button:active {
+        outline: 3px solid #0d6efd;
+        outline-offset: 2px;
+    }
 
-.Map {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-height: 180px;
+    .left-aligned-button:hover {
+        background-color: #0b5ed7;
+    }
+    
+.button-wrapper {
+    display: flex;
+    justify-content: center;
 }

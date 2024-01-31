@@ -4,8 +4,8 @@
 
 <PageTitle>RoomScout.Org - View Hotels</PageTitle>
 
-<div class="image-grid">
-    <img class="image-grid-col-2 image-grid-row-2" src="@hotel.ImagePath" alt="hotel pic">
+<div class="image-hotel">
+    <img src="@hotel.ImagePath" alt="hotel pic">
 </div>
 
 <div class="Hotel-Name">
@@ -34,17 +34,16 @@
             <li>No amenities available</li>
         }
     </ul>
-</div>
-
-</div>
-
-@* <div class="Map-Container">
-    <div class="Map">
-        <p>
-            Lorem ipsum dolor sit amet. Eum omnis voluptatibus qui fugit voluptatum vel eligendi error ut distinctio velit est voluptas molestias id molestias nisi! Ut voluptatem magni ut praesentium enim aut dolores quis aut nihil iusto et consequatur rerum ut mollitia illo ut illum animi. Ut rerum aperiam quo adipisci fugit aut dolores aspernatur et eaque!
-        </p>
     </div>
-</div> *@
+
+    <br />
+    <div class="button-wrapper">
+        <button type="submit" class="left-aligned-button" @onclick="NavigateBack">
+            Back
+        </button>
+    </div>
+
+</div>
 
 @code {
     [Parameter] public int id { get; set; }
@@ -80,5 +79,11 @@
 
         return amenities;
     }
+
+    private void NavigateBack()
+    {
+        _navManager.NavigateTo("/hotel");
+    }
+
 }
 
