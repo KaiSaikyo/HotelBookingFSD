@@ -1,5 +1,5 @@
 ﻿﻿.main-background {
-    min-height: 100dvh;
+    min-height: calc(100dvh - 70px);
     background-color: #8EB4E5;
     box-sizing: border-box;
     display: flex;

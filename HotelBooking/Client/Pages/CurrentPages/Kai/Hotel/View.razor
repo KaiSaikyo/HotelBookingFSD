@@ -4,14 +4,81 @@
 
 <PageTitle>RoomScout.Org - View Hotels</PageTitle>
 
-<FormComponent hotel="hotel" Disabled="true" />
+<div class="image-grid">
+    <img class="image-grid-col-2 image-grid-row-2" src="@hotel.ImagePath" alt="hotel pic">
+</div>
+
+<div class="Hotel-Name">
+    <h1>@hotel.Name</h1>
+    <p>@hotel.Address</p>
+</div>
+
+<div class="Hotel-Info">
+    <div class="Hotel-Description">
+        <h2>Description</h2>
+        <p>@hotel.Description</p>
+    </div>
+
+    <div class="Hotel-Amentities">
+    <h2>Amenities</h2>
+    <ul id="amenitiesList">
+        @if (hotel != null)
+        {
+            @foreach (var amenity in GetAmenities())
+            {
+                <li>@amenity</li>
+            }
+        }
+        else
+        {
+            <li>No amenities available</li>
+        }
+    </ul>
+</div>
+
+</div>
+
+@* <div class="Map-Container">
+    <div class="Map">
+        <p>
+            Lorem ipsum dolor sit amet. Eum omnis voluptatibus qui fugit voluptatum vel eligendi error ut distinctio velit est voluptas molestias id molestias nisi! Ut voluptatem magni ut praesentium enim aut dolores quis aut nihil iusto et consequatur rerum ut mollitia illo ut illum animi. Ut rerum aperiam quo adipisci fugit aut dolores aspernatur et eaque!
+        </p>
+    </div>
+</div> *@
 
 @code {
-	[Parameter] public int id { get; set; }
-	Hotel? hotel = new Hotel();
+    [Parameter] public int id { get; set; }
+    Hotel? hotel = new Hotel();
 
-	protected async override Task OnParametersSetAsync()
-	{
-		hotel = await _client.GetFromJsonAsync<Hotel>($"{Endpoints.HotelsEndpoint}/{id}");
-	}
+    protected override async Task OnParametersSetAsync()
+    {
+        hotel = await _client.GetFromJsonAsync<Hotel>($"{Endpoints.HotelsEndpoint}/{id}");
+    }
+
+       private List<string> GetAmenities()
+    {
+        List<string> amenities = new List<string>();
+
+        if (hotel != null && !string.IsNullOrWhiteSpace(hotel.Amenities))
+        {
+            // Retrieve the amenities string from your data storage
+            var amenitiesString = hotel.Amenities;
+
+            // Split the string into an array using commas as the delimiter
+            var amenitiesArray = amenitiesString.Split(",");
+
+            // Trim and add non-empty amenities to the list
+            foreach (var amenity in amenitiesArray)
+            {
+                var trimmedAmenity = amenity.Trim();
+                if (!string.IsNullOrWhiteSpace(trimmedAmenity))
+                {
+                    amenities.Add(trimmedAmenity);
+                }
+            }
+        }
+
+        return amenities;
+    }
 }
+
