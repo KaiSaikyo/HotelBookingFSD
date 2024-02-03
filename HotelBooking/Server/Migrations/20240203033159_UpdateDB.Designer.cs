@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooking.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240131023508_NewDb")]
-    partial class NewDb
+    [Migration("20240203033159_UpdateDB")]
+    partial class UpdateDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -241,7 +241,7 @@ namespace HotelBooking.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "43ceba8d-eb93-47cc-af63-466ad4340e6f",
+                            ConcurrencyStamp = "56295c77-ae21-4d1a-bfb0-c359e0de3a06",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -249,9 +249,9 @@ namespace HotelBooking.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPF36ow/8fMqaAJgPOeO8k7W74WNgaK6uix/ezlffcSEFInyScSHQb8Li5I6cWMJlw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPD1LVXRT0JN/70md/VHvZoiiRSuoOfEMYAMQ9b56pUxJNWzv0jdt4iAH/a2jYBPgQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a1ada88e-e55c-4e5f-bc75-ac03735555bf",
+                            SecurityStamp = "f5ff66cf-af0b-4611-933c-81f272de22b0",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -535,7 +535,7 @@ namespace HotelBooking.Server.Migrations
                             Amenities = "Game Center, Swimming Pool, Wifi",
                             Availability = "false",
                             Description = "Your go-to hotel for awesome rates, comfortable rooms, and accessible locations.",
-                            ImagePath = "css/img/hotel/st_81_hotel.jpg",
+                            ImagePath = "css/img/hotel/81_Hotel.jpg",
                             Name = "St 81 Hotel",
                             Rating = 3m
                         },

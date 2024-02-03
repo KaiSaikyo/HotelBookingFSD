@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HotelBooking.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class NewDb : Migration
+    public partial class newDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -422,7 +422,7 @@ namespace HotelBooking.Server.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "43ceba8d-eb93-47cc-af63-466ad4340e6f", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEPF36ow/8fMqaAJgPOeO8k7W74WNgaK6uix/ezlffcSEFInyScSHQb8Li5I6cWMJlw==", null, false, "a1ada88e-e55c-4e5f-bc75-ac03735555bf", false, "admin@localhost.com" });
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "9b313af4-905c-4792-bff1-7f315522a594", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEP0dxC/m0iM2F+BSqp83KNI8OJLY9QDVlgB9XtXM+uJHarG/v23Dl4QLIfFlN/e3/w==", null, false, "541d7218-f000-4cc1-bb87-41fe0b084329", false, "admin@localhost.com" });
 
             migrationBuilder.InsertData(
                 table: "Customers",

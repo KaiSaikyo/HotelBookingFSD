@@ -36,7 +36,7 @@ namespace HotelBooking.Server.Configurations.Entities
                 {
                     Id = 3,
                     Name = "St 81 Hotel",
-					ImagePath = "css/img/hotel/st_81_hotel.jpg",
+					ImagePath = "css/img/hotel/81_Hotel.jpg",
 					Address = "768 Upper Serangoon Rd, Singapore 534636",
                     Description = "Your go-to hotel for awesome rates, comfortable rooms, and accessible locations.",
                     Amenities = "Game Center, Swimming Pool, Wifi",

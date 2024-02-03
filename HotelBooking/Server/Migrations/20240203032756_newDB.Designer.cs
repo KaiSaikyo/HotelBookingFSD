@@ -4,6 +4,7 @@ using HotelBooking.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooking.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240203032756_newDB")]
+    partial class newDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -238,7 +241,7 @@ namespace HotelBooking.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "56295c77-ae21-4d1a-bfb0-c359e0de3a06",
+                            ConcurrencyStamp = "9b313af4-905c-4792-bff1-7f315522a594",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -246,9 +249,9 @@ namespace HotelBooking.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPD1LVXRT0JN/70md/VHvZoiiRSuoOfEMYAMQ9b56pUxJNWzv0jdt4iAH/a2jYBPgQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEP0dxC/m0iM2F+BSqp83KNI8OJLY9QDVlgB9XtXM+uJHarG/v23Dl4QLIfFlN/e3/w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f5ff66cf-af0b-4611-933c-81f272de22b0",
+                            SecurityStamp = "541d7218-f000-4cc1-bb87-41fe0b084329",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -532,7 +535,7 @@ namespace HotelBooking.Server.Migrations
                             Amenities = "Game Center, Swimming Pool, Wifi",
                             Availability = "false",
                             Description = "Your go-to hotel for awesome rates, comfortable rooms, and accessible locations.",
-                            ImagePath = "css/img/hotel/81_Hotel.jpg",
+                            ImagePath = "css/img/hotel/st_81_hotel.jpg",
                             Name = "St 81 Hotel",
                             Rating = 3m
                         },
