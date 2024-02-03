@@ -4,28 +4,43 @@
 
 <PageTitle>RoomScout.Org - View Reviews</PageTitle>
 
-<div>
-    <div>
-        content
-        <div>
-            image
+<div class="review-container">
+    <div class="review-content">
+        <div class="image-review">
+            <img src="@review.ImagePath" alt="review pic">
         </div>
-        <div>
+        <div class="rating-review">
             <div>
-				Rating 
+                <h2>Rating - @review.Rating</h2>
 			</div>
-            <div>
-                <div>
-                    top right date
-                </div>
-                <div>
-                    description
-                </div>
+            <div class="review-description">
+                <h2>Description</h2>
+                <p>
+                    "@review.Description" - @review.Customer.Name, @review.Date.ToString().Split()[0]
+                </p>
+            </div>
+            <div class="review-services">
+                <h2>Services</h2>
+                <ul id="servicesList">
+                    @if (review != null)
+                    {
+                        @foreach (var service in GetServices())
+                        {
+                            <li>@service</li>
+                        }
+                    }
+                    else
+                    {
+                        <li>No services available</li>
+                    }
+                </ul>
             </div>
         </div>
     </div>
-    <div>
-        button
+    <div class="button-wrapper">
+        <button type="submit" class="middle-aligned-button" @onclick="NavigateBack">
+            Back
+        </button>
     </div>
 </div>
 

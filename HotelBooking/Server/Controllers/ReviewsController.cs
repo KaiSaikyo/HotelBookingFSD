@@ -33,7 +33,8 @@ namespace HotelBooking.Server.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetReview(int id)
         {
-            var review = await _unitOfWork.Reviews.Get(q => q.Id == id);
+            var review = await _unitOfWork.Reviews.Get(q => q.Id == id/*,
+                includes: q => q.Include(x => x.Customer!).Include(x => x.Stay!)*/);
 
             if (review == null)
             {

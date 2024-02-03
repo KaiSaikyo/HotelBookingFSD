@@ -18,31 +18,28 @@
         <h2>Description</h2>
         <p>@hotel.Description</p>
     </div>
-
     <div class="Hotel-Amentities">
-    <h2>Amenities</h2>
-    <ul id="amenitiesList">
-        @if (hotel != null)
-        {
-            @foreach (var amenity in GetAmenities())
+        <h2>Amenities</h2>
+        <ul id="amenitiesList">
+            @if (hotel != null)
             {
-                <li>@amenity</li>
+                @foreach (var amenity in GetAmenities())
+                {
+                    <li>@amenity</li>
+                }
             }
-        }
-        else
-        {
-            <li>No amenities available</li>
-        }
-    </ul>
+            else
+            {
+                <li>No amenities available</li>
+            }
+        </ul>
     </div>
-
     <br />
     <div class="button-wrapper">
         <button type="submit" class="middle-aligned-button" @onclick="NavigateBack">
             Back
         </button>
     </div>
-
 </div>
 
 @code {

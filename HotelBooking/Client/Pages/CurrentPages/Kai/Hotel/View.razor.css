@@ -4,6 +4,7 @@
 
 .image-hotel img {
     max-height: 350px;
+    max-width: 500px;
     display: block;
     margin-left: auto;
     margin-right: auto;
