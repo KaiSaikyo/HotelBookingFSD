@@ -20,7 +20,7 @@ else
 			</a>
 		</div>
 		<div class="table-background">
-			<table class="table table-responsive">
+			<table class="table table-responsive" id="roomsTable">
 				<thead>
 					<tr>
 						<th style="border-top-left-radius: 0.5rem;">ID</th>
@@ -41,20 +41,22 @@ else
 							<td><b>@room.Amenities</b></td>
 							<td><b>@room.RoomMinStay</b></td>
 							<td><b>@room.RoomMaxStay</b></td>
-							<td><b>@room.RoomType.Description - $@room.RoomType.Price</b></td>
+							<td><b>@room.RoomType.Description<br />Price - $@room.RoomType.Price</b></td>
 
 							<td>
-								<a href="/room/view/@room.Id" class="btn btn-primary">
-									<span class="oi oi-magnifying-glass"></span>
-								</a>
+								<div id="button-container" style="display: flex; flex-direction: row; gap: 0.2rem;">
+									<a href="/room/view/@room.Id" class="btn btn-view">
+										<span class="oi oi-magnifying-glass"></span>
+									</a>
 
-								<a href="/room/edit/@room.Id" class="btn btn-warning">
-									<span class="oi oi-script"></span>
-								</a>
+									<a href="/room/edit/@room.Id" class="btn btn-edit">
+										<span class="oi oi-script"></span>
+									</a>
 
-								<button class="btn btn-danger" @onclick="@(()=>Delete(room.Id))">
-									<span class="oi oi-trash"></span>
-								</button>
+									<button class="btn btn-delete" @onclick="@(()=>Delete(room.Id))">
+										<span class="oi oi-trash"></span>
+									</button>
+								</div>
 							</td>
 						</tr>
 					}
@@ -98,8 +100,14 @@ else
 		}
 	}
 
+	protected async override Task OnAfterRenderAsync(bool firstRender)
+	{
+		await js.InvokeVoidAsync("AddDataTable", "#roomsTable");
+	}
+
 	public void Dispose()
 	{
+		js.InvokeVoidAsync("DataTablesDispose", "#roomsTable");
 		_interceptor.DisposeEvent();
 	}
 }

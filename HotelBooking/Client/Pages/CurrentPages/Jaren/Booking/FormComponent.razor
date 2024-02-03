@@ -62,7 +62,7 @@
 							{
 								foreach (var hotel in Hotels)
 								{
-									<option value="@hotel.Id">@hotel.Name - @hotel.Rating</option>
+									<option value="@hotel.Id">@hotel.Name, Rating - @hotel.Rating</option>
 								}
 							}
 						</InputSelect>
@@ -79,7 +79,7 @@
 							{
 								foreach (var roomtype in RoomTypes)
 								{
-									<option value="@roomtype.Id">@roomtype.Description - $@roomtype.Price</option>
+									<option value="@roomtype.Id">@roomtype.Description, Price - $@roomtype.Price</option>
 								}
 							}
 						</InputSelect>

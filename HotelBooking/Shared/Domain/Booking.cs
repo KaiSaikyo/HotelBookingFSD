@@ -32,19 +32,19 @@ namespace HotelBooking.Shared.Domain
 		[RegularExpression(@"^(true|false)$", ErrorMessage = "Status must be either 'true' or 'false'")]
 		public string? Status { get; set; }
 
-		[Required]
+		
 		public int? HotelId { get; set; }
 		public virtual Hotel? Hotel { get; set; }
 
-		[Required]
+		
 		public int? StaffId { get; set; }
 		public virtual Staff? Staff { get; set; }
 
-		[Required]
+		
 		public int? CustomerId { get; set; }
 		public virtual Customer? Customer { get; set; }
 
-		[Required]
+		
 		public int? RoomTypeId { get; set; }
 		public virtual RoomType? RoomType { get; set; }
 

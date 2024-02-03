@@ -14,6 +14,7 @@ namespace HotelBooking.Server.Configurations.Entities
                 {
                     Id = 1,
                     Name = "Hilton Hotel",
+                    ImagePath = "css/img/hotel/hilton_hotel.jpg",
                     Address = "333 Orchard Rd, Mandarin Orchard Singapore",
                     Description = "Hilton Hotels & Resorts is a global brand of full-service hotels and resorts.",
                     Amenities = "Breakfast, Wifi, Gym",
@@ -24,7 +25,8 @@ namespace HotelBooking.Server.Configurations.Entities
                 {
                     Id = 2,
                     Name = "Fullerton Hotel",
-                    Address = "1 Fullerton Square, Singapore 049178",
+					ImagePath = "css/img/hotel/fullerton_hotel.jpg",
+					Address = "1 Fullerton Square, Singapore 049178",
                     Description = "The Fullerton Hotel Singapore offers 5-star luxury rooms & suites with exceptional services.",
                     Amenities = "Breakfast, Gym, Laundry",
                     Rating = (decimal?)5.0,
@@ -34,7 +36,8 @@ namespace HotelBooking.Server.Configurations.Entities
                 {
                     Id = 3,
                     Name = "St 81 Hotel",
-                    Address = "768 Upper Serangoon Rd, Singapore 534636",
+					ImagePath = "css/img/hotel/81_Hotel.jpg",
+					Address = "768 Upper Serangoon Rd, Singapore 534636",
                     Description = "Your go-to hotel for awesome rates, comfortable rooms, and accessible locations.",
                     Amenities = "Game Center, Swimming Pool, Wifi",
                     Rating = (decimal?)3.0,
@@ -44,7 +47,8 @@ namespace HotelBooking.Server.Configurations.Entities
                 {
                     Id = 4,
                     Name = "Hard Rock Hotel",
-                    Address = "Desaru Coast, Jln Pantai 3, 81930, Johor, Malaysia",
+					ImagePath = "css/img/hotel/hard_rock_hotel.jpg",
+					Address = "Desaru Coast, Jln Pantai 3, 81930, Johor, Malaysia",
                     Description = "Your ultimate destination getaway at the leading entertainment hotel in Desaru Coast, Johor, Malaysia.",
                     Amenities = "Breakfast, Wifi, Gym",
                     Rating = (decimal?)2.5,

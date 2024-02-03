@@ -30,7 +30,7 @@ namespace HotelBooking.Server.Controllers
             return Ok(reviews);
         }
 
-        [HttpGet("{id}")]
+		[HttpGet("{id}")]
         public async Task<IActionResult> GetReview(int id)
         {
             var review = await _unitOfWork.Reviews.Get(q => q.Id == id);
@@ -43,7 +43,7 @@ namespace HotelBooking.Server.Controllers
             return Ok(review);
         }
 
-        [HttpPut("{id}")]
+		[HttpPut("{id}")]
         public async Task<IActionResult> PutReview(int id, Review review)
         {
             if (id != review.Id)

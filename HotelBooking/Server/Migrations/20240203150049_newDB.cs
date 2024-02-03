@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HotelBooking.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class NewDB : Migration
+    public partial class newDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -104,7 +104,8 @@ namespace HotelBooking.Server.Migrations
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Amenities = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Rating = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Availability = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Availability = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -391,6 +392,7 @@ namespace HotelBooking.Server.Migrations
                     Rating = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CustomerId = table.Column<int>(type: "int", nullable: true),
                     StayId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -421,7 +423,7 @@ namespace HotelBooking.Server.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "195ef76f-a514-4361-9909-76aadff41c11", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEDzRU3R4SmqO0TTnjNIV1wORPSQKUSlQcFw4A5WCjTqezHQi94Z/qf4jKIrshJ50Hw==", null, false, "26d1e76b-0b39-4afa-9d97-2edcec4f3e64", false, "admin@localhost.com" });
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "45e96a1e-5e46-47cd-98d8-bdc958a293c2", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEKy6TgJ2tZzUvfOzS2G+wdTOGtKicvt7c5RjJVwxXTaaeX7Qjy84Cssu5Ywq6eivhQ==", null, false, "d03c3363-80fa-477d-96b9-6e1567e7076a", false, "admin@localhost.com" });
 
             migrationBuilder.InsertData(
                 table: "Customers",
@@ -436,13 +438,13 @@ namespace HotelBooking.Server.Migrations
 
             migrationBuilder.InsertData(
                 table: "Hotels",
-                columns: new[] { "Id", "Address", "Amenities", "Availability", "Description", "Name", "Rating" },
+                columns: new[] { "Id", "Address", "Amenities", "Availability", "Description", "ImagePath", "Name", "Rating" },
                 values: new object[,]
                 {
-                    { 1, "333 Orchard Rd, Mandarin Orchard Singapore", "Breakfast, Wifi, Gym", "true", "Hilton Hotels & Resorts is a global brand of full-service hotels and resorts.", "Hilton Hotel", 3.5m },
-                    { 2, "1 Fullerton Square, Singapore 049178", "Breakfast, Gym, Laundry", "true", "The Fullerton Hotel Singapore offers 5-star luxury rooms & suites with exceptional services.", "Fullerton Hotel", 5m },
-                    { 3, "768 Upper Serangoon Rd, Singapore 534636", "Game Center, Swimming Pool, Wifi", "false", "Your go-to hotel for awesome rates, comfortable rooms, and accessible locations.", "St 81 Hotel", 3m },
-                    { 4, "Desaru Coast, Jln Pantai 3, 81930, Johor, Malaysia", "Breakfast, Wifi, Gym", "true", "Your ultimate destination getaway at the leading entertainment hotel in Desaru Coast, Johor, Malaysia.", "Hard Rock Hotel", 2.5m }
+                    { 1, "333 Orchard Rd, Mandarin Orchard Singapore", "Breakfast, Wifi, Gym", "true", "Hilton Hotels & Resorts is a global brand of full-service hotels and resorts.", "css/img/hotel/hilton_hotel.jpg", "Hilton Hotel", 3.5m },
+                    { 2, "1 Fullerton Square, Singapore 049178", "Breakfast, Gym, Laundry", "true", "The Fullerton Hotel Singapore offers 5-star luxury rooms & suites with exceptional services.", "css/img/hotel/fullerton_hotel.jpg", "Fullerton Hotel", 5m },
+                    { 3, "768 Upper Serangoon Rd, Singapore 534636", "Game Center, Swimming Pool, Wifi", "false", "Your go-to hotel for awesome rates, comfortable rooms, and accessible locations.", "css/img/hotel/81_Hotel.jpg", "St 81 Hotel", 3m },
+                    { 4, "Desaru Coast, Jln Pantai 3, 81930, Johor, Malaysia", "Breakfast, Wifi, Gym", "true", "Your ultimate destination getaway at the leading entertainment hotel in Desaru Coast, Johor, Malaysia.", "css/img/hotel/hard_rock_hotel.jpg", "Hard Rock Hotel", 2.5m }
                 });
 
             migrationBuilder.InsertData(
@@ -477,10 +479,10 @@ namespace HotelBooking.Server.Migrations
                 columns: new[] { "Id", "CheckInDate", "CheckOutDate", "CustomerId", "Destination", "HotelId", "NumGuest", "RoomTypeId", "StaffId", "Status" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "City A", 1, 2, 1, 1, "true" },
-                    { 2, new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "City B", 2, 1, 2, 2, "true" },
-                    { 3, new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "City C", 3, 3, 3, 3, "false" },
-                    { 4, new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "City D", 4, 2, 4, 4, "true" }
+                    { 1, new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Singapore", 1, 2, 1, 1, "true" },
+                    { 2, new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Malaysia", 2, 1, 2, 2, "true" },
+                    { 3, new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Indonesia", 3, 3, 3, 3, "false" },
+                    { 4, new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Thailand", 4, 2, 4, 4, "true" }
                 });
 
             migrationBuilder.InsertData(
@@ -507,13 +509,13 @@ namespace HotelBooking.Server.Migrations
 
             migrationBuilder.InsertData(
                 table: "Reviews",
-                columns: new[] { "Id", "CustomerId", "Date", "Description", "Rating", "StayId" },
+                columns: new[] { "Id", "CustomerId", "Date", "Description", "ImagePath", "Rating", "StayId" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Enjoyed the stay, great service!", 4.5m, 1 },
-                    { 2, 2, new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Decent stay, room was comfortable", 3.0m, 2 },
-                    { 3, 3, new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Outstanding experience, highly recommended!", 5.0m, 3 },
-                    { 4, 4, new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Average stay, room cleanliness could be improved", 2.5m, 4 }
+                    { 1, 1, new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Enjoyed the stay, great service!", "css/img/room/HolidayInn.jpg", 4.5m, 1 },
+                    { 2, 2, new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Decent stay, room was comfortable", "css/img/room/HyattJohor.jpg", 3.0m, 2 },
+                    { 3, 3, new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Outstanding experience, highly recommended!", "css/img/room/LeMeridien.jpg", 5.0m, 3 },
+                    { 4, 4, new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Average stay, room cleanliness could be improved", "css/img/room/ParkHyatt.jpg", 2.5m, 4 }
                 });
 
             migrationBuilder.CreateIndex(

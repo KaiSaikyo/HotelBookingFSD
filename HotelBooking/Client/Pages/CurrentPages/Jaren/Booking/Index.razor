@@ -21,12 +21,11 @@ else
             </a>
         </div>
         <div class="table-background">
-            <table class="table table-responsive">
+            <table class="table table-responsive" id="bookingsTable">
                 <thead>
                     <tr>
                         <th style="border-top-left-radius: 0.5rem;">ID</th>
-                        <th>Check-in</th>
-                        <th>Check-out</th>
+                        <th>Check-in Details</th>
                         <th>Destination</th>
                         <th>Guest No.</th>
                         <th>Status</th>
@@ -42,28 +41,29 @@ else
                     {
                         <tr>
                             <td><b>@booking.Id</b></td>
-                            <td><b>@booking.CheckInDate</b></td>
-                            <td><b>@booking.CheckOutDate</b></td>
+                            <td><b>Check-in: @booking.CheckInDate.ToString().Split()[0] <br />Check-out: @booking.CheckOutDate.ToString().Split()[0] </b></td>
                             <td><b>@booking.Destination</b></td>
                             <td><b>@booking.NumGuest</b></td>
                             <td><b>@booking.Status</b></td>
-                            <td><b>@booking.Hotel.Name - @booking.Hotel.Rating</b></td>
-                            <td><b>@booking.RoomType.Description - $@booking.RoomType.Price</b></td>
+                            <td><b>@booking.Hotel.Name<br />Rating - @booking.Hotel.Rating</b></td>
+                            <td><b>@booking.RoomType.Description<br />Price - $@booking.RoomType.Price</b></td>
                             <td><b>@booking.Staff.Name</b></td>
                             <td><b>@booking.Customer.Name</b></td>
 
                             <td>
-                                <a href="/booking/view/@booking.Id" class="btn btn-primary">
-                                    <span class="oi oi-magnifying-glass"></span>
-                                </a>
+                                <div id="button-container" style="display: flex; flex-direction: row; gap: 0.2rem;">
+                                    <a href="/booking/view/@booking.Id" class="btn btn-view">
+                                        <span class="oi oi-magnifying-glass"></span>
+                                    </a>
 
-                                <a href="/booking/edit/@booking.Id" class="btn btn-warning">
-                                    <span class="oi oi-script"></span>
-                                </a>
+                                    <a href="/booking/edit/@booking.Id" class="btn btn-edit">
+                                        <span class="oi oi-script"></span>
+                                    </a>
 
-                                <button class="btn btn-danger" @onclick="@(()=>Delete(booking.Id))">
-                                    <span class="oi oi-trash"></span>
-                                </button>
+                                    <button class="btn btn-delete" @onclick="@(()=>Delete(booking.Id))">
+                                        <span class="oi oi-trash"></span>
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     }
@@ -107,8 +107,14 @@ else
         }
     }
 
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await js.InvokeVoidAsync("AddDataTable", "#bookingsTable");
+    }
+
     public void Dispose()
     {
+        js.InvokeVoidAsync("DataTablesDispose", "#bookingsTable");
         _interceptor.DisposeEvent();
     }
 }

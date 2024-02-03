@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooking.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240129191041_NewDB")]
-    partial class NewDB
+    [Migration("20240203150049_newDB")]
+    partial class newDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -241,7 +241,7 @@ namespace HotelBooking.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "195ef76f-a514-4361-9909-76aadff41c11",
+                            ConcurrencyStamp = "45e96a1e-5e46-47cd-98d8-bdc958a293c2",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -249,9 +249,9 @@ namespace HotelBooking.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDzRU3R4SmqO0TTnjNIV1wORPSQKUSlQcFw4A5WCjTqezHQi94Z/qf4jKIrshJ50Hw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKy6TgJ2tZzUvfOzS2G+wdTOGtKicvt7c5RjJVwxXTaaeX7Qjy84Cssu5Ywq6eivhQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "26d1e76b-0b39-4afa-9d97-2edcec4f3e64",
+                            SecurityStamp = "d03c3363-80fa-477d-96b9-6e1567e7076a",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -317,7 +317,7 @@ namespace HotelBooking.Server.Migrations
                             CheckInDate = new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CheckOutDate = new DateTime(2023, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 1,
-                            Destination = "City A",
+                            Destination = "Singapore",
                             HotelId = 1,
                             NumGuest = 2,
                             RoomTypeId = 1,
@@ -330,7 +330,7 @@ namespace HotelBooking.Server.Migrations
                             CheckInDate = new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CheckOutDate = new DateTime(2023, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 2,
-                            Destination = "City B",
+                            Destination = "Malaysia",
                             HotelId = 2,
                             NumGuest = 1,
                             RoomTypeId = 2,
@@ -343,7 +343,7 @@ namespace HotelBooking.Server.Migrations
                             CheckInDate = new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CheckOutDate = new DateTime(2023, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 3,
-                            Destination = "City C",
+                            Destination = "Indonesia",
                             HotelId = 3,
                             NumGuest = 3,
                             RoomTypeId = 3,
@@ -356,7 +356,7 @@ namespace HotelBooking.Server.Migrations
                             CheckInDate = new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CheckOutDate = new DateTime(2023, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 4,
-                            Destination = "City D",
+                            Destination = "Thailand",
                             HotelId = 4,
                             NumGuest = 2,
                             RoomTypeId = 4,
@@ -489,6 +489,9 @@ namespace HotelBooking.Server.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -510,6 +513,7 @@ namespace HotelBooking.Server.Migrations
                             Amenities = "Breakfast, Wifi, Gym",
                             Availability = "true",
                             Description = "Hilton Hotels & Resorts is a global brand of full-service hotels and resorts.",
+                            ImagePath = "css/img/hotel/hilton_hotel.jpg",
                             Name = "Hilton Hotel",
                             Rating = 3.5m
                         },
@@ -520,6 +524,7 @@ namespace HotelBooking.Server.Migrations
                             Amenities = "Breakfast, Gym, Laundry",
                             Availability = "true",
                             Description = "The Fullerton Hotel Singapore offers 5-star luxury rooms & suites with exceptional services.",
+                            ImagePath = "css/img/hotel/fullerton_hotel.jpg",
                             Name = "Fullerton Hotel",
                             Rating = 5m
                         },
@@ -530,6 +535,7 @@ namespace HotelBooking.Server.Migrations
                             Amenities = "Game Center, Swimming Pool, Wifi",
                             Availability = "false",
                             Description = "Your go-to hotel for awesome rates, comfortable rooms, and accessible locations.",
+                            ImagePath = "css/img/hotel/81_Hotel.jpg",
                             Name = "St 81 Hotel",
                             Rating = 3m
                         },
@@ -540,6 +546,7 @@ namespace HotelBooking.Server.Migrations
                             Amenities = "Breakfast, Wifi, Gym",
                             Availability = "true",
                             Description = "Your ultimate destination getaway at the leading entertainment hotel in Desaru Coast, Johor, Malaysia.",
+                            ImagePath = "css/img/hotel/hard_rock_hotel.jpg",
                             Name = "Hard Rock Hotel",
                             Rating = 2.5m
                         });
@@ -565,6 +572,9 @@ namespace HotelBooking.Server.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<decimal?>("Rating")
                         .IsRequired()
                         .HasColumnType("decimal(18,2)");
@@ -587,6 +597,7 @@ namespace HotelBooking.Server.Migrations
                             CustomerId = 1,
                             Date = new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Enjoyed the stay, great service!",
+                            ImagePath = "css/img/room/HolidayInn.jpg",
                             Rating = 4.5m,
                             StayId = 1
                         },
@@ -596,6 +607,7 @@ namespace HotelBooking.Server.Migrations
                             CustomerId = 2,
                             Date = new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Decent stay, room was comfortable",
+                            ImagePath = "css/img/room/HyattJohor.jpg",
                             Rating = 3.0m,
                             StayId = 2
                         },
@@ -605,6 +617,7 @@ namespace HotelBooking.Server.Migrations
                             CustomerId = 3,
                             Date = new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Outstanding experience, highly recommended!",
+                            ImagePath = "css/img/room/LeMeridien.jpg",
                             Rating = 5.0m,
                             StayId = 3
                         },
@@ -614,6 +627,7 @@ namespace HotelBooking.Server.Migrations
                             CustomerId = 4,
                             Date = new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Average stay, room cleanliness could be improved",
+                            ImagePath = "css/img/room/ParkHyatt.jpg",
                             Rating = 2.5m,
                             StayId = 4
                         });

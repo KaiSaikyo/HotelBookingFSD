@@ -20,7 +20,7 @@ else
             </a>
         </div>
         <div class="table-background">
-            <table class="table table-responsive">
+            <table class="table table-responsive" id="staysTable">
                 <thead>
                     <tr>
                         <th style="border-top-left-radius: 0.5rem;">ID</th>
@@ -40,21 +40,27 @@ else
                             <td><b>@stay.EmergencyContact</b></td>
                             <td><b>@stay.OccupancyStatus</b></td>
                             <td><b>@stay.ComplimentaryServices</b></td>
-                            <td><b>@stay.Booking.Destination, Check-in: @stay.Booking.CheckInDate - Check-out: @stay.Booking.CheckOutDate</b></td>
-                            <td><b>@stay.Room.Number, Min Stay: @stay.Room.RoomMinStay - Max Stay: @stay.Room.RoomMaxStay</b></td>
+                            <td>
+                                <b>@stay.Booking.Destination</b><br />
+                                <b>Check-in: @stay.Booking.CheckInDate.ToString().Split()[0]</b><br />
+                                <b>Check-out: @stay.Booking.CheckOutDate.ToString().Split()[0]</b>
+                            </td>
+                            <td><b>@stay.Room.Number<br />Min Stay: @stay.Room.RoomMinStay<br />Max Stay: @stay.Room.RoomMaxStay</b></td>
 
                             <td>
-                                <a href="/stay/view/@stay.Id" class="btn btn-primary">
-                                    <span class="oi oi-magnifying-glass"></span>
-                                </a>
+                                <div id="button-container" style="display: flex; flex-direction: row; gap: 0.2rem;">
+                                    <a href="/stay/view/@stay.Id" class="btn btn-view">
+                                        <span class="oi oi-magnifying-glass"></span>
+                                    </a>
 
-                                <a href="/stay/edit/@stay.Id" class="btn btn-warning">
-                                    <span class="oi oi-script"></span>
-                                </a>
+                                    <a href="/stay/edit/@stay.Id" class="btn btn-edit">
+                                        <span class="oi oi-script"></span>
+                                    </a>
 
-                                <button class="btn btn-danger" @onclick="@(()=>Delete(stay.Id))">
-                                    <span class="oi oi-trash"></span>
-                                </button>
+                                    <button class="btn btn-delete" @onclick="@(()=>Delete(stay.Id))">
+                                        <span class="oi oi-trash"></span>
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     }
@@ -98,8 +104,14 @@ else
         }
     }
 
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await js.InvokeVoidAsync("AddDataTable", "#staysTable");
+    }
+
     public void Dispose()
     {
+        js.InvokeVoidAsync("DataTablesDispose", "#staysTable");
         _interceptor.DisposeEvent();
     }
 }

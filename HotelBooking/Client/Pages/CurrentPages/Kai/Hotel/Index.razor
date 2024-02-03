@@ -20,11 +20,11 @@ else
 			</a>
 		</div>
 		<div class="table-background">
-			<table class="table table-responsive">
+			<table class="table table-responsive" id="hotelsTable">
 				<thead>
 					<tr>
 						<th style="border-top-left-radius: 0.5rem;">ID</th>
-						<th>Name</th>
+						<th>Hotel</th>
 						<th>Address</th>
 						<th>Description</th>
 						<th>Amenities</th>
@@ -38,7 +38,7 @@ else
 					{
 						<tr>
 							<td><b>@hotel.Id</b></td>
-							<td><b>@hotel.Name</b></td>
+							<td><b>@hotel.Name</b><br /><img src="@hotel.ImagePath" alt="Uploaded Img" class="scaled-image" /></td>
 							<td><b>@hotel.Address</b></td>
 							<td><b>@hotel.Description</b></td>
 							<td><b>@hotel.Amenities</b></td>
@@ -46,17 +46,19 @@ else
 							<td><b>@hotel.Availability</b></td>
 
 							<td>
-								<a href="/hotel/view/@hotel.Id" class="btn btn-primary">
-									<span class="oi oi-magnifying-glass"></span>
-								</a>
+								<div id="button-container" style="display: flex; flex-direction: row; gap: 0.2rem;">
+									<a href="/hotel/view/@hotel.Id" class="btn btn-view">
+										<span class="oi oi-magnifying-glass"></span>
+									</a>
 
-								<a href="/hotel/edit/@hotel.Id" class="btn btn-warning">
-									<span class="oi oi-script"></span>
-								</a>
+									<a href="/hotel/edit/@hotel.Id" class="btn btn-edit">
+										<span class="oi oi-script"></span>
+									</a>
 
-								<button class="btn btn-danger" @onclick="@(()=>Delete(hotel.Id))">
-									<span class="oi oi-trash"></span>
-								</button>
+									<button class="btn btn-delete" @onclick="@(()=>Delete(hotel.Id))">
+										<span class="oi oi-trash"></span>
+									</button>
+								</div>
 							</td>
 						</tr>
 					}
@@ -109,8 +111,14 @@ else
 		}
 	}
 
+	protected async override Task OnAfterRenderAsync(bool firstRender)
+	{
+		await js.InvokeVoidAsync("AddDataTable", "#hotelsTable");
+	}
+
 	public void Dispose()
 	{
+		js.InvokeVoidAsync("DataTablesDispose", "#hotelsTable");
 		_interceptor.DisposeEvent();
 	}
 }

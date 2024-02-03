@@ -27,7 +27,7 @@ namespace HotelBooking.Shared.Domain
 		[Range(1, 10)]
 		public int? RoomMaxStay { get; set; }
 
-		[Required]
+		
 		public int? RoomTypeId { get; set; }
 
         public virtual RoomType? RoomType { get; set; }

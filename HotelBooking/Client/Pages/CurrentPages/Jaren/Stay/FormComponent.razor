@@ -46,7 +46,7 @@
 							{
 								foreach (var booking in Bookings)
 								{
-									<option value="@booking.Id">@booking.Destination, Check-in: @booking.CheckInDate - Check-out: @booking.CheckOutDate</option>
+									<option value="@booking.Id">@booking.Destination, Check-in: @booking.CheckInDate, Check-out: @booking.CheckOutDate</option>
 								}
 							}
 						</InputSelect>
@@ -63,7 +63,7 @@
 							{
 								foreach (var room in Rooms)
 								{
-									<option value="@room.Id">@room.Number, Min Stay: @room.RoomMinStay - Max Stay: @room.RoomMaxStay</option>
+									<option value="@room.Id">@room.Number, Min Stay: @room.RoomMinStay, Max Stay: @room.RoomMaxStay</option>
 								}
 							}
 						</InputSelect>

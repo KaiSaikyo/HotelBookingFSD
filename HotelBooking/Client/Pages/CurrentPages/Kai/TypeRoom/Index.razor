@@ -38,21 +38,23 @@ else
 							<td><b>@roomtype.Id</b></td>
 							<td><b>@roomtype.Description</b></td>
 							<td><b>@roomtype.Size</b></td>
-							<td><b>@roomtype.Price</b></td>
-							<td><b>@roomtype.Hotel.Name - @roomtype.Hotel.Rating</b></td>
+							<td><b>$@roomtype.Price</b></td>
+							<td><b>@roomtype.Hotel.Name<br />Rating - @roomtype.Hotel.Rating</b></td>
 
 							<td>
-								<a href="/roomtype/view/@roomtype.Id" class="btn btn-primary">
-									<span class="oi oi-magnifying-glass"></span>
-								</a>
+								<div id="button-container" style="display: flex; flex-direction: row; gap: 0.2rem;">
+									<a href="/roomtype/view/@roomtype.Id" class="btn btn-view">
+										<span class="oi oi-magnifying-glass"></span>
+									</a>
 
-								<a href="/roomtype/edit/@roomtype.Id" class="btn btn-warning">
-									<span class="oi oi-script"></span>
-								</a>
+									<a href="/roomtype/edit/@roomtype.Id" class="btn btn-edit">
+										<span class="oi oi-script"></span>
+									</a>
 
-								<button class="btn btn-danger" @onclick="@(()=>Delete(roomtype.Id))">
-									<span class="oi oi-trash"></span>
-								</button>
+									<button class="btn btn-delete" @onclick="@(()=>Delete(roomtype.Id))">
+										<span class="oi oi-trash"></span>
+									</button>
+								</div>
 							</td>
 						</tr>
 					}
@@ -105,14 +107,14 @@ else
 		}
 	}
 
-	//protected async override Task OnAfterRenderAsync(bool firstRender)
-	//{
-	//	await js.InvokeVoidAsync("AddDataTable", "#typesTable");
-	//}
+	protected async override Task OnAfterRenderAsync(bool firstRender)
+	{
+		await js.InvokeVoidAsync("AddDataTable", "#typesTable");
+	}
 
 	public void Dispose()
 	{
-		//js.InvokeVoidAsync("DataTablesDispose", "#typesTable");
+		js.InvokeVoidAsync("DataTablesDispose", "#typesTable");
 		_interceptor.DisposeEvent();
 	}
 }

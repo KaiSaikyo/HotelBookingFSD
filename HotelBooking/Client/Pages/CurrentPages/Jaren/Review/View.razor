@@ -1,14 +1,89 @@
-﻿@page "/review/view/{id:int}"
+﻿@page "/review/view/{id:int}/{name}/{complimentaryservices}"
 @inject HttpClient _client
 @inject NavigationManager _navManager
+@attribute [Authorize]
 
-<FormComponent review="review" Disabled="true" />
+<PageTitle>RoomScout.Org - View Reviews</PageTitle>
+
+<div class="review-container">
+    <div class="review-content">
+        <div class="image-review">
+            <img src="@review?.ImagePath" alt="review pic">
+        </div>
+        <div class="rating-review">
+            <div>
+                <h2>Rating - @review?.Rating</h2>
+			</div>
+            <div class="review-description">
+                <h2>Description</h2>
+                <p>
+                    "@review?.Description" - @name, @review?.Date?.ToString().Split()[0]
+                </p>
+            </div>
+            <div class="review-services">
+                <h2>Services</h2>
+                <ul id="servicesList">
+                    @if (review != null)
+                    {
+                        @foreach (var service in GetServices())
+                        {
+                            <li>@service</li>
+                        }
+                    }
+                    else
+                    {
+                        <li>No services available</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="button-wrapper">
+        <button type="submit" class="middle-aligned-button" @onclick="NavigateBack">
+            Back
+        </button>
+    </div>
+</div>
+
 @code {
     [Parameter] public int id { get; set; }
+    [Parameter] public string name { get; set; }
+    [Parameter] public string complimentaryservices { get; set; }
     Review? review = new Review();
+
     protected async override Task OnParametersSetAsync()
     {
-        review = await
-        _client.GetFromJsonAsync<Review>($"{Endpoints.ReviewsEndpoint}/{id}");
+        review = await _client.GetFromJsonAsync<Review>($"{Endpoints.ReviewsEndpoint}/{id}");
+    }
+
+    private List<string> GetServices()
+    {
+        List<string> services = new List<string>();
+
+        if (review != null && !string.IsNullOrWhiteSpace(complimentaryservices))
+        {
+            // Retrieve the services string from data storage
+            var servicesString = complimentaryservices;
+
+            // Split the string into an array using commas as the delimiter
+            var servicesArray = servicesString.Split(",");
+
+            // Trim and add non-empty services to the list
+            foreach (var service in servicesArray)
+            {
+                var trimmedService = service.Trim();
+                if (!string.IsNullOrWhiteSpace(trimmedService))
+                {
+                    services.Add(trimmedService);
+                }
+            }
+        }
+
+        return services;
+    }
+
+    private void NavigateBack()
+    {
+        _navManager.NavigateTo("/review");
     }
 }
