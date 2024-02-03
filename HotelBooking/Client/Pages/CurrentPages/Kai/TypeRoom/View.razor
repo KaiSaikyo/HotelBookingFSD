@@ -1,6 +1,7 @@
 ﻿@page "/roomtype/view/{id:int}"
 @inject HttpClient _client
 @inject NavigationManager _navManager
+@attribute [Authorize]
 
 <PageTitle>RoomScout.Org - View Room Types</PageTitle>
 

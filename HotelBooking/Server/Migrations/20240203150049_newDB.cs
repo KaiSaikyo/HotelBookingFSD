@@ -423,7 +423,7 @@ namespace HotelBooking.Server.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "f41d47c6-a153-4c15-b852-d99dfd234218", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEGNdoX9ALAaLEF60bRAatUrA7TCIP62+UdFClICL9Q+ABhKWjC7eVOw1LsMfqn1uWg==", null, false, "dea8598f-885e-41ce-8b0c-22a73c0ad8ed", false, "admin@localhost.com" });
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "45e96a1e-5e46-47cd-98d8-bdc958a293c2", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEKy6TgJ2tZzUvfOzS2G+wdTOGtKicvt7c5RjJVwxXTaaeX7Qjy84Cssu5Ywq6eivhQ==", null, false, "d03c3363-80fa-477d-96b9-6e1567e7076a", false, "admin@localhost.com" });
 
             migrationBuilder.InsertData(
                 table: "Customers",

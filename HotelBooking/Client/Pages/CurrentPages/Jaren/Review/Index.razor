@@ -46,17 +46,19 @@ else
 							<td><b>@review.Stay.ComplimentaryServices</b></td>
 
 							<td>
-								<a href="/review/view/@review.Id" class="btn btn-primary">
-									<span class="oi oi-magnifying-glass"></span>
-								</a>
+								<div id="button-container" style="display: flex; flex-direction: row; gap: 0.2rem;">
+									<a href="/review/view/@review.Id/@review.Customer.Name/@review.Stay.ComplimentaryServices" class="btn btn-view">
+										<span class="oi oi-magnifying-glass"></span>
+									</a>
 
-								<a href="/review/edit/@review.Id" class="btn btn-warning">
-									<span class="oi oi-script"></span>
-								</a>
+									<a href="/review/edit/@review.Id" class="btn btn-edit">
+										<span class="oi oi-script"></span>
+									</a>
 
-								<button class="btn btn-danger" @onclick="@(()=>Delete(review.Id))">
-									<span class="oi oi-trash"></span>
-								</button>
+									<button class="btn btn-delete" @onclick="@(()=>Delete(review.Id))">
+										<span class="oi oi-trash"></span>
+									</button>
+								</div>
 							</td>
 						</tr>
 					}

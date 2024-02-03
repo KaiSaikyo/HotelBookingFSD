@@ -50,17 +50,19 @@ else
 							<td><b>@customer.ExpiryDate.ToString().Split()[0]</b></td>
 
 							<td>
-								<a href="/customer/view/@customer.Id" class="btn btn-primary">
-									<span class="oi oi-magnifying-glass"></span>
-								</a>
+								<div id="button-container" style="display: flex; flex-direction: row; gap: 0.2rem;">
+									<a href="/customer/view/@customer.Id" class="btn btn-view">
+										<span class="oi oi-magnifying-glass"></span>
+									</a>
 
-								<a href="/customer/edit/@customer.Id" class="btn btn-warning">
-									<span class="oi oi-script"></span>
-								</a>
+									<a href="/customer/edit/@customer.Id" class="btn btn-edit">
+										<span class="oi oi-script"></span>
+									</a>
 
-								<button class="btn btn-danger" @onclick="@(()=>Delete(customer.Id))">
-									<span class="oi oi-trash"></span>
-								</button>
+									<button class="btn btn-delete" @onclick="@(()=>Delete(customer.Id))">
+										<span class="oi oi-trash"></span>
+									</button>
+								</div>
 							</td>
 						</tr>
 					}

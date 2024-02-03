@@ -1,6 +1,7 @@
 ﻿@page "/booking/view/{id:int}"
 @inject HttpClient _client
 @inject NavigationManager _navManager
+@attribute [Authorize]
 
 <FormComponent booking="booking" Disabled="true" />
 @code {

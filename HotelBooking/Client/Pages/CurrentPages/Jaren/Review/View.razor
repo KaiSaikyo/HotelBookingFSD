@@ -1,22 +1,23 @@
-﻿@page "/review/view/{id:int}"
+﻿@page "/review/view/{id:int}/{name}/{complimentaryservices}"
 @inject HttpClient _client
 @inject NavigationManager _navManager
+@attribute [Authorize]
 
 <PageTitle>RoomScout.Org - View Reviews</PageTitle>
 
 <div class="review-container">
     <div class="review-content">
         <div class="image-review">
-            <img src="@review.ImagePath" alt="review pic">
+            <img src="@review?.ImagePath" alt="review pic">
         </div>
         <div class="rating-review">
             <div>
-                <h2>Rating - @review.Rating</h2>
+                <h2>Rating - @review?.Rating</h2>
 			</div>
             <div class="review-description">
                 <h2>Description</h2>
                 <p>
-                    "@review.Description" - @review.Customer.Name, @review.Date.ToString().Split()[0]
+                    "@review?.Description" - @name, @review?.Date?.ToString().Split()[0]
                 </p>
             </div>
             <div class="review-services">
@@ -46,6 +47,8 @@
 
 @code {
     [Parameter] public int id { get; set; }
+    [Parameter] public string name { get; set; }
+    [Parameter] public string complimentaryservices { get; set; }
     Review? review = new Review();
 
     protected async override Task OnParametersSetAsync()
@@ -57,10 +60,10 @@
     {
         List<string> services = new List<string>();
 
-        if (review != null && !string.IsNullOrWhiteSpace(review.Stay.ComplimentaryServices))
+        if (review != null && !string.IsNullOrWhiteSpace(complimentaryservices))
         {
             // Retrieve the services string from data storage
-            var servicesString = review.Stay.ComplimentaryServices;
+            var servicesString = complimentaryservices;
 
             // Split the string into an array using commas as the delimiter
             var servicesArray = servicesString.Split(",");

@@ -51,17 +51,19 @@ else
                             <td><b>@booking.Customer.Name</b></td>
 
                             <td>
-                                <a href="/booking/view/@booking.Id" class="btn btn-primary">
-                                    <span class="oi oi-magnifying-glass"></span>
-                                </a>
+                                <div id="button-container" style="display: flex; flex-direction: row; gap: 0.2rem;">
+                                    <a href="/booking/view/@booking.Id" class="btn btn-view">
+                                        <span class="oi oi-magnifying-glass"></span>
+                                    </a>
 
-                                <a href="/booking/edit/@booking.Id" class="btn btn-warning">
-                                    <span class="oi oi-script"></span>
-                                </a>
+                                    <a href="/booking/edit/@booking.Id" class="btn btn-edit">
+                                        <span class="oi oi-script"></span>
+                                    </a>
 
-                                <button class="btn btn-danger" @onclick="@(()=>Delete(booking.Id))">
-                                    <span class="oi oi-trash"></span>
-                                </button>
+                                    <button class="btn btn-delete" @onclick="@(()=>Delete(booking.Id))">
+                                        <span class="oi oi-trash"></span>
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     }

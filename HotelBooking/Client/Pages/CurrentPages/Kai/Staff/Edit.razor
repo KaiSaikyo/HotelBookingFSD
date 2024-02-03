@@ -1,6 +1,7 @@
 ﻿@page "/staff/edit/{id:int}"
 @inject HttpClient _client
 @inject NavigationManager _navManager
+@attribute [Authorize]
 
 <FormComponent ButtonText="Update Staff" OnValidSubmit="EditStaff" staff="staff" />
 
