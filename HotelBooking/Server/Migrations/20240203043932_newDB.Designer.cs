@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooking.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240203033159_UpdateDB")]
-    partial class UpdateDB
+    [Migration("20240203043932_newDB")]
+    partial class newDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -241,7 +241,7 @@ namespace HotelBooking.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "56295c77-ae21-4d1a-bfb0-c359e0de3a06",
+                            ConcurrencyStamp = "f41d47c6-a153-4c15-b852-d99dfd234218",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -249,9 +249,9 @@ namespace HotelBooking.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPD1LVXRT0JN/70md/VHvZoiiRSuoOfEMYAMQ9b56pUxJNWzv0jdt4iAH/a2jYBPgQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGNdoX9ALAaLEF60bRAatUrA7TCIP62+UdFClICL9Q+ABhKWjC7eVOw1LsMfqn1uWg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f5ff66cf-af0b-4611-933c-81f272de22b0",
+                            SecurityStamp = "dea8598f-885e-41ce-8b0c-22a73c0ad8ed",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         });
@@ -317,7 +317,7 @@ namespace HotelBooking.Server.Migrations
                             CheckInDate = new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CheckOutDate = new DateTime(2023, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 1,
-                            Destination = "City A",
+                            Destination = "Singapore",
                             HotelId = 1,
                             NumGuest = 2,
                             RoomTypeId = 1,
@@ -330,7 +330,7 @@ namespace HotelBooking.Server.Migrations
                             CheckInDate = new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CheckOutDate = new DateTime(2023, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 2,
-                            Destination = "City B",
+                            Destination = "Malaysia",
                             HotelId = 2,
                             NumGuest = 1,
                             RoomTypeId = 2,
@@ -343,7 +343,7 @@ namespace HotelBooking.Server.Migrations
                             CheckInDate = new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CheckOutDate = new DateTime(2023, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 3,
-                            Destination = "City C",
+                            Destination = "Indonesia",
                             HotelId = 3,
                             NumGuest = 3,
                             RoomTypeId = 3,
@@ -356,7 +356,7 @@ namespace HotelBooking.Server.Migrations
                             CheckInDate = new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CheckOutDate = new DateTime(2023, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CustomerId = 4,
-                            Destination = "City D",
+                            Destination = "Thailand",
                             HotelId = 4,
                             NumGuest = 2,
                             RoomTypeId = 4,
@@ -572,6 +572,9 @@ namespace HotelBooking.Server.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<decimal?>("Rating")
                         .IsRequired()
                         .HasColumnType("decimal(18,2)");
@@ -594,6 +597,7 @@ namespace HotelBooking.Server.Migrations
                             CustomerId = 1,
                             Date = new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Enjoyed the stay, great service!",
+                            ImagePath = "css/img/room/HolidayInn.jpg",
                             Rating = 4.5m,
                             StayId = 1
                         },
@@ -603,6 +607,7 @@ namespace HotelBooking.Server.Migrations
                             CustomerId = 2,
                             Date = new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Decent stay, room was comfortable",
+                            ImagePath = "css/img/room/HyattJohor.jpg",
                             Rating = 3.0m,
                             StayId = 2
                         },
@@ -612,6 +617,7 @@ namespace HotelBooking.Server.Migrations
                             CustomerId = 3,
                             Date = new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Outstanding experience, highly recommended!",
+                            ImagePath = "css/img/room/LeMeridien.jpg",
                             Rating = 5.0m,
                             StayId = 3
                         },
@@ -621,6 +627,7 @@ namespace HotelBooking.Server.Migrations
                             CustomerId = 4,
                             Date = new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Average stay, room cleanliness could be improved",
+                            ImagePath = "css/img/room/ParkHyatt.jpg",
                             Rating = 2.5m,
                             StayId = 4
                         });

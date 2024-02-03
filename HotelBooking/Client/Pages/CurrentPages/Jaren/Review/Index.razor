@@ -24,6 +24,7 @@ else
 				<thead>
 					<tr>
 						<th style="border-top-left-radius: 0.5rem;">ID</th>
+						<th>Image</th>
 						<th>Rating</th>
 						<th>Description</th>
 						<th>Date</th>
@@ -37,6 +38,7 @@ else
 					{
 						<tr>
 							<td><b>@review.Id</b></td>
+							<td><img src="@review.ImagePath" alt="Uploaded Img" class="scaled-image" /></td>
 							<td><b>@review.Rating</b></td>
 							<td><b>@review.Description</b></td>
 							<td><b>@review.Date.ToString().Split()[0]</b></td>

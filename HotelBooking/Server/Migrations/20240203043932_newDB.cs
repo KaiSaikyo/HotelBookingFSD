@@ -392,6 +392,7 @@ namespace HotelBooking.Server.Migrations
                     Rating = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CustomerId = table.Column<int>(type: "int", nullable: true),
                     StayId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -422,7 +423,7 @@ namespace HotelBooking.Server.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "9b313af4-905c-4792-bff1-7f315522a594", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEP0dxC/m0iM2F+BSqp83KNI8OJLY9QDVlgB9XtXM+uJHarG/v23Dl4QLIfFlN/e3/w==", null, false, "541d7218-f000-4cc1-bb87-41fe0b084329", false, "admin@localhost.com" });
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "f41d47c6-a153-4c15-b852-d99dfd234218", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEGNdoX9ALAaLEF60bRAatUrA7TCIP62+UdFClICL9Q+ABhKWjC7eVOw1LsMfqn1uWg==", null, false, "dea8598f-885e-41ce-8b0c-22a73c0ad8ed", false, "admin@localhost.com" });
 
             migrationBuilder.InsertData(
                 table: "Customers",
@@ -442,7 +443,7 @@ namespace HotelBooking.Server.Migrations
                 {
                     { 1, "333 Orchard Rd, Mandarin Orchard Singapore", "Breakfast, Wifi, Gym", "true", "Hilton Hotels & Resorts is a global brand of full-service hotels and resorts.", "css/img/hotel/hilton_hotel.jpg", "Hilton Hotel", 3.5m },
                     { 2, "1 Fullerton Square, Singapore 049178", "Breakfast, Gym, Laundry", "true", "The Fullerton Hotel Singapore offers 5-star luxury rooms & suites with exceptional services.", "css/img/hotel/fullerton_hotel.jpg", "Fullerton Hotel", 5m },
-                    { 3, "768 Upper Serangoon Rd, Singapore 534636", "Game Center, Swimming Pool, Wifi", "false", "Your go-to hotel for awesome rates, comfortable rooms, and accessible locations.", "css/img/hotel/st_81_hotel.jpg", "St 81 Hotel", 3m },
+                    { 3, "768 Upper Serangoon Rd, Singapore 534636", "Game Center, Swimming Pool, Wifi", "false", "Your go-to hotel for awesome rates, comfortable rooms, and accessible locations.", "css/img/hotel/81_Hotel.jpg", "St 81 Hotel", 3m },
                     { 4, "Desaru Coast, Jln Pantai 3, 81930, Johor, Malaysia", "Breakfast, Wifi, Gym", "true", "Your ultimate destination getaway at the leading entertainment hotel in Desaru Coast, Johor, Malaysia.", "css/img/hotel/hard_rock_hotel.jpg", "Hard Rock Hotel", 2.5m }
                 });
 
@@ -478,10 +479,10 @@ namespace HotelBooking.Server.Migrations
                 columns: new[] { "Id", "CheckInDate", "CheckOutDate", "CustomerId", "Destination", "HotelId", "NumGuest", "RoomTypeId", "StaffId", "Status" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "City A", 1, 2, 1, 1, "true" },
-                    { 2, new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "City B", 2, 1, 2, 2, "true" },
-                    { 3, new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "City C", 3, 3, 3, 3, "false" },
-                    { 4, new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "City D", 4, 2, 4, 4, "true" }
+                    { 1, new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Singapore", 1, 2, 1, 1, "true" },
+                    { 2, new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "Malaysia", 2, 1, 2, 2, "true" },
+                    { 3, new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Indonesia", 3, 3, 3, 3, "false" },
+                    { 4, new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 4, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, "Thailand", 4, 2, 4, 4, "true" }
                 });
 
             migrationBuilder.InsertData(
@@ -508,13 +509,13 @@ namespace HotelBooking.Server.Migrations
 
             migrationBuilder.InsertData(
                 table: "Reviews",
-                columns: new[] { "Id", "CustomerId", "Date", "Description", "Rating", "StayId" },
+                columns: new[] { "Id", "CustomerId", "Date", "Description", "ImagePath", "Rating", "StayId" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Enjoyed the stay, great service!", 4.5m, 1 },
-                    { 2, 2, new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Decent stay, room was comfortable", 3.0m, 2 },
-                    { 3, 3, new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Outstanding experience, highly recommended!", 5.0m, 3 },
-                    { 4, 4, new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Average stay, room cleanliness could be improved", 2.5m, 4 }
+                    { 1, 1, new DateTime(2023, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Enjoyed the stay, great service!", "css/img/room/HolidayInn.jpg", 4.5m, 1 },
+                    { 2, 2, new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Decent stay, room was comfortable", "css/img/room/HyattJohor.jpg", 3.0m, 2 },
+                    { 3, 3, new DateTime(2023, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Outstanding experience, highly recommended!", "css/img/room/LeMeridien.jpg", 5.0m, 3 },
+                    { 4, 4, new DateTime(2023, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Average stay, room cleanliness could be improved", "css/img/room/ParkHyatt.jpg", 2.5m, 4 }
                 });
 
             migrationBuilder.CreateIndex(

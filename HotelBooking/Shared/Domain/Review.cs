@@ -23,8 +23,9 @@ namespace HotelBooking.Shared.Domain
 		[DataType(DataType.Date)]
 		public DateTime? Date { get; set; }
 
-		
-		public int? CustomerId { get; set; }
+        public string? ImagePath { get; set; }
+
+        public int? CustomerId { get; set; }
 		public virtual Customer? Customer { get; set; }
 
 		

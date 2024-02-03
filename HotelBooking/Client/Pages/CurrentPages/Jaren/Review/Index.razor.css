@@ -69,3 +69,9 @@ thead {
 .btn {
     padding: 0.200rem 0.45rem 0.200rem 0.55rem;
 }
+
+.scaled-image {
+    max-width: 200px;
+    object-fit: contain;
+    border-radius: 0.5rem;
+}

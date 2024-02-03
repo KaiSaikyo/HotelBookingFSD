@@ -17,7 +17,8 @@ namespace HotelBooking.Server.Configurations.Entities
                     Description = "Enjoyed the stay, great service!",
                     Date = new DateTime(2023, 1, 15),
                     CustomerId = 1,
-                    StayId = 1
+                    StayId = 1,
+                    ImagePath = "css/img/room/HolidayInn.jpg"
                 },
                 new Review
                 {
@@ -26,7 +27,8 @@ namespace HotelBooking.Server.Configurations.Entities
                     Description = "Decent stay, room was comfortable",
                     Date = new DateTime(2023, 2, 5),
                     CustomerId = 2,
-                    StayId = 2
+                    StayId = 2,
+                    ImagePath = "css/img/room/HyattJohor.jpg"
                 },
                 new Review
                 {
@@ -35,7 +37,8 @@ namespace HotelBooking.Server.Configurations.Entities
                     Description = "Outstanding experience, highly recommended!",
                     Date = new DateTime(2023, 3, 20),
                     CustomerId = 3,
-                    StayId = 3
+                    StayId = 3,
+                    ImagePath = "css/img/room/LeMeridien.jpg"
                 },
                 new Review
                 {
@@ -44,7 +47,8 @@ namespace HotelBooking.Server.Configurations.Entities
                     Description = "Average stay, room cleanliness could be improved",
                     Date = new DateTime(2023, 4, 10),
                     CustomerId = 4,
-                    StayId = 4
+                    StayId = 4,
+                    ImagePath = "css/img/room/ParkHyatt.jpg"
                 }
             );
         }

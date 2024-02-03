@@ -2,13 +2,70 @@
 @inject HttpClient _client
 @inject NavigationManager _navManager
 
-<FormComponent review="review" Disabled="true" />
+<PageTitle>RoomScout.Org - View Reviews</PageTitle>
+
+<div>
+    <div>
+        content
+        <div>
+            image
+        </div>
+        <div>
+            <div>
+				Rating 
+			</div>
+            <div>
+                <div>
+                    top right date
+                </div>
+                <div>
+                    description
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        button
+    </div>
+</div>
+
 @code {
     [Parameter] public int id { get; set; }
     Review? review = new Review();
+
     protected async override Task OnParametersSetAsync()
     {
-        review = await
-        _client.GetFromJsonAsync<Review>($"{Endpoints.ReviewsEndpoint}/{id}");
+        review = await _client.GetFromJsonAsync<Review>($"{Endpoints.ReviewsEndpoint}/{id}");
+    }
+
+    private List<string> GetServices()
+    {
+        List<string> services = new List<string>();
+
+        if (review != null && !string.IsNullOrWhiteSpace(review.Stay.ComplimentaryServices))
+        {
+            // Retrieve the services string from data storage
+            var servicesString = review.Stay.ComplimentaryServices;
+
+            // Split the string into an array using commas as the delimiter
+            var servicesArray = servicesString.Split(",");
+
+            // Trim and add non-empty services to the list
+            foreach (var service in servicesArray)
+            {
+                var trimmedService = service.Trim();
+                if (!string.IsNullOrWhiteSpace(trimmedService))
+                {
+                    services.Add(trimmedService);
+                }
+            }
+        }
+
+        return services;
+    }
+
+    private void NavigateBack()
+    {
+        _navManager.NavigateTo("/review");
     }
 }
