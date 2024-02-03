@@ -39,8 +39,8 @@
         margin-bottom: 5px;
     }
 
-.left-aligned-button {
-    width: 180px;
+.middle-aligned-button {
+    width: 192px;
     height: 40px;
     background-color: #1b6ec2;
     border-radius: 0.5rem;
@@ -52,12 +52,12 @@
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
 }
 
-    .left-aligned-button:active {
+    .middle-aligned-button:active {
         outline: 3px solid #0d6efd;
         outline-offset: 2px;
     }
 
-    .left-aligned-button:hover {
+    .middle-aligned-button:hover {
         background-color: #0b5ed7;
     }
     

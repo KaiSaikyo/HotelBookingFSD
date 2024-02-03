@@ -38,7 +38,7 @@
 
     <br />
     <div class="button-wrapper">
-        <button type="submit" class="left-aligned-button" @onclick="NavigateBack">
+        <button type="submit" class="middle-aligned-button" @onclick="NavigateBack">
             Back
         </button>
     </div>
@@ -54,7 +54,7 @@
         hotel = await _client.GetFromJsonAsync<Hotel>($"{Endpoints.HotelsEndpoint}/{id}");
     }
 
-       private List<string> GetAmenities()
+    private List<string> GetAmenities()
     {
         List<string> amenities = new List<string>();
 
