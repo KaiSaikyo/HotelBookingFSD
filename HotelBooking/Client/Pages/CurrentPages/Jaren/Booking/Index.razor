@@ -1,4 +1,5 @@
 ﻿@page "/booking"
+@page "/booking/{destination}/{hotel}"
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
@@ -25,31 +26,43 @@ else
                 <thead>
                     <tr>
                         <th style="border-top-left-radius: 0.5rem;">ID</th>
-                        <th>Check-in Details</th>
-                        <th>Destination</th>
-                        <th>Guest No.</th>
-                        <th>Status</th>
-                        <th>Hotel Rating</th>
-                        <th>Price Description</th>
-                        <th>Staff Name</th>
+                        <th>Booking Details</th>
+                        <th>Check-in/out</th>
+                        <th>Price</th>
+                        <th>No. Guests</th>
                         <th>Customer Name</th>
+                        <th>Staff Name</th>
+                        <th>Status</th>
                         <th style="border-top-right-radius: 0.5rem;">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var booking in Bookings)
+                    @foreach (var booking in FilteredBookings)
                     {
                         <tr>
                             <td><b>@booking.Id</b></td>
-                            <td><b>Check-in: @booking.CheckInDate.ToString().Split()[0] <br />Check-out: @booking.CheckOutDate.ToString().Split()[0] </b></td>
-                            <td><b>@booking.Destination</b></td>
+                            <td>
+                                <b>@booking.Hotel.Name</b>
+                                <br />
+                                <b>@booking.Destination</b>
+                                <br />
+                                <b>Rating - @booking.Hotel.Rating</b>
+                                <img src="@booking.Hotel.ImagePath" alt="Uploaded Img" class="scaled-image" />
+                            </td>
+                            <td>
+                                <b>Check-in: @booking.CheckInDate.ToString().Split()[0]</b>
+                                <br />
+                                <b>Check-out: @booking.CheckOutDate.ToString().Split()[0]</b>
+                            </td>
+                            <td>
+                                <b>@booking.RoomType.Description</b>
+                                <br />
+                                <b>Price - $@booking.RoomType.Price</b>
+                            </td>
                             <td><b>@booking.NumGuest</b></td>
-                            <td><b>@booking.Status</b></td>
-                            <td><b>@booking.Hotel.Name<br />Rating - @booking.Hotel.Rating</b></td>
-                            <td><b>@booking.RoomType.Description<br />Price - $@booking.RoomType.Price</b></td>
-                            <td><b>@booking.Staff.Name</b></td>
                             <td><b>@booking.Customer.Name</b></td>
-
+                            <td><b>@booking.Staff.Name</b></td>
+                            <td><b>@booking.Status</b></td>
                             <td>
                                 <div id="button-container" style="display: flex; flex-direction: row; gap: 0.2rem;">
                                     <a href="/booking/view/@booking.Id" class="btn btn-view">
@@ -75,11 +88,15 @@ else
 
 @code {
     private List<Booking>? Bookings;
+    private List<Booking>? FilteredBookings;
+    [Parameter] public string? destination { get; set; }
+    [Parameter] public string? hotel { get; set; }
 
     protected async override Task OnInitializedAsync()
     {
         _interceptor.MonitorEvent();
         Bookings = await _client.GetFromJsonAsync<List<Booking>>($"{Endpoints.BookingsEndpoint}");
+        ApplyFilter();
     }
 
     async Task Delete(int bookingId)
@@ -116,5 +133,15 @@ else
     {
         js.InvokeVoidAsync("DataTablesDispose", "#bookingsTable");
         _interceptor.DisposeEvent();
+    }
+
+    private void ApplyFilter()
+    {
+        if (Bookings != null)
+        {
+            FilteredBookings = Bookings.Where(b =>
+                (string.IsNullOrEmpty(destination) || b.Destination.Contains(destination, StringComparison.OrdinalIgnoreCase)) &&
+                (string.IsNullOrEmpty(hotel) || b.Hotel.Name.Contains(hotel, StringComparison.OrdinalIgnoreCase))).ToList();
+        }
     }
 }

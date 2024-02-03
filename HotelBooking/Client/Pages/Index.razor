@@ -1,4 +1,6 @@
 ﻿@page "/"
+@inject NavigationManager _navManager
+@inject IJSRuntime js
 
 <PageTitle>RoomScout.Org - Home</PageTitle>
 
@@ -8,20 +10,20 @@
             <form>
                 <div class="form-group">
                     <div class="input-group">
-                        <input type="text" placeholder="Singapore" />
+                        <input type="text" placeholder="Singapore" @bind="searchDestination" required />
                         <label>Destination</label>
                     </div>
                     <p>Where are you going?</p>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
-                        <input type="text" placeholder="Hilton Hotel"/>
+                        <input type="text" placeholder="Hilton Hotel" @bind="searchHotelName" required />
                         <label>Hotel</label>
                     </div>
                     <p>Any preferred hotel?</p>
                 </div>
             </form>
-            <button class="btn" onclick="window.location.href='/booking';"><img src="./css/img/magnifying-glass.png"></button>
+            <button class="btn" @onclick="SearchItem"><img src="./css/img/magnifying-glass.png"></button>
         </div>
     </div>
 </section>
@@ -34,7 +36,7 @@
                 <p>This stylish hotel is located in the heart of Tokyo, just steps away from some of the city's most popular attractions. Guests can enjoy stunning views of the city skyline from the hotel's rooftop bar. The hotel also has a variety of restaurants, a spa, and a fitness center.</p>
                 <div class="nav-item" style="width: fit-content; margin-left: 1rem;">
                     <button class="nav-button" onclick="window.location.href='/stay';">
-							<span aria-hidden="true"></span> Go Back
+                        <span aria-hidden="true"></span> Go Back
                     </button>
                 </div>
             </div>
@@ -124,8 +126,42 @@
         </div>
     </div>
     <div style="text-align: center; margin-top: 0.5rem;">
-        <p>Copyright © 2023 RoomScout.Org</p>
+        <p>Copyright Â© 2023 RoomScout.Org</p>
     </div>
 </footer>
 
 
+@code {
+    private string? searchHotelName;
+    private string? searchDestination;
+
+    private async Task SearchItem()
+    {
+        if (!string.IsNullOrWhiteSpace(searchDestination) && !string.IsNullOrWhiteSpace(searchHotelName))
+        {
+            var destinationEncoded = Uri.EscapeDataString(searchDestination);
+            var hotelEncoded = Uri.EscapeDataString(searchHotelName);
+            _navManager.NavigateTo($"/booking/{destinationEncoded}/{hotelEncoded}");
+        }
+        else
+        {
+            var message = string.Empty;
+            if (string.IsNullOrWhiteSpace(searchDestination) && string.IsNullOrWhiteSpace(searchHotelName))
+            {
+                message = "Please enter both a destination and a hotel name.";
+            }
+            else if (string.IsNullOrWhiteSpace(searchDestination))
+            {
+                message = "Please enter a destination.";
+            }
+            else if (string.IsNullOrWhiteSpace(searchHotelName))
+            {
+                message = "Please enter a hotel name.";
+            }
+
+            await js.InvokeVoidAsync("alert", message);
+            searchDestination = null;
+            searchHotelName = null;
+        }
+    }
+}
