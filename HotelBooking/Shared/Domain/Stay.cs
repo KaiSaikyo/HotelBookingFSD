@@ -24,12 +24,12 @@ namespace HotelBooking.Shared.Domain
 		[StringLength(500, MinimumLength = 3, ErrorMessage = "Complimentry Services does not meet length requirements")]
 		public string? ComplimentaryServices { get; set; }
 
-		
-		public int? BookingId { get; set; }
+        [Required]
+        public int? BookingId { get; set; }
 		public virtual Booking? Booking { get; set; }
 
-		
-		public int? RoomId { get; set; }
+        [Required]
+        public int? RoomId { get; set; }
 		public virtual Room? Room { get; set; }
 
 	}

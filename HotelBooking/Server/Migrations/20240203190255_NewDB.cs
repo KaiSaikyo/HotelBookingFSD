@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HotelBooking.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class newDB : Migration
+    public partial class NewDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -423,7 +423,11 @@ namespace HotelBooking.Server.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "45e96a1e-5e46-47cd-98d8-bdc958a293c2", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEKy6TgJ2tZzUvfOzS2G+wdTOGtKicvt7c5RjJVwxXTaaeX7Qjy84Cssu5Ywq6eivhQ==", null, false, "d03c3363-80fa-477d-96b9-6e1567e7076a", false, "admin@localhost.com" });
+                values: new object[,]
+                {
+                    { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "d1c82d29-bcfb-42aa-b6b9-c4a4ab21bdfd", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAIAAYagAAAAEAPTEbQ8aFD3jx9Ru0eSEzEEdzDLPeEidZfonW8QQy8cNsaC5EoxhtnRH+ycubfffg==", null, false, "39abf2c8-2887-478d-bdbd-a68c30e4700d", false, "admin@localhost.com" },
+                    { "af86d9d4-11ae-4f29-8028-c711f1582813", 0, "7b190e52-e719-4565-b38a-880e7ca53dd8", "user@localhost.com", false, "User", "User", false, null, "USER@LOCALHOST.COM", "USER@LOCALHOST.COM", "AQAAAAIAAYagAAAAEPOxU8O8CVmfsLWQviHZkjuhrJbHwTjSRCPh2ZVKzO2OoHz/iK4h5adMDCpK6CxW4A==", null, false, "e9de311f-d587-4d54-bf07-877f17320013", false, "user@localhost.com" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Customers",
@@ -461,7 +465,11 @@ namespace HotelBooking.Server.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "3781efa7-66dc-47f0-860f-e506d04102e4" });
+                values: new object[,]
+                {
+                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "3781efa7-66dc-47f0-860f-e506d04102e4" },
+                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "af86d9d4-11ae-4f29-8028-c711f1582813" }
+                });
 
             migrationBuilder.InsertData(
                 table: "RoomTypes",

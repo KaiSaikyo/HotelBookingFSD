@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooking.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240203150049_newDB")]
-    partial class newDB
+    [Migration("20240203190255_NewDB")]
+    partial class NewDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -241,7 +241,7 @@ namespace HotelBooking.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "45e96a1e-5e46-47cd-98d8-bdc958a293c2",
+                            ConcurrencyStamp = "d1c82d29-bcfb-42aa-b6b9-c4a4ab21bdfd",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -249,11 +249,29 @@ namespace HotelBooking.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKy6TgJ2tZzUvfOzS2G+wdTOGtKicvt7c5RjJVwxXTaaeX7Qjy84Cssu5Ywq6eivhQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAPTEbQ8aFD3jx9Ru0eSEzEEdzDLPeEidZfonW8QQy8cNsaC5EoxhtnRH+ycubfffg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d03c3363-80fa-477d-96b9-6e1567e7076a",
+                            SecurityStamp = "39abf2c8-2887-478d-bdbd-a68c30e4700d",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
+                        },
+                        new
+                        {
+                            Id = "af86d9d4-11ae-4f29-8028-c711f1582813",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "7b190e52-e719-4565-b38a-880e7ca53dd8",
+                            Email = "user@localhost.com",
+                            EmailConfirmed = false,
+                            FirstName = "User",
+                            LastName = "User",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER@LOCALHOST.COM",
+                            NormalizedUserName = "USER@LOCALHOST.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPOxU8O8CVmfsLWQviHZkjuhrJbHwTjSRCPh2ZVKzO2OoHz/iK4h5adMDCpK6CxW4A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "e9de311f-d587-4d54-bf07-877f17320013",
+                            TwoFactorEnabled = false,
+                            UserName = "user@localhost.com"
                         });
                 });
 
@@ -1043,6 +1061,11 @@ namespace HotelBooking.Server.Migrations
                         {
                             UserId = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             RoleId = "ad2bcf0c-20db-474f-8407-5a6b159518ba"
+                        },
+                        new
+                        {
+                            UserId = "af86d9d4-11ae-4f29-8028-c711f1582813",
+                            RoleId = "bd2bcf0c-20db-474f-8407-5a6b159518bb"
                         });
                 });
 

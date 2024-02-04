@@ -108,6 +108,10 @@ namespace HotelBooking.Server.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [Display(Name = "Role")]
+            public string Role { get; set; }
         }
 
 
@@ -161,6 +165,14 @@ namespace HotelBooking.Server.Areas.Identity.Pages.Account
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
+                        if (Input.Role == "Administrator")
+                        {
+                            return LocalRedirect("~/");
+                        }
+                        else if (Input.Role == "User")  
+                        {
+                            return LocalRedirect("~/");
+                        }
                         return LocalRedirect(returnUrl);
                     }
                 }

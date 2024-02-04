@@ -83,6 +83,7 @@ namespace HotelBooking.Server.Areas.Identity.Pages.Account
             /// </summary>
             [Display(Name = "Remember me?")]
             public bool RememberMe { get; set; }
+
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -115,7 +116,21 @@ namespace HotelBooking.Server.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
+                    if (user != null)
+                    {
+                        _logger.LogInformation("User logged in.");
+                        var userRole = await _signInManager.UserManager.GetRolesAsync(user);
+                        if (userRole.Contains("Administrator"))
+                        {
+                            return LocalRedirect("~/");
+                        }
+                        else if (userRole.Contains("User"))
+                        {
+                            return LocalRedirect("~/");
+                        }
+                    }
+
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

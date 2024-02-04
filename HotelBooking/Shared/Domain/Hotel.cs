@@ -35,6 +35,7 @@ namespace HotelBooking.Shared.Domain
 		[RegularExpression(@"^(true|false)$", ErrorMessage = "Availability must be either 'true' or 'false'")]
 		public string? Availability { get; set; }
 
-		public string? ImagePath { get; set; }
+        [Required]
+        public string? ImagePath { get; set; }
 	}
 }
