@@ -238,7 +238,7 @@ namespace HotelBooking.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d1c82d29-bcfb-42aa-b6b9-c4a4ab21bdfd",
+                            ConcurrencyStamp = "bb633ea1-e4e0-442f-b61e-c67c168b6770",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -246,9 +246,9 @@ namespace HotelBooking.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAPTEbQ8aFD3jx9Ru0eSEzEEdzDLPeEidZfonW8QQy8cNsaC5EoxhtnRH+ycubfffg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJBT2K6TsweCeBovPpdddOYWS3dH2ePxwkWDW9xI1xsFYv5YNMdSPs6h6mNp6TfOJA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "39abf2c8-2887-478d-bdbd-a68c30e4700d",
+                            SecurityStamp = "514b549d-d4b5-4df8-a6e3-d3c216a92dc5",
                             TwoFactorEnabled = false,
                             UserName = "admin@localhost.com"
                         },
@@ -256,7 +256,7 @@ namespace HotelBooking.Server.Migrations
                         {
                             Id = "af86d9d4-11ae-4f29-8028-c711f1582813",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7b190e52-e719-4565-b38a-880e7ca53dd8",
+                            ConcurrencyStamp = "eda3332f-5c78-4da7-9b0c-2d158dd6d7e3",
                             Email = "user@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "User",
@@ -264,9 +264,9 @@ namespace HotelBooking.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@LOCALHOST.COM",
                             NormalizedUserName = "USER@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPOxU8O8CVmfsLWQviHZkjuhrJbHwTjSRCPh2ZVKzO2OoHz/iK4h5adMDCpK6CxW4A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEF+J+eLdcwHKtznfX5FJJ4zI3mCkkekgaKl9ZtmzsUWzYbSdzgSRAReeP9Y7bpvZMQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e9de311f-d587-4d54-bf07-877f17320013",
+                            SecurityStamp = "3645d379-eb15-401b-a345-1663f0872942",
                             TwoFactorEnabled = false,
                             UserName = "user@localhost.com"
                         });

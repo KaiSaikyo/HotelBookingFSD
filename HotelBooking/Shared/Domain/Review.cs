@@ -22,16 +22,16 @@ namespace HotelBooking.Shared.Domain
 		[Required]
 		[DataType(DataType.Date)]
 		public DateTime? Date { get; set; }
-        
-		[Required]
-        public string? ImagePath { get; set; }
 
-        [Required]
-        public int? CustomerId { get; set; }
+		[Required]
+		public string? ImagePath { get; set; }
+
+		[Required]
+		public int? CustomerId { get; set; }
 		public virtual Customer? Customer { get; set; }
 
-        [Required]
-        public int? StayId { get; set; }
+		[Required]
+		public int? StayId { get; set; }
 		public virtual Stay? Stay { get; set; }
 
 	}
