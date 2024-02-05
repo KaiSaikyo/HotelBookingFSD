@@ -23,7 +23,7 @@ namespace HotelBooking.Shared.Domain
 		[DataType(DataType.Date)]
 		public DateTime? Date { get; set; }
 
-		[Required]
+		
 		public string? ImagePath { get; set; }
 
 		[Required]
